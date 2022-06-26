@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\seller\postController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
+
+Route::get('/seller/post', function(){ return view('seller/sellerPost'); });
+
+Route::post('/seller/post',[postController::class,'validateSellerPost'])->name('seller.post');
