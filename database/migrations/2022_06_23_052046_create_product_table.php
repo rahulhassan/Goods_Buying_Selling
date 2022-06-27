@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->string('p_description');
             $table->string('p_price');
             $table->string('p_quantity');
+            $table->string('image_path');
             $table->foreignId('s_id')->references('s_id')->on('seller');
             $table->timestamps();
         });
