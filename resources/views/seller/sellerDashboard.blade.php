@@ -1,12 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>seller dashboard</h1>
-</body>
-</html>
+@extends('seller.layouts.navbar')
+@section('content')
+<div class="container-md p-4">
+    <h2 class="p-4 d-flex justify-content-center">Seller Dashboard</h2>
+    <h3>Your posted products:</h3>
+    <div class="w-75">
+        @foreach ($productInfo as $p)
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th  rowspan="3"><img src="{{ asset ('images/' . $p->image_path)}}" width="300px" alt=""></th>
+                    <th>{{$p->p_title}}</th>
+                </tr>
+                <tr>
+                    <td><b>Brand:</b>{{" ".$p->p_brand}}</td>
+                </tr>
+                <tr>
+                    <td>{{$p->p_price}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{$p->p_description}}</td>
+                </tr>
+                <tr>
+                    <td><a href="#"><button type="button" class="btn btn-warning">Edit</button></a></td>
+                    <td><a href="{{'delete/'.$p->p_id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        @endforeach
+    </div>
+</div>
+@endsection
