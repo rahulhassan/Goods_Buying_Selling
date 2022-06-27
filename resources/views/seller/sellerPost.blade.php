@@ -1,7 +1,7 @@
 @extends('seller.layouts.navbar')
 @section('content')
 <div class="w-75 p-3 justify-content-center">
-    <form action="{{route('seller.post')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('submit.sellerPost')}}" method="POST" enctype="multipart/form-data">
         @if(Session::has('success'))
         <div class="alert alert-success">{{Session::get('success')}}</div>
         @endif
@@ -43,7 +43,7 @@
         <br>
         <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" value="{{old('desc')}}" name="desc" rows="3"></textarea>
+            <textarea class="form-control" name="desc" rows="3" placeholder="Write about your product...">{{old('desc')}}</textarea>
         </div>
         @error('desc')
         <span class="text-danger">{{$message}}</span>
