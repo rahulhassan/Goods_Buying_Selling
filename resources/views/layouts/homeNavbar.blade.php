@@ -13,6 +13,7 @@
     <div class="p-3">
         <a href="{{route('home')}}"><button type="button" class="btn btn-outline-info">GBS</button></a>
         <a href="{{route('user.login')}}"><button type="button" class="btn btn-outline-primary">Sign In</button></a>
+
         <a href="{{route('user.registration')}}"><button type="button" class="btn btn-outline-success">Sign Up</button></a>
     </div>
     @yield('content')

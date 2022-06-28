@@ -1,6 +1,5 @@
 @extends('layouts.homeNavbar')
 @section('content')
-
 <div class="w-25 p-3 justify-content-center">
 
 <form action="{{route('submit.registration')}}" method="POST">
@@ -66,5 +65,4 @@
     </div>
   </form>
 </div>
-
 @endsection
