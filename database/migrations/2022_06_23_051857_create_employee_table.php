@@ -20,6 +20,7 @@ class CreateEmployeeTable extends Migration
             $table->string('e_mail');
             $table->string('e_pass');
             $table->string('e_add');
+            $table->string('e_image');
             $table->timestamps();
         });
     }
