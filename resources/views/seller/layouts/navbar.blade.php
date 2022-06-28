@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="ps-3 navbar-brand" href="#">GBS</a>
+        <a class="ps-3 navbar-brand" href="{{route('home')}}">GBS</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link" href="{{route('seller.dashboard')}}">Dashboard</a>
