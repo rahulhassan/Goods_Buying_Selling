@@ -117,5 +117,11 @@ class userController extends Controller
         }
 
     }
+    function userLogout(){
+        if(Session::has('loginId')){
+            Session::pull('loginId');
+            return redirect()->route('user.login');
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\seller\sellerProduct;
+use Session;
 
 class postController extends Controller
 {
@@ -28,6 +29,7 @@ class postController extends Controller
         $imageName = time().'_'.$req->brand_name.'.'.$req->image->extension();
         $req->image->move(public_path('images'), $imageName);
 
+        
         $product = new sellerProduct();
         $product->p_title = $req->p_title;
         $product->p_brand = $req->brand_name;
@@ -35,6 +37,7 @@ class postController extends Controller
         $product->p_description = $req->desc;
         $product->p_quantity = $req->qnty;
         $product->image_path = $imageName;
+        $product->s_id = Session::get('loginId');
         $res = $product->save();
         if($res){
             return back()->with('success', 'Data Inserted');
