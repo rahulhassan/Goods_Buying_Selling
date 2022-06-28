@@ -12,7 +12,7 @@ use App\Http\Controllers\buyer\BuyerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -56,8 +56,18 @@ Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])
 
 Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+
+Route::get('orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
+
+Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+
 //Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+
 Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
+
+Route::get('updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
+Route::post('updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
+
 Route::get('account',[BuyerController::class,'account'])->name('buyer.other.account');
 Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
 

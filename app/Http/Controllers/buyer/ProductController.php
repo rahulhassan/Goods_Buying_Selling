@@ -11,7 +11,7 @@ class ProductController extends Controller
     //
     function dashboard()
     {
-        $products=ProductModel::paginate(2);
+        $products=ProductModel::paginate(4);
         return view('buyer.other.dashboard')
                     ->with('products',$products);
     }
@@ -23,6 +23,16 @@ class ProductController extends Controller
     {
         $products=ProductModel::where('p_title',$req->title)->first();
         return view('buyer.other.productDetails')
+                ->with('products',$products);
+    }
+
+
+    //______________________________________
+
+    function orderDetails(Request $req)
+    {
+        $products=ProductModel::where('p_title',$req->title)->first();
+        return view('buyer.other.orderDetails')
                 ->with('products',$products);
     }
 

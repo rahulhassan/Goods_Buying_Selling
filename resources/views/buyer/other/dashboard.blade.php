@@ -4,7 +4,9 @@
 <style>
   
 </style>
-<br>
+<hr>
+<h3 style="text-align:center">Choose Your Product </h3>
+<hr> 
 <div class="container">
   <div class="row">
     <div class="col-sm">
@@ -18,7 +20,7 @@
                     
                     @foreach($products as $p)
                     <tr>
-                        <td rowspan="4"><a href="{{route('buyer.other.productDetails',['title'=>$p->p_title])}}"><img src="{{asset('images/'.$p->image_path)}}" height="180px" width="200px"></a></td>
+                        <td rowspan="4"><a href="{{route('buyer.other.productDetails',['title'=>$p->p_title])}}"><img src="{{asset('images/'.$p->image_path)}}" style="border-radius:10px"height="180px" width="200px"></a></td>
                        
                     </tr>
                     <tr>
