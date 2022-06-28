@@ -21,7 +21,7 @@ use App\Http\Controllers\buyer\BuyerController;
 */
 
 
-Route::get('/', function () { return view('home'); })->name('home');
+Route::get('/', function () { return view('home'); })->name('home')->middleware('loginExist');
 
 Route::get('/registration',[function(){return view('registration');}])->name('user.registration')->middleware('loginExist');
 
@@ -59,7 +59,7 @@ Route::get('productDetails/{title}',[ProductController::class,'productDetails'])
 
 Route::get('orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
 
-Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 
 //Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 

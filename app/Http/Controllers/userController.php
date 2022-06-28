@@ -97,7 +97,7 @@ class userController extends Controller
         }elseif($user3){
             if(md5($req->pass) == $user3->b_pass){
 
-                //return redirect()->route('user.dashboard');
+                return redirect()->route('buyer.other.dashboard');
 
             }else{
                 return back()->with('fail','Password incorrect');
