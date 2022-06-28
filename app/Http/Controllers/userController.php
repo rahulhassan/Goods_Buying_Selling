@@ -121,6 +121,8 @@ class userController extends Controller
         if(Session::has('loginId')){
             Session::pull('loginId');
             return redirect()->route('user.login');
+        }else{
+            return redirect()->route('user.login');
         }
     }
 
