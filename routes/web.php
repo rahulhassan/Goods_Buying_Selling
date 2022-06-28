@@ -6,6 +6,9 @@ use App\Http\Controllers\seller\sDashboardController;
 use App\Http\Controllers\seller\sProfileController;
 use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\buyer\ProductController;
+use App\Http\Controllers\buyer\BuyerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +20,8 @@ use App\Http\Controllers\userController;
 |sStatementController
 */
 
-Route::get('/', function () { return view('home'); })->name('home');
 
+Route::get('/', function () { return view('home'); })->name('home');
 
 Route::get('/registration',[function(){return view('registration');}])->name('user.registration');
 
@@ -27,6 +30,9 @@ Route::post('/registration',[userController::class, 'validateRegistration'])->na
 Route::get('/login',[function () {return view('login');}])->name('user.login');
 
 Route::post('/login',[userController::class, 'checkLogin'])->name('submit.login');
+
+
+//___________________________Seller_________________________________
 
 
 Route::get('/seller/post', function(){ return view('seller/sellerPost'); })->name('seller.post');
@@ -42,3 +48,17 @@ Route::post('/seller/edit',[postController::class,'sellerUpdate'])->name('seller
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->name('seller.profile');
 
 Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])->name('seller.statement');
+
+
+//___________________________Buyer_________________________________
+
+
+Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
+Route::get('account',[BuyerController::class,'account'])->name('buyer.other.account');
+Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
+
+Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
+Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
