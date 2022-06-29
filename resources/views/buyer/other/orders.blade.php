@@ -18,7 +18,7 @@
         @foreach($orders as $ord)
 
                     <tr>
-                        <td rowspan="4"><img src="{{asset('images/'.$ord->p_image)}}" style="border-radius:10px"height="200px" width="200px"></a></td>
+                        <td rowspan="4"><img src="{{asset('images/'.$ord->p_image)}}" style="border-radius:10px"height="200px" width="250px"></a></td>
                        
                     </tr>
                     <tr>
@@ -37,8 +37,19 @@
                     </tr>
        
         @endforeach
+
+        
         
 </table>
+
+            {{ $orders->links() }}
+                    <style>
+                            
+                        .w-5{
+                            display:none;
+                        
+                        }
+                    </style>
     </div>
     <div class="col-sm">
       
@@ -49,4 +60,6 @@
     </div>
 </div>
 
+
 @endsection
+

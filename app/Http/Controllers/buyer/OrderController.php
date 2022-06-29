@@ -21,12 +21,16 @@ class OrderController extends Controller
            
             "name"=>"required",
             "phone"=>"required",
-            "address"=>"required",       
+            "address"=>"required",
+            "payment"=>"required"       
         ],
         [
-              
+          "name.required"=>" *Provide Your Name",
+          "phone.required"=>"*Provide Phone Number",
+          "address.required"=>"*Provide Your Address",     
         ]);
         $products=ProductModel::where('p_title',$req->title)->first();
+        //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
        
         $order=new OrderModel();
         $order->b_name=$req->name;
@@ -78,7 +82,7 @@ class OrderController extends Controller
     function orders()
     {
         $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
-        $orders=OrderModel::where('b_name',$buyer->b_name)->get();
+        $orders=OrderModel::where('b_name',$buyer->b_name)->paginate(4);
         return view('buyer.other.orders')
                     ->with('orders',$orders);
 

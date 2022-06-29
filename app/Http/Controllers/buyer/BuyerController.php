@@ -84,20 +84,32 @@ class BuyerController extends Controller
             "name"=>"required",
             "phone"=>"required",
             "address"=>"required",
-            "pro_pic"=>"required|mimes:jpg,jpeg,png"
+            //"pro_pic"=>"required|mimes:jpg,jpeg,png"
             
         ],
         [
               
         ]);
-
-
-        $imageName = time().'_'.$req->name.'.'.$req->pro_pic->extension();
-        $req->pro_pic->move(public_path('buyerImages'), $imageName);
+      
+   
 
        
         //$buyer=new BuyerModel();
         $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+        $imageName=$buyer->b_image;
+
+        if($req->pro_pic==null)
+        {
+            $imageName== $buyer->b_image;   
+        }
+        else 
+        {
+            $imageName = time().'_'.$req->name.'.'.$req->pro_pic->extension();
+            $req->pro_pic->move(public_path('buyerImages'), $imageName);
+        }
+
+    
+
         $affected = DB::table('buyer')
               ->where('b_id', $buyer->b_id)
               ->update(['b_name' => $req->name,
