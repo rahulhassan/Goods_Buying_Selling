@@ -54,7 +54,7 @@ Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])
 //___________________________Buyer_________________________________
 
 
-Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
 Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 
 Route::get('orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
