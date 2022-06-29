@@ -11,7 +11,7 @@
         <div class="row">
       
                 <div class="col-sm-4 ">
-                    <h5>Order Review</h5>
+                    <h5>Product Review</h5>
                     <img src="{{asset('images/'.$products->image_path)}}" height="180px" width="200px"><br><br>
                     <b>Title: {{$products->p_title}}</b><br>
                     <b>Price: {{$products->p_price}}</b><br>
@@ -24,10 +24,11 @@
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control" name="name" value="{{old('name')}}"></b></td>
+                            <td><b><input type="text" class="form-control" name="name" value="{{old('name')}}"></b>
                             @error('name')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -35,10 +36,11 @@
                         <tr>
                             <td><b>Phone</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control " name="phone" value="{{old('phone')}}"></b></td>
+                            <td><b><input type="text" class="form-control " name="phone" value="{{old('phone')}}"></b>
                             @error('phone')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -46,11 +48,12 @@
                         <tr>
                             <td><b>Address</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control" name="address" value="{{old('address')}}"></b></td>
+                            <td><b><input type="text" class="form-control" name="address" value="{{old('address')}}"></b>
 
                             @error('address')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -127,7 +130,15 @@
                                                         </div>
                                                 </td>
                                         </tr>
+
+
+                                       
                                 </table>
+                                        @error('payment')
+                                                <span class="text-danger">{{$message}}</span>
+                                         @enderror
+
+                                         <br><br>
                         </div>
 
         </div>

@@ -18,12 +18,13 @@ class CreateOrderDetailsTable extends Migration
             $table->string('p_title');
             $table->string('p_price');
             $table->string('p_quantity');
+            $table->string('p_image');
             $table->string('b_name');
             $table->string('b_phn');
             $table->string('b_add');
             $table->string('payment_method');
             $table->string('status');
-            //$table->foreignId('b_id')->references('b_id')->on('buyer');
+            $table->foreignId('s_id')->references('s_id')->on('seller');
             //$table->foreignId('p_id')->references('p_id')->on('product');
             $table->timestamps();
         });

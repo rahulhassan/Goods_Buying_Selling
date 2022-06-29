@@ -13,7 +13,7 @@
 <form action="{{route('buyer.other.search')}}" method="get">
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
   <a class="navbar-brand">GBS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@
 
 
     
-              <input class="form-control" style="height:35px;width: 300px; margin-left:250px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
+              <input class="form-control" style="height:35px;width: 350px; margin-left:250px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
   </div>

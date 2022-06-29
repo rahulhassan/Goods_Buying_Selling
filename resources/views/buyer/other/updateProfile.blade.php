@@ -36,10 +36,11 @@
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control" name="name" value="{{$buyer->b_name}}"></b></td>
+                            <td><b><input type="text" class="form-control" name="name" value="{{$buyer->b_name}}"></b>
                             @error('name')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -47,10 +48,11 @@
                         <tr>
                             <td><b>Email</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control " name="email" value="{{$buyer->b_mail}}" disabled></b></td>
+                            <td><b><input type="text" class="form-control " name="email" value="{{$buyer->b_mail}}" disabled></b>
                             @error('email')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -58,11 +60,12 @@
                         <tr>
                             <td><b>Phone</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control" name="phone" value="{{$buyer->b_phn}}"></b></td>
+                            <td><b><input type="text" class="form-control" name="phone" value="{{$buyer->b_phn}}"></b>
 
                             @error('phone')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 
@@ -70,11 +73,12 @@
                         <tr>
                             <td><b>Address</b></td>
                             <td><b>:</b></td>
-                            <td><b><input type="text" class="form-control" name="address" value="{{$buyer->b_add}}"></b></td>
+                            <td><b><input type="text" class="form-control" name="address" value="{{$buyer->b_add}}"></b>
 
                             @error('address')
-                                    <span class="text-danger">{{$message}}</span><br><br>
+                                    <span class="text-danger">{{$message}}</span>
                              @enderror
+                             </td>
                         </tr>
 
 

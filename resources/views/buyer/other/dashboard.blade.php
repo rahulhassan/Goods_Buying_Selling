@@ -18,7 +18,7 @@
                     
                     @foreach($products as $p)
                     <tr>
-                        <td rowspan="4"><a href="{{route('buyer.other.productDetails',['title'=>$p->p_title])}}"><img src="{{asset('images/'.$p->image_path)}}" style="border-radius:10px"height="250px" width="300px"></a></td>
+                        <td rowspan="4"><a href="{{route('buyer.other.productDetails',['title'=>$p->p_title])}}"><img src="{{asset('images/'.$p->image_path)}}" style="border-radius:10px"height="220px" width="350px"></a></td>
                        
                     </tr>
                     <tr>
@@ -39,8 +39,18 @@
                     @endforeach
             </table>
             <br>
-
-            {{ $products->links() }}
+            <div class="row">
+                    {{ $products->links() }}
+                    
+                    <style>
+                            
+                        .w-5{
+                            display:none;
+                            
+                        }
+                    </style>
+            </div>
+  
            
 
     </div>
@@ -53,17 +63,6 @@
   </div>
 </div>
 
-
-
-
-   
-    <style>
-        
-    .w-5{
-        display:none;
-       
-    }
-</style>
 
 
 
