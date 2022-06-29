@@ -1,7 +1,7 @@
 
 @extends('buyer/main/navbar')
 @section('contents')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <hr>
 <h3 style="text-align:center">{{$products->p_title}} </h3>
 <hr>
@@ -41,8 +41,21 @@
                                 </tr>
 
                             </table>
-                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" >Buy Now</button></a>
-                            <button type="button" class="btn btn-warning" style="margin-left:20px">Add to Cart</button>
+                            <form action="/cart" method="post">
+                                {{@csrf_field()}}
+                                <input type="hidden" name="p_id" value="{{$products->p_id}}">
+                                <button type="Submit" id="addToCart" onclick="myFunction()" class="btn btn-warning" style="margin-right:20px; float:left">Add to Cart</button>
+                            </form>
+
+                            <script>
+                                function myFunction() {
+                                alert("Added into Cart");
+                                }
+                             </script>
+
+<!-- {{Session::get('added')}} -->
+                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="float:left">Buy Now</button></a>
+                            
 
             </div>
         </div>
