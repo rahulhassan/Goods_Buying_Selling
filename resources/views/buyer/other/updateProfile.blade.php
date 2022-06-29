@@ -1,9 +1,9 @@
 
-@extends('buyer/main/navbar')
+@extends('buyer/main/navbar1')
 @section('contents')
 
 <hr>
-<h3 style="text-align:center">Update Profile</h3>
+<h4 style="text-align:center;font-family: myFirstFont;">Update Profile</h4>
 <hr>
 <div>
     <div class="container" style="padding: 30px 0">
@@ -13,7 +13,18 @@
        
                 <div class="col-sm-4">
                     
-                    <img src="{{asset('buyerImages/'.$buyer->b_image)}}" width="300px" alt=""><br>
+                @if($buyer->b_image==null)
+                    
+                        <img src="dummy/download.png" width="300px" alt="">
+                    
+                    @else
+                    
+                        <img src="{{asset('buyerImages/'.$buyer->b_image)}}" width="300px" height="300px" alt="">
+                    
+                    @endif
+
+
+                   <br><br>
                     <input type="file" name="pro_pic"><br><br>
                             @error('pro_pic')
                                     <span class="text-danger">{{$message}}</span><br><br>

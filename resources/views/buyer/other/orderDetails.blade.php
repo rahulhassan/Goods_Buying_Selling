@@ -1,9 +1,9 @@
 
-@extends('buyer/main/navbar')
+@extends('buyer/main/navbar1')
 @section('contents')
 
 <hr>
-<h3 style="text-align:center"> Order Overview</h3>
+<h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
 <div class="container" style="padding: 30px 0">
 <form action="{{route('buyer.other.placeOrderSubmit',['title'=>$products->p_title])}}" method="post">

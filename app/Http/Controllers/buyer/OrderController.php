@@ -38,6 +38,7 @@ class OrderController extends Controller
         $order->p_title=$products->p_title;
         $order->p_price=$products->p_price;
         $order->p_quantity=$products->p_quantity;
+        $order->p_image=$products->image_path;
 
         $order->save();
         session()->flash("added","Added into cart");

@@ -84,7 +84,7 @@ class BuyerController extends Controller
             "name"=>"required",
             "phone"=>"required",
             "address"=>"required",
-            "pro_pic"=>"required|mimes:pdf,docx,doc,jpg,jpeg,png"
+            "pro_pic"=>"required|mimes:jpg,jpeg,png"
             
         ],
         [

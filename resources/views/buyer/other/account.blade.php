@@ -1,5 +1,5 @@
 
-@extends('buyer/main/navbar')
+@extends('buyer/main/navbar1')
 @section('contents')
 <br>
 
