@@ -33,7 +33,8 @@
         <a class="nav-link" href="{{route('buyer.other.orders')}}">Orders</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('user.logout')}}">Logout</a>
+      
+        <a class="nav-link" href="{{route('buyer.other.logout')}}">Logout</a>
       </li>
       
     </ul>

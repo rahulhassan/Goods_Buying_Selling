@@ -43,7 +43,7 @@ class BuyerController extends Controller
 
         if($buyer)
         {
-            session()->put('LoggedIn',$buyer->b_mail);
+            session()->put('LoggedIn',$buyer->b_id);
             return redirect()->route('buyer.other.dashboard');
         }
         else
@@ -57,7 +57,7 @@ class BuyerController extends Controller
 
     function profile()
     {
-        $buyer=BuyerModel::where('b_mail',session()->get('LoggedIn'))->first();
+        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
         return view('buyer.other.profile')
                 ->with('buyer',$buyer);
     }
@@ -67,7 +67,7 @@ class BuyerController extends Controller
 
     function updateProfile()
     {
-        $buyer=BuyerModel::where('b_mail',session()->get('LoggedIn'))->first();
+        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
         return view('buyer.other.updateProfile')
                 ->with('buyer',$buyer);
     }
@@ -97,7 +97,7 @@ class BuyerController extends Controller
 
        
         //$buyer=new BuyerModel();
-        $buyer=BuyerModel::where('b_mail',session()->get('LoggedIn'))->first();
+        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
         $affected = DB::table('buyer')
               ->where('b_id', $buyer->b_id)
               ->update(['b_name' => $req->name,

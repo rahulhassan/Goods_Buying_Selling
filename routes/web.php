@@ -8,6 +8,7 @@ use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
+use App\Http\Controllers\buyer\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,22 +55,20 @@ Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])
 //___________________________Buyer_________________________________
 
 
-Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
+Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
-
 Route::get('orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-
-//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
-
-//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 
 Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
-
 Route::get('updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
 Route::post('updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
-
 Route::get('account',[BuyerController::class,'account'])->name('buyer.other.account');
 Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
+Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
-//Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
-//Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
+Route::post('/cart',[OrderController::class,'addToCartSubmit']);
+Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
+Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
