@@ -10,8 +10,6 @@
 
 </head>
 <body>
-<form action="{{route('buyer.other.search')}}" method="get">
-
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand">GBS</a>
@@ -20,7 +18,6 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       
       <li class="nav-item">
@@ -42,11 +39,8 @@
       
     </ul>
 
-
-    
-              <input class="form-control" style="height:35px;width: 300px; margin-left:250px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+     
+   
   </div>
 </nav>
     

@@ -1,9 +1,9 @@
 
-@extends('buyer/main/navbar')
+@extends('buyer/main/navbar1')
 @section('contents')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <hr>
-<h3 style="text-align:center">{{$products->p_title}} </h3>
+<h4 style="text-align:center;font-family: myFirstFont;">{{$products->p_title}} </h4>
 <hr>
 <div class="container" style="padding: 30px 0">
         <div class="row">

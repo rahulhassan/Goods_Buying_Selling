@@ -47,4 +47,16 @@ class ProductController extends Controller
         session()->flash('logout','Logged out successfully');
         return redirect()->route('buyer.other.login');
     }
+
+    //__________________________________________
+
+    function search()
+    {
+
+        $search_text=$_GET['search'];
+        $products=ProductModel::where('p_title','LIKE',$search_text.'%')->get();
+
+        return view('buyer.other.search')
+                    ->with('products',$products);
+    }
 }

@@ -1,7 +1,9 @@
 
 @extends('buyer/main/navbar')
 @section('contents')
-
+<style>
+  
+</style>
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">Choose Your Product </h4>
 <hr> 
@@ -40,8 +42,7 @@
             </table>
             <br>
 
-            {{ $products->links() }}
-           
+         
 
     </div>
     <div class="col-sm">

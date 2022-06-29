@@ -1,8 +1,8 @@
 
-@extends('buyer/main/navbar')
+@extends('buyer/main/navbar1')
 @section('contents')
 <hr>
-<h3 style="text-align:center">My Previous Orders </h3>
+<h4 style="text-align:center;font-family: myFirstFont;">My Order List</h4>
 <hr>
 <div class="container">
   <div class="row">
@@ -18,7 +18,7 @@
         @foreach($orders as $ord)
 
                     <tr>
-                        <td rowspan="4"><img src="{{asset('images/'.$ord->image_path)}}" style="border-radius:10px"height="280px" width="300px"></a></td>
+                        <td rowspan="4"><img src="{{asset('images/'.$ord->p_image)}}" style="border-radius:10px"height="200px" width="200px"></a></td>
                        
                     </tr>
                     <tr>
