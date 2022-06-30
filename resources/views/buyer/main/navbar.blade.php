@@ -10,6 +10,7 @@
 
 </head>
 <body>
+<marquee behavior="" direction="right"><b>|-- Welcome {{Session::get('LoggedInName')}} --|</b></marquee>
 <form action="{{route('buyer.other.search')}}" method="get">
 
 
@@ -44,9 +45,11 @@
 
 
     
-              <input class="form-control" style="height:35px;width: 350px; margin-left:250px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
+              <input class="form-control" style="height:40px;width: 350px; margin-left:220px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
+              <b class="text-white" style="margin-left:10px">{{Session::get('LoggedInName')}}</b>
       </form>
+      
   </div>
 </nav>
     

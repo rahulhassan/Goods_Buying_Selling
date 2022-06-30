@@ -27,7 +27,10 @@
   @enderror
   
 <!-- ____________________ -->
-
+<div class="remember">
+          <input type="checkbox" name="remember" value="Remember">
+          <label for="Remember">Remember me</label>
+    </div>
 
   <input type="submit" value="Submit">
 </form>

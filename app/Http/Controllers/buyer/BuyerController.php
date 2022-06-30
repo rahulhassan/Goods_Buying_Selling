@@ -4,6 +4,7 @@ namespace App\Http\Controllers\buyer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\buyer\BuyerModel;
 use Illuminate\Support\Facades\DB;
 
@@ -41,9 +42,16 @@ class BuyerController extends Controller
 
         $buyer=BuyerModel::where('b_mail',$req->email)->where('b_pass',$req->password)->first();
 
+        // $minute=1;
+        // $response=new Response();
+        // $response->withCookie(cookie('b_mail',$req->email,$minute));
+        // return $response;
+
         if($buyer)
         {
+          
             session()->put('LoggedIn',$buyer->b_id);
+            session()->put('LoggedInName',$buyer->b_name);
             return redirect()->route('buyer.other.dashboard');
         }
         else
@@ -84,7 +92,7 @@ class BuyerController extends Controller
             "name"=>"required",
             "phone"=>"required",
             "address"=>"required",
-            //"pro_pic"=>"required|mimes:jpg,jpeg,png"
+            "pro_pic"=>"mimes:jpg,jpeg,png"
             
         ],
         [

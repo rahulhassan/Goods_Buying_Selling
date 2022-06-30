@@ -39,7 +39,7 @@
       
     </ul>
 
-     
+    <b class="text-white" style="margin-left:650px"><h3>¯ಠ_ಠ</h3>{{Session::get('LoggedInName')}}</b>
    
   </div>
 </nav>

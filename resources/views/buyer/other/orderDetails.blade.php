@@ -1,7 +1,6 @@
 
 @extends('buyer/main/navbar1')
 @section('contents')
-
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
@@ -16,6 +15,11 @@
                     <b>Title: {{$products->p_title}}</b><br>
                     <b>Price: {{$products->p_price}}</b><br>
                     <b>Quantity: {{$products->p_quantity}}</b><br>
+
+                    <b>Your Quantity:<input type="text" class="form-control " name="quantity" value="{{old('quantity')}}" style="width:50px"></b>
+                            @error('quantity')
+                                    <span class="text-danger">{{$message}}</span>
+                             @enderror
                 </div>
             
                         <div class="col-sm-4">

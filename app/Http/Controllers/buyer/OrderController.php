@@ -22,7 +22,8 @@ class OrderController extends Controller
             "name"=>"required",
             "phone"=>"required",
             "address"=>"required",
-            "payment"=>"required"       
+            "payment"=>"required", 
+            "quantity"=>"required"       
         ],
         [
           "name.required"=>" *Provide Your Name",
@@ -41,7 +42,7 @@ class OrderController extends Controller
 
         $order->p_title=$products->p_title;
         $order->p_price=$products->p_price;
-        $order->p_quantity=$products->p_quantity;
+        $order->p_quantity=$req->quantity;
         $order->p_image=$products->image_path;
 
         $order->save();
@@ -53,18 +54,43 @@ class OrderController extends Controller
 
 //_________________________________________________
 
+    function addToCart()
+    {
+        $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        $total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+            return $t->p_price * $t->p_quantity;
+        });
+        return view('buyer.other.cart')
+                    ->with('carts',$cart)
+                    ->with('total',$total);
+    }
   
+
+    //___________________________________________
+
     function addToCartSubmit(Request $req)
     {
         if($req->session()->has("LoggedIn"))
         {
-          
+          $check=CartModel::where('p_id',$req->p_id)->where('b_id',$req->session()->get("LoggedIn"))->first();
+          if($check)
+          {
+            CartModel::where('p_id',$req->p_id)->where('b_id',$req->session()->get("LoggedIn"))->increment('p_quantity');
+            return back()->with("cartAdded","Product added on Cart");
+          }
+          else
+          {
             $cart=new CartModel();
             $cart->b_id=$req->session()->get("LoggedIn");
             $cart->p_id=$req->p_id;
+            $cart->p_price=$req->p_price;
+            $cart->p_quantity=1;
             $cart->save();
-            session()->flash("added","Added into cart");
-            return back();
+            //session()->flash("added","Added into cart");
+            return back()->with("cartAdded","Product added on Cart");
+
+          }
+           
         }
         else
         {
@@ -74,7 +100,28 @@ class OrderController extends Controller
     }
 
 
+    //_________________Cart Destroy______________________
 
+
+    function destroy($c_id)
+    {
+        CartModel::where('c_id',$c_id)->where('b_id',session()->get('LoggedIn'))->delete();
+
+       return back()->with("cartDeleted","Product deleted from Cart");
+
+    }
+
+    //_______________________Cart Quantity Update________________________
+
+
+    function cartQuantityUpdate(Request $req,$c_id)
+    {
+        CartModel::where('c_id',$c_id)->where('b_id',session()->get('LoggedIn'))->update([
+                'p_quantity'=>$req->quantity,
+        ]);
+        return back()->with("cartQuantityUpdated","Quantity Updated");
+
+    }
 
     //___________________________________________
 

@@ -32,7 +32,7 @@
                     <!-- <button type="Submit" class="btn btn-primary">Change Photo</button> -->
                 </div>
                 <div class="col-sm-8">
-                    <table  class="table table-striped table-active table-responsive-sm" style="width:500px; height:300px">
+                    <table  class="table table-striped table-dark table-responsive-sm" style="width:500px; height:300px">
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>:</b></td>

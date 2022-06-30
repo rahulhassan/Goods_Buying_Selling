@@ -70,7 +70,11 @@ Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.order
 Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
 Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
-
-Route::post('/cart',[OrderController::class,'addToCartSubmit']);
+Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
+Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
 Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
 Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
+Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
+
+
