@@ -15,6 +15,8 @@ class CreateCartTable extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id('c_id');
+            $table->id('p_price');
+            $table->id('p_quantity');
             $table->foreignId('b_id')->references('b_id')->on('buyer');
             $table->foreignId('p_id')->references('b_id')->on('product');
             $table->timestamps();

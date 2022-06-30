@@ -13,7 +13,7 @@
     </div>
     <div class="col-sm">
 
-<table class="table table-striped table-active"> 
+<table class="table table-striped table-dark"> 
  
         @foreach($orders as $ord)
 
@@ -26,11 +26,11 @@
                     <td>{{$ord->p_title}}</td>
                     </tr>
                     <tr>
-                        <td>{{$ord->p_price}}</td>
+                        <td>{{$ord->p_price}} BDT</td>
                         
                     </tr>
                     <tr>
-                        <td>{{$ord->p_quantity}}</td>
+                        <td>Quantity: {{$ord->p_quantity}}</td>
                     </tr>
                     <tr>
                         <td>{{$ord->status}}</td>

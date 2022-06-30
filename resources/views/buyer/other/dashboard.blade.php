@@ -7,14 +7,14 @@
 <hr> 
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm-3 ">
      
         
 
     </div>
-    <div class="col-sm">
+    <div class="col-sm-6">
  
-            <table class="table table-striped table-active">
+            <table class="table table-striped table-dark" >
                     
                     @foreach($products as $p)
                     <tr>
@@ -26,11 +26,11 @@
                         <td>{{$p->p_title}}</td>
                     </tr>
                     <tr>
-                        <td>{{$p->p_price}}</td>
+                        <td>Price:{{$p->p_price}}</td>
                         
                     </tr>
                     <tr>
-                       
+                       <!-- <td>{{$p->p_description}}</td> -->
                     </tr>
 
                         
@@ -54,7 +54,7 @@
            
 
     </div>
-    <div class="col-sm">
+    <div class="col-sm-3">
       
     
 

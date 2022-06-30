@@ -5,6 +5,27 @@
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">{{$products->p_title}} </h4>
 <hr>
+@if(session('cartAdded'))
+        <div class="alert alert-success" role="alert">
+            <b>{{session('cartAdded')}}</b>
+            <!-- <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button> -->
+        </div>
+@endif
+
+@php 
+    $total=App\Models\buyer\CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+        return $t->p_price * $t->p_quantity;
+    });
+
+    $quantity=App\Models\buyer\CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum('p_quantity');
+@endphp 
+
+Total: {{$total}}
+Quantity: {{$quantity}}
+
+<a href="{{route('buyer.other.cart')}}"> Go To Cart </a>
 <div class="container" style="padding: 30px 0">
         <div class="row">
        
@@ -15,7 +36,7 @@
                 <div class="col-sm-8">
 
 
-                            <table class="table table-striped  table-hover table-active">
+                            <table class="table table-striped  table-hover table-dark">
                                 
                                 <tr>
                             
@@ -41,17 +62,14 @@
                                 </tr>
 
                             </table>
-                            <form action="/cart" method="post">
+                            <form action="{{route('buyer.other.cartSubmit')}}" method="post">
                                 {{@csrf_field()}}
                                 <input type="hidden" name="p_id" value="{{$products->p_id}}">
+                                <input type="hidden" name="p_price" value="{{$products->p_price}}">
                                 <button type="Submit" id="addToCart" onclick="myFunction()" class="btn btn-warning" style="margin-right:20px; float:left">Add to Cart</button>
                             </form>
 
-                            <script>
-                                function myFunction() {
-                                alert("Added into Cart");
-                                }
-                             </script>
+                          
 
 <!-- {{Session::get('added')}} -->
                             <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="float:left">Buy Now</button></a>
