@@ -2,9 +2,28 @@
 @extends('buyer/main/navbar1')
 @section('contents')
 
+
+
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">Update Profile</h4>
 <hr>
+
+
+@if(session('profileUpdated'))
+                <div class="alert alert-success" role="alert">
+                    <b>{{session('profileUpdated')}}</b>
+                    
+                </div>
+ @endif
+ @if(session('profileNotUpdated'))
+                <div class="alert alert-danger" role="alert">
+                    <b>{{session('profileNotUpdated')}}</b>
+                    
+                </div>
+ @endif
+
+
+
 <div>
     <div class="container" style="padding: 30px 0">
     <form action="" method="post" enctype="multipart/form-data">
