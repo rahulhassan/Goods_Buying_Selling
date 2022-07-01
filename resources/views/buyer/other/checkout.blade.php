@@ -5,12 +5,21 @@
 <h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
 
-<!-- @if(session('orderPlaced'))
+@if(session('orderPlaced'))
         <div class="alert alert-warning" role="alert">
             <b>{{session('orderPlaced')}}</b>
             
         </div>
-@endif -->
+@endif
+
+
+
+        @error('total')
+        <div class="alert alert-danger" role="alert">
+              <b>{{$message}}</b>
+        </div>
+        @enderror
+      
 
 <div class="container" style="padding: 30px 0">
 <form action="{{route('buyer.other.placeOrder')}}" method="post">
@@ -93,10 +102,14 @@
                                                 
                                                    
                                                 @endif
+
+
+                                                       
                                     </td>
                                 </tr>
                             </table>
 
+                               
 
 
                          

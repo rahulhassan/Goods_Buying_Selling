@@ -24,6 +24,8 @@ class OrderController extends Controller
 
     function placeOrderSubmit(Request $req)
     {
+        //dd($req->all());
+
         $this->validate($req,
         [
            
@@ -31,31 +33,73 @@ class OrderController extends Controller
             "phone"=>"required",
             "address"=>"required",
             "payment"=>"required", 
-            "quantity"=>"required"       
+     
         ],
         [
           "name.required"=>" *Provide Your Name",
           "phone.required"=>"*Provide Phone Number",
           "address.required"=>"*Provide Your Address",     
         ]);
-        $products=ProductModel::where('p_title',$req->title)->first();
-        //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+        // $products=ProductModel::where('p_title',$req->title)->first();
+        // //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
        
-        $order=new OrderModel();
-        $order->b_name=$req->name;
-        $order->b_phn=$req->phone;
-        $order->b_add=$req->address;
-        $order->payment_method=$req->payment;
-        $order->status="pending";
+        // $order=new OrderModel();
+        // $order->b_name=$req->name;
+        // $order->b_phn=$req->phone;
+        // $order->b_add=$req->address;
+        // $order->payment_method=$req->payment;
+        // $order->status="pending";
 
-        $order->p_title=$products->p_title;
-        $order->p_price=$products->p_price;
-        $order->p_quantity=$req->quantity;
-        $order->p_image=$products->image_path;
+        // $order->p_title=$products->p_title;
+        // $order->p_price=$products->p_price;
+        // $order->p_quantity=$req->quantity;
+        // $order->p_image=$products->image_path;
 
-        $order->save();
-        session()->flash("added","Added into cart");
-        return back();
+        // $order->save();
+        // session()->flash("added","Added into cart");
+        // return back();
+
+         $products=ProductModel::where('p_title',$req->title)->first();
+        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+       
+        $order_id=Order::insertGetId([
+            'b_id'=>$buyer->b_id,
+            'payment_type'=>$req->payment,
+            'sub_total'=>$products->p_price,
+            'discount'=>0,
+            'total'=>$products->p_price,
+            'created_at'=>Carbon::Now(),
+            'updated_at'=>Carbon::Now()
+
+        ]);
+
+
+   
+            OrderItem::insert([
+                'order_id'=>$order_id,
+                'p_id'=>$products->p_id,
+                'p_quantity'=>1,
+                'created_at'=>Carbon::Now(),
+                'updated_at'=>Carbon::Now()
+            ]);
+   
+        //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+
+        Shipping::insert([
+            'order_id'=>$order_id,
+            'b_name'=>$req->name,
+            'b_phn'=>$req->phone,
+            'b_add'=>$req->address,
+            'created_at'=>Carbon::Now(),
+            'updated_at'=>Carbon::Now()
+        ]);
+
+        //return back()->with("orderPlaced"," Your Order has been completed");
+
+        return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced"," Your Order has been completed");
+
+
+
     }
 
 
@@ -191,12 +235,14 @@ class OrderController extends Controller
             "phone"=>"required",
             "address"=>"required",
             "payment"=>"required", 
+            "total"=>"min:2"
       
         ],
         [
           "name.required"=>" *Provide Your Name",
           "phone.required"=>"*Provide Phone Number",
-          "address.required"=>"*Provide Your Address",     
+          "address.required"=>"*Provide Your Address",
+          "total.min"=>"You have no product on cart",     
         ]);
 
         $order_id=Order::insertGetId([
@@ -243,7 +289,8 @@ class OrderController extends Controller
 
         CartModel::where('b_id',session()->get('LoggedIn'))->delete();
 
-        return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced","Order has been completed");
+        //return back()->with("orderPlaced","Your Order has been completed");
+        return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced","Your Order has been completed");
 
     }
 
