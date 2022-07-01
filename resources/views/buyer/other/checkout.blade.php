@@ -5,21 +5,99 @@
 <h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
 <div class="container" style="padding: 30px 0">
-<form action="{{route('buyer.other.placeOrderSubmit',['title'=>$products->p_title])}}" method="post">
-        @csrf
+<form action="{{route('buyer.other.placeOrder')}}" method="post">
+       @csrf
         <div class="row">
       
-                <div class="col-sm-4 ">
+                <div class="col-sm-5">
                     <h5>Product Review</h5>
-                    <img src="{{asset('images/'.$products->image_path)}}" height="180px" width="200px"><br><br>
-                    <b>Title: {{$products->p_title}}</b><br>
-                    <b>Price: {{$products->p_price}}</b><br>
-                    <b>Quantity: {{$products->p_quantity}}</b><br>
 
-                    <b>Your Quantity:<input type="text" class="form-control " name="quantity" value="{{old('quantity')}}" style="width:50px"></b>
-                            @error('quantity')
-                                    <span class="text-danger">{{$message}}</span>
-                             @enderror
+
+
+                         <div class="cart_total"  >
+
+                            <table class="table  table-striped table-dark" style="width:380px">
+                                <tr>
+                                    <td></td>
+                                    <td>Your Order</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Products</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                @foreach($carts as $c)
+                                <tr>
+                                    <td> {{$c->product->p_title}}({{$c->p_quantity}})</td>
+                                    <td></td>
+                                    <td>{{$c->p_price * $c->p_quantity}}</td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                    @if(Session::has('coupon'))
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sub Total</td>
+                                    <td>:</td>
+                                    <td>
+                                            {{$sub_total}}
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+
+                                    <td> Coupon</td>
+                                    <td>:</td>
+                                    <td>
+                                            
+                                            {{session()->get('coupon')['cpn_name']}}
+                                            <a href="{{url('coupon/destroy')}}"><button type="button" style="float:right" class="btn-close btn-close-white" aria-label="Close"></button></a>
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td>Discount</td>
+                                    <td>:</td>
+                                    <td>
+                                                
+                                                            {{session()->get('coupon')['discount']}}%
+                                    
+                                                ({{$discount=$sub_total * session()->get('coupon')['discount'] /100}})
+                                                
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Total</td>
+                                    <td>:</td>
+                                    <td>
+                                                {{$sub_total-$discount}}
+                                                @else
+                                                    
+                                                {{$sub_total}}
+                                                   
+                                                @endif
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+                         
+
+                        </div>
+
+
+
+
+
+
+
+
+                    
                 </div>
             
                         <div class="col-sm-4">
@@ -65,12 +143,12 @@
                     </table>
                                 
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                         <h5>Payment Methods</h5>
 
 
                         <div class="payment-method">
-                                <table  class="table table-striped table-active table-responsive-sm" style="width:300px; height:200px">
+                                <table  class="table table-striped table-active table-responsive-sm" style="width:280px; height:200px">
                                         <tr>
                                                 <td>
                                                         <div class="input-radio">
@@ -145,8 +223,11 @@
                                          <br><br>
                         </div>
 
-        </div>
-        <button type="Submit" class="btn btn-success">PLACE ORDER</button>
+
+                        </div>
+                                                                
+            
+        <button type="Submit" class="btn btn-success" style="width:100%">PLACE ORDER</button>
 </form>
 </div>
 

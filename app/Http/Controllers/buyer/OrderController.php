@@ -8,11 +8,15 @@ use App\Models\buyer\CartModel;
 use App\Models\buyer\OrderModel;
 use App\Models\buyer\ProductModel;
 use App\Models\buyer\BuyerModel;
+use App\Models\buyer\CouponModel;
+use Illuminate\Support\Facades\Session;
+
 
 class OrderController extends Controller
 {
     //
     
+    //___________________Order Submit______________________
 
     function placeOrderSubmit(Request $req)
     {
@@ -52,21 +56,21 @@ class OrderController extends Controller
 
 
 
-//_________________________________________________
+//_________________________Add to cart________________________
 
     function addToCart()
     {
         $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
-        $total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+        $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
             return $t->p_price * $t->p_quantity;
         });
         return view('buyer.other.cart')
                     ->with('carts',$cart)
-                    ->with('total',$total);
+                    ->with('sub_total',$sub_total);
     }
   
 
-    //___________________________________________
+    //_____________________Add to Cart Submit______________________
 
     function addToCartSubmit(Request $req)
     {
@@ -123,7 +127,82 @@ class OrderController extends Controller
 
     }
 
-    //___________________________________________
+
+    //_______________________Coupon Apply____________________
+
+    function couponApply(Request $req)
+    {
+        $check=CouponModel::where('cpn_name',$req->coupon)->first();
+        if($check)
+        {
+            session::put('coupon',[
+                'cpn_name'=> $check->cpn_name,
+                'discount'=>$check->discount
+            ]);
+            return back()->with("validCoupon","Coupon Applied");
+
+            //session::put('cpn_name',$check->coupon);
+            //session::put('discount',$check->discount);
+        }
+        else
+        {
+            return back()->with("invalidCoupon","Invalid Coupon");
+
+        }
+    }
+    //___________________________Coupon Destroy______________________
+
+    function couponDestroy()
+    {
+        if(Session::has('coupon'))
+        {
+            session()->forget('coupon');
+            return back()->with("destroyCoupon","Coupon has been removed");
+        }
+    }
+    //____________________________Checkout______________________
+
+    function checkout()
+    {
+        $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+            return $t->p_price * $t->p_quantity;
+        });
+        return view('buyer.other.checkout')
+                    ->with('carts',$cart)
+                    ->with('sub_total',$sub_total);
+       
+    }
+
+    //_______________________________Place Order With Cart______________________________
+
+    function placeOrder(Request $req)
+    {
+        dd($req->all());
+
+        $order_id=Order::insertGetId([
+            'b_id'=>session()->get('LoggedIn'),
+            'payment_type'=>$req->payment_type,
+            'sub_total'=>$req->sub_total,
+            'discount'=>$req->discount,
+            'total'=>$req->total,
+
+        ]);
+
+
+        $carts=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        foreach($carts as $cart)
+        {
+            OrderItem::insert([
+                'order_id'=>$order_id,
+                'p_id'=>$req->$cart->p_id,
+                'p_quantity'=>$cart->p_quantity
+            ]);
+        }
+        
+    }
+
+    //__________________________________Show My Orders________________________________
 
 
     function orders()

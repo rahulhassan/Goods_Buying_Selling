@@ -5,52 +5,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <hr>
-<h4 style="text-align:center;font-family: myFirstFont;">Shopping Cart </h4>
+<h3 style="text-align:center;font-family: myFirstFont;">Shopping Cart </h3>
 <hr> 
-
-<!-- <section class="shoping-cart spad">
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="shopping__product">Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="" alt="">
-                                </td>
-                                <td class="shoping__cart__price"></td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__item"></td>
-                                <td></td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-        </div>
-    </div>
-</div>
-</section>
-
- -->
-
-
 
 
 
@@ -135,22 +91,119 @@
                         
                 
                     @endforeach
-                    
+
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>{{$total}}</td>
                         <td></td>
+                        <td></td>
+                        
                     </tr>
+                    
+                    
             </table>
 
                     <a href="{{route('buyer.other.dashboard')}}"><button type="button" class="btn btn-success">Continue Shopping</button></a>
-            <br>
+            <br><br>
             
+
+
+
+            @if(session('validCoupon'))
+                <div class="alert alert-success" role="alert">
+                    <b>{{session('validCoupon')}}</b>
+                    
+                </div>
+            @endif
+
+            @if(session('invalidCoupon'))
+                <div class="alert alert-danger" role="alert">
+                    <b>{{session('invalidCoupon')}}</b>
+                    
+                </div>
+            @endif
+
+
+            @if(session('destroyCoupon'))
+                <div class="alert alert-danger" role="alert">
+                    <b>{{session('destroyCoupon')}}</b>
+                    
+                </div>
+            @endif
+
+
+
+
+
+            <div class="coupon" >
+                <form action="{{url('coupon/apply')}}" method="post">
+                    @csrf
+                    <input type="text" name="coupon" placeholder="Enter you coupon code">
+                    <button type="Submit" class="btn btn-warning">Apply Coupon</button>
+                </form>
+            </div>
+
+
+            <div class="cart_total" style="float:right" >
+
+                        <table class="table  table-striped table-dark" style="width:300px">
+                            <tr>
+                                <td>Cart Total</td>
+                                <td></td>
+                                <td>
+                                @if(Session::has('coupon'))
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sub Total</td>
+                                <td>:</td>
+                                <td>
+                                        {{$sub_total}}
+                                </td>
+                            </tr>
+                            <tr>
+                          
+                                <td> Coupon</td>
+                                <td>:</td>
+                                <td>
+                                        
+                                        {{session()->get('coupon')['cpn_name']}}
+                                        <a href="{{url('coupon/destroy')}}"><button type="button" style="float:right" class="btn-close btn-close-white" aria-label="Close"></button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                <td>:</td>
+                                <td>
+                                            
+                                                        {{session()->get('coupon')['discount']}}%
+                                
+                                            ({{$discount=$sub_total * session()->get('coupon')['discount'] /100}})
+                                            
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Total</td>
+                                <td>:</td>
+                                <td>
+                                            {{$sub_total-$discount}}
+                                            @else
+                                                        {{$sub_total}}
+                                            @endif
+                                </td>
+                            </tr>
+                        </table>
+                   
+                   
+                   
+            </div>
            
 
     </div>
+    <a href="{{route('buyer.other.checkout')}}"><button type="button"  style="width:100%" class="btn btn-success">PROCEED TO CHECKOUT</button></a>
+    <hr>
     <div class="col-sm-1">
       
     

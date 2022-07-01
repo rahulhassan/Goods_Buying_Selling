@@ -133,10 +133,10 @@ class BuyerController extends Controller
 
         // $result=$buyer->save();
         if($affected){
-            return back()->with('success', 'Information Updated Successfully');
+            return back()->with('profileUpdated', 'Information Updated Successfully');
 
         }else{
-            return back()->with('failed', 'Informatin not updated');
+            return back()->with('profileNotUpdated', 'Informatin not updated');
         }
         return view('buyer.other.updateProfile')
                 ->with('buyer',$buyer);

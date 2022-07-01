@@ -10,6 +10,7 @@ use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
 use App\Http\Controllers\buyer\OrderController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,5 +77,11 @@ Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->
 Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
 Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
+Route::post('/coupon/apply',[OrderController::class,'couponApply']);
+Route::get('/coupon/destroy',[OrderController::class,'couponDestroy']);
+Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,'checkout'])->name('buyer.other.checkout');
+
+Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
+
 
 
