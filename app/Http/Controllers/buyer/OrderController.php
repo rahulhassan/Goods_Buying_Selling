@@ -4,11 +4,15 @@ namespace App\Http\Controllers\buyer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\buyer\CartModel;
 use App\Models\buyer\OrderModel;
 use App\Models\buyer\ProductModel;
 use App\Models\buyer\BuyerModel;
 use App\Models\buyer\CouponModel;
+use App\Models\buyer\Order;
+use App\Models\buyer\OrderItem;
+use App\Models\buyer\Shipping;
 use Illuminate\Support\Facades\Session;
 
 
@@ -178,14 +182,31 @@ class OrderController extends Controller
 
     function placeOrder(Request $req)
     {
-        dd($req->all());
+        // dd($req->all());
+
+        $this->validate($req,
+        [
+           
+            "name"=>"required",
+            "phone"=>"required",
+            "address"=>"required",
+            "payment"=>"required", 
+      
+        ],
+        [
+          "name.required"=>" *Provide Your Name",
+          "phone.required"=>"*Provide Phone Number",
+          "address.required"=>"*Provide Your Address",     
+        ]);
 
         $order_id=Order::insertGetId([
             'b_id'=>session()->get('LoggedIn'),
-            'payment_type'=>$req->payment_type,
+            'payment_type'=>$req->payment,
             'sub_total'=>$req->sub_total,
             'discount'=>$req->discount,
             'total'=>$req->total,
+            'created_at'=>Carbon::Now(),
+            'updated_at'=>Carbon::Now()
 
         ]);
 
@@ -195,11 +216,35 @@ class OrderController extends Controller
         {
             OrderItem::insert([
                 'order_id'=>$order_id,
-                'p_id'=>$req->$cart->p_id,
-                'p_quantity'=>$cart->p_quantity
+                'p_id'=>$cart->p_id,
+                'p_quantity'=>$cart->p_quantity,
+                'created_at'=>Carbon::Now(),
+                'updated_at'=>Carbon::Now()
             ]);
         }
-        
+
+        //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+
+        Shipping::insert([
+            'order_id'=>$order_id,
+            'b_name'=>$req->name,
+            'b_phn'=>$req->phone,
+            'b_add'=>$req->address,
+            'created_at'=>Carbon::Now(),
+            'updated_at'=>Carbon::Now()
+        ]);
+
+
+        if(Session::has('coupon'))
+        {
+            session()->forget('coupon');
+            //return back()->with("destroyCoupon","Coupon has been removed");
+        }
+
+        CartModel::where('b_id',session()->get('LoggedIn'))->delete();
+
+        return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced","Order has been completed");
+
     }
 
     //__________________________________Show My Orders________________________________
@@ -212,5 +257,12 @@ class OrderController extends Controller
         return view('buyer.other.orders')
                     ->with('orders',$orders);
 
+    }
+
+    //______________________________________________________________
+
+    function orderCompleted()
+    {
+        return view('buyer.other.orderCompleted');
     }
 }

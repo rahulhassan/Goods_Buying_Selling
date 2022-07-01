@@ -82,6 +82,7 @@ Route::get('/coupon/destroy',[OrderController::class,'couponDestroy']);
 Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,'checkout'])->name('buyer.other.checkout');
 
 Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
+Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
 
 
 

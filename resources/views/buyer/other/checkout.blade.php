@@ -4,6 +4,14 @@
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
+
+<!-- @if(session('orderPlaced'))
+        <div class="alert alert-warning" role="alert">
+            <b>{{session('orderPlaced')}}</b>
+            
+        </div>
+@endif -->
+
 <div class="container" style="padding: 30px 0">
 <form action="{{route('buyer.other.placeOrder')}}" method="post">
        @csrf
@@ -45,7 +53,9 @@
                                     <td>Sub Total</td>
                                     <td>:</td>
                                     <td>
-                                            {{$sub_total}}
+                                                {{$sub_total}}
+                                                <input type="hidden" name="sub_total" value="{{$sub_total}}">
+                                                
                                     </td>
                                 </tr>
                                 <!-- <tr>
@@ -66,7 +76,7 @@
                                                             {{session()->get('coupon')['discount']}}%
                                     
                                                 ({{$discount=$sub_total * session()->get('coupon')['discount'] /100}})
-                                                
+                                                <input type="hidden" name="discount" value=" {{session()->get('coupon')['discount']}}">
                                     </td>
                                 </tr>
 
@@ -75,9 +85,12 @@
                                     <td>:</td>
                                     <td>
                                                 {{$sub_total-$discount}}
+                                                <input type="hidden" name="total" value="{{$sub_total-$discount}}">
                                                 @else
-                                                    
-                                                {{$sub_total}}
+                                                     {{$sub_total}}
+                                                    <input type="hidden" name="sub_total" value=" {{$sub_total}}">
+                                                    <input type="hidden" name="total" value=" {{$sub_total}}">
+                                                
                                                    
                                                 @endif
                                     </td>
@@ -227,7 +240,7 @@
                         </div>
                                                                 
             
-        <button type="Submit" class="btn btn-success" style="width:100%">PLACE ORDER</button>
+        <a href=""><button type="Submit" class="btn btn-success" style="width:100%;">PLACE ORDER</button></a>
 </form>
 </div>
 
