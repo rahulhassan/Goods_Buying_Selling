@@ -17,8 +17,8 @@ class CreateShippingTable extends Migration
             $table->id('s_id');
             $table->integer('order_id');
             $table->string('b_name');
-            $table->string('p_phn');
-            $table->string('p_add');
+            $table->string('b_phn');
+            $table->string('b_add');
             $table->timestamps();
         });
     }

@@ -146,7 +146,7 @@
                         </div>
 
         </div>
-        <button type="Submit" class="btn btn-success">PLACE ORDER</button>
+        <button type="Submit" class="btn btn-success" >PLACE ORDER</button>
 </form>
 </div>
 

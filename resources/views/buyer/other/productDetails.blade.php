@@ -22,10 +22,15 @@
     $quantity=App\Models\buyer\CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum('p_quantity');
 @endphp 
 
-Total: {{$total}}
-Quantity: {{$quantity}}
+<div class="alert alert-secondary" role="alert" style="float:right">
+<span><b>Total: {{$total}}</b> </span> 
+<span><b>Quantity: {{$quantity}}</b> </span> 
+<span><b><a href="{{route('buyer.other.cart')}}"> Go To Cart </a></b></span>
+</div>
+<br><br><br>
 
-<a href="{{route('buyer.other.cart')}}"> Go To Cart </a>
+
+
 <div class="container" style="padding: 30px 0">
         <div class="row">
        
@@ -72,7 +77,7 @@ Quantity: {{$quantity}}
                           
 
 <!-- {{Session::get('added')}} -->
-                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="float:left">Buy Now</button></a>
+                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="float:left;">Buy Now</button></a>
                             
 
             </div>

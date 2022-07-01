@@ -24,6 +24,9 @@
             
         </div>
 @endif
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-sm-1 ">
@@ -57,25 +60,27 @@
                          
                                                             
                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                
-                                                        <button class="btn btn-link px-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                        <i class="fas fa-minus"></i>
-                                                        </button>
-                                                        <button class="btn btn-link px-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                        <i class="fas fa-plus"></i>
-                                                        </button>
+                        
+                                            <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                            </button>
+                                            
+                                            <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post">
+                                            @csrf
+                                    
+                                                    <input id="form1" min="1" name="quantity" style="width:50px" value="{{$c->p_quantity}}" type="number"
+                                                    class="form-control form-control-sm" />
 
-                                                <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post">
-                                                    @csrf
-                                                        <input id="form1" min="1" name="quantity" style="width:50px" value="{{$c->p_quantity}}" type="number"
-                                                        class="form-control form-control-sm" />
-
-                                                       
-
-                                                        <button type="Submit" class="btn btn-info">Update</button>
-                                                </form>
+                                                    <button type="Submit" class="btn btn-info" >Update</button>
+                                            </form>
+                                            <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                
+                                                    
+                                                   
 
                                 </div>       
                             
