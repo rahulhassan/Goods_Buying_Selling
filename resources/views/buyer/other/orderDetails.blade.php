@@ -4,8 +4,18 @@
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">Order Overview</h4>
 <hr>
+
+@if(session('orderPlaced'))
+        <div class="alert alert-warning" role="alert">
+            <b>{{session('orderPlaced')}}</b>
+            
+        </div>
+@endif
+
+
 <div class="container" style="padding: 30px 0">
 <form action="{{route('buyer.other.placeOrderSubmit',['title'=>$products->p_title])}}" method="post">
+
         @csrf
         <div class="row">
       
@@ -14,12 +24,12 @@
                     <img src="{{asset('images/'.$products->image_path)}}" height="180px" width="200px"><br><br>
                     <b>Title: {{$products->p_title}}</b><br>
                     <b>Price: {{$products->p_price}}</b><br>
-                    <b>Quantity: {{$products->p_quantity}}</b><br>
+                    <!-- <b>Quantity: {{$products->p_quantity}}</b><br> -->
 
-                    <b>Your Quantity:<input type="text" class="form-control " name="quantity" value="{{old('quantity')}}" style="width:50px"></b>
+                    <!-- <b>Your Quantity:<input type="text" class="form-control " name="quantity" value="{{old('quantity')}}" style="width:50px"></b>
                             @error('quantity')
                                     <span class="text-danger">{{$message}}</span>
-                             @enderror
+                             @enderror -->
                 </div>
             
                         <div class="col-sm-4">

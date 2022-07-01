@@ -2,6 +2,9 @@
 @extends('buyer/main/navbar1')
 @section('contents')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <hr>
 <h4 style="text-align:center;font-family: myFirstFont;">{{$products->p_title}} </h4>
 <hr>
@@ -24,8 +27,8 @@
 
 <div class="alert alert-secondary" role="alert" style="float:right">
 <span><b>Total: {{$total}}</b> </span> 
-<span><b>Quantity: {{$quantity}}</b> </span> 
-<span><b><a href="{{route('buyer.other.cart')}}"> Go To Cart </a></b></span>
+<span style="margin-right:10px"><b>Quantity: {{$quantity}}</b> </span> 
+<span><b><a href="{{route('buyer.other.cart')}}">Cart <i class="fa fa-shopping-cart" style="font-size:48px;"></i> </a></b></span>
 </div>
 <br><br><br>
 

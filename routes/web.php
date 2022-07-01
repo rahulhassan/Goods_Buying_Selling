@@ -83,6 +83,3 @@ Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,
 
 Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
 Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
-
-
-
