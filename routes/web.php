@@ -9,11 +9,12 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
 use App\Http\Controllers\adminDashboardC;
+use App\Http\Controllers\buyer\OrderController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -22,7 +23,7 @@ use App\Http\Controllers\adminDashboardC;
 */
 
 
-Route::get('/', function () { return view('home'); })->name('home');
+Route::get('/', function () { return view('home'); })->name('home')->middleware('loginExist');
 
 Route::get('/registration',[function(){return view('registration');}])->name('user.registration')->middleware('loginExist');
 
@@ -53,6 +54,7 @@ Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])
 
 
 //___________________________Buyer_________________________________
+
 
 
 Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
@@ -115,4 +117,33 @@ Route::get('/admin/files/deleteBuyer/{id}',[adminDashboardC::class,'DeleteBuyer'
 
 Route::get('/admin/files/showBuyer/{b_id}',[adminDashboardC::class,'showBuyer']);
 Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->name('submit.updateBuyer');
+
+
+Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
+Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
+
+
+Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
+Route::get('/updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
+Route::post('/updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
+Route::get('/account',[BuyerController::class,'account'])->name('buyer.other.account');
+Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
+Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
+Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
+Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
+Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
+Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
+Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
+Route::post('/coupon/apply',[OrderController::class,'couponApply']);
+Route::get('/coupon/destroy',[OrderController::class,'couponDestroy']);
+Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,'checkout'])->name('buyer.other.checkout');
+
+Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
+Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
 

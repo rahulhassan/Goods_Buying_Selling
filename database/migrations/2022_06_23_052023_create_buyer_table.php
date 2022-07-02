@@ -15,6 +15,7 @@ class CreateBuyerTable extends Migration
     {
         Schema::create('buyer', function (Blueprint $table) {
             $table->id('b_id');
+            $table->string('b_image');
             $table->string('b_name');
             $table->string('b_phn');
             $table->string('b_mail');
