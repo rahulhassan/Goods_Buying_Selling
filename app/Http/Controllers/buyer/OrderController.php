@@ -299,10 +299,16 @@ class OrderController extends Controller
 
     function orders()
     {
-        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
-        $orders=OrderModel::where('b_name',$buyer->b_name)->paginate(4);
+        $order=Order::where('b_id',session()->get('LoggedIn'))->latest()->first();
+        $order_item=OrderItem::with('product')->where('order_id',$order->id)->get();
         return view('buyer.other.orders')
-                    ->with('orders',$orders);
+                    ->with('order_items',$order_item)
+                    ->with('orders',$order);
+
+        //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+        //$orders=OrderModel::where('b_name',$buyer->b_name)->paginate(4);
+        //return view('buyer.other.orders')
+        //            ->with('orders',$orders);
 
     }
 

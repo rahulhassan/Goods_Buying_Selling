@@ -39,8 +39,9 @@
             <table class="table  table-striped table-dark" style>
                     <tr>
                         <th>Products</th>
-                        <th>Price</th>
+                        <th>Price</th>      
                         <th>Quantity</th>
+                        <th></th>
                         <th>Total</th>
                         <th> </th>
                     </tr>
@@ -61,29 +62,33 @@
                                                             
                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                         
+                                        
+                                           
                                             <button class="btn btn-link px-2"
                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                             <i class="fas fa-minus"></i>
                                             </button>
-                                            
-                                            <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post">
-                                            @csrf
-                                    
-                                                    <input id="form1" min="1" name="quantity" style="width:50px" value="{{$c->p_quantity}}" type="number"
-                                                    class="form-control form-control-sm" />
-
-                                                    <button type="Submit" class="btn btn-info" >Update</button>
-                                            </form>
                                             <button class="btn btn-link px-2"
                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                             <i class="fas fa-plus"></i>
                                             </button>
-                
                                                     
-                                                   
+                                            <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post">
+                                            @csrf
+                                            
+                                                    <input id="form1" min="1" name="quantity" style="width:50px" value="{{$c->p_quantity}}" type="number"
+                                                    class="form-control form-control-sm" />
+
+                                                    
+                                           
 
                                 </div>       
                             
+                        </td>
+                        <td>
+                            <button type="Submit" class="btn btn-info" >Update</button>
+                            </form>
+                        
                         </td>
                         <td>
                                  {{$c->p_price * $c->p_quantity}}    
@@ -98,6 +103,7 @@
                     @endforeach
 
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

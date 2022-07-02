@@ -6,52 +6,50 @@
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm-2">
      
         
 
     </div>
-    <div class="col-sm">
+    <div class="col-sm-8">
 
 <table class="table table-striped table-dark"> 
- 
-        @foreach($orders as $ord)
+
+            <th>Product Name</th>
+            <th>Product Quantity</th>
+            <th>Sub_Total</th>
+            <th>Discount</th>
+            <th>Total</th>
+
+
+                    @foreach($order_items as $ord)
+                    <tr>
+                    
+
+                        <td>{{$ord->product->p_title}}</td>
+                        <td>{{$ord->p_quantity}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    
+                    </tr>
+                    
+                    @endforeach
+          
 
                     <tr>
-                        <td rowspan="4"><img src="{{asset('images/'.$ord->p_image)}}" style="border-radius:10px"height="200px" width="250px"></a></td>
-                       
+                        <td><td>     
+                        </td></td>
+                        <td>{{$orders->sub_total}}</td>
+                        <td>{{$orders->discount}}</td>
+                        <td>{{$orders->total}}</td>
                     </tr>
-                    <tr>
-                       
-                    <td>{{$ord->p_title}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$ord->p_price}} BDT</td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Quantity: {{$ord->p_quantity}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$ord->status}}</td>
-                    </tr>
-       
-        @endforeach
-
-        
         
 </table>
 
-            {{ $orders->links() }}
-                    <style>
-                            
-                        .w-5{
-                            display:none;
-                        
-                        }
-                    </style>
+           
     </div>
-    <div class="col-sm">
+    <div class="col-sm-2">
       
     
 

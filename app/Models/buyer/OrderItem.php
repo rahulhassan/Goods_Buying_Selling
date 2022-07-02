@@ -9,4 +9,9 @@ class OrderItem extends Model
 {
     use HasFactory;
     protected $table="order_items";
+
+    function product()
+    {
+        return $this->belongsTo(ProductModel::class,'p_id','p_id');
+    }
 }
