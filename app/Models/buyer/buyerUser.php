@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class buyerUser extends Model
 {
     use HasFactory;
-    protected $table = 'buyer';
+    protected $table="buyer";
 }

@@ -53,7 +53,7 @@ class ProductController extends Controller
     function search()
     {
 
-        $search_text=$_GET['search'];
+        $search_text=$_POST['search'];
         $products=ProductModel::where('p_title','LIKE',$search_text.'%')->get();
 
         return view('buyer.other.search')

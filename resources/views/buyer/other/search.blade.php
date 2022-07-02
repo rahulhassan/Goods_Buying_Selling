@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm">
  
-            <table class="table table-striped table-active">
+            <table class="table table-striped table-dark">
                     
                     @foreach($products as $p)
                     <tr>
@@ -41,7 +41,7 @@
                     @endforeach
             </table>
             <br>
-
+     
          
 
     </div>
@@ -58,13 +58,7 @@
 
 
    
-    <style>
-        
-    .w-5{
-        display:none;
-       
-    }
-</style>
+      
 
 
 

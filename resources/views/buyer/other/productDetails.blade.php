@@ -25,7 +25,7 @@
     $quantity=App\Models\buyer\CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum('p_quantity');
 @endphp 
 
-<div class="alert alert-secondary" role="alert" style="float:right;margin-right:70px">
+<div class="alert alert-dark" role="alert" style="float:right;margin-right:70px">
 <span><b>Total: {{$total}}</b> </span> 
 <span style="margin-right:10px"><b>Quantity: {{$quantity}}</b> </span> 
 <span><b><a href="{{route('buyer.other.cart')}}" style="text-decoration:none">Cart <i class="fa fa-shopping-cart" style="font-size:48px;"></i> </a></b></span>

@@ -11,8 +11,8 @@
 </head>
 <body>
 <marquee behavior="" direction="right"><b>|--- Welcome {{Session::get('LoggedInName')}} ---|</b></marquee>
-<form action="{{route('buyer.other.search')}}" method="get">
-
+<form action="{{route('buyer.other.search')}}" method="post">
+@csrf
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
   <a class="navbar-brand">GBS</a>

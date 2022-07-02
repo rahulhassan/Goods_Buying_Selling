@@ -60,7 +60,7 @@ Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.oth
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
 Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
-Route::get('/search',[ProductController::class,'search'])->name('buyer.other.search');
+Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 
 Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
