@@ -8,6 +8,7 @@ use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
+use App\Http\Controllers\adminDashboardC;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,55 @@ Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders
 
 //Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
 //Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
+
+//___________________________ADMIN_________________________________
+Route::get('/admin/adminDashboard',[adminDashboardC::class,'Dashboard'])->name('admin.adminDashboard');
+
+Route::get('/admin/files/statement',[adminDashboardC::class,'Statement'])->name('admin.files.statement');
+
+Route::get('/admin/files/buyer',[adminDashboardC::class,'Buyer'])->name('admin.files.buyer');
+
+Route::get('/admin/files/employee',[adminDashboardC::class,'Employee'])->name('admin.files.employee');
+
+Route::get('/admin/files/seller',[adminDashboardC::class,'Seller'])->name('admin.files.seller');
+
+Route::get('/admin/files/buyInfo',[adminDashboardC::class,'BuyInfo'])->name('admin.files.buyInfo');
+
+Route::get('/admin/files/sellInfo',[adminDashboardC::class,'SellInfo'])->name('admin.files.sellInfo');
+
+Route::get('/admin/files/profile',[adminDashboardC::class,'Profile'])->name('admin.files.profile');
+
+//-----------------------------CRUD EMPLOYEE
+
+Route::get('/admin/files/createEmp',[adminDashboardC::class,'CreateEmp'])->name('admin.files.createEmp');
+
+Route::post('/admin/files/createEmp',[adminDashboardC::class,'storeEmp'])->name('submit.storeEmp');
+
+Route::get('/admin/files/delete/{id}',[adminDashboardC::class,'DeleteEmp']);
+
+Route::get('/admin/files/show/{e_id}',[adminDashboardC::class,'showEmp']);
+Route::post('/admin/files/show',[adminDashboardC::class,'UpdateEmp'])->name('submit.updateEmp');
+
+//-----------------------------CRUD SELLER
+
+Route::get('/admin/files/createSeller',[adminDashboardC::class,'createSeller'])->name('admin.files.createSeller');
+
+Route::post('/admin/files/createSeller',[adminDashboardC::class,'storeSeller'])->name('submit.storeSeller');
+
+Route::get('/admin/files/deleteSeller/{id}',[adminDashboardC::class,'DeleteSeller']);
+
+Route::get('/admin/files/showSeller/{s_id}',[adminDashboardC::class,'showSeller']);
+Route::post('/admin/files/showSeller',[adminDashboardC::class,'UpdateSeller'])->name('submit.updateSeller');
+
+//-----------------------------CRUD BUYER
+
+Route::get('/admin/files/createBuyer',[adminDashboardC::class,'createBuyer'])->name('admin.files.createBuyer');
+
+Route::post('/admin/files/createBuyer',[adminDashboardC::class,'storeBuyer'])->name('submit.storeBuyer');
+
+Route::get('/admin/files/deleteBuyer/{id}',[adminDashboardC::class,'DeleteBuyer']);
+
+Route::get('/admin/files/showBuyer/{b_id}',[adminDashboardC::class,'showBuyer']);
+Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->name('submit.updateBuyer');
+

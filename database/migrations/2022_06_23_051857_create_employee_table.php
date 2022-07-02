@@ -22,6 +22,7 @@ class CreateEmployeeTable extends Migration
             $table->string('e_add');
             $table->timestamps();
         });
+        
     }
 
     /**
