@@ -38,7 +38,8 @@ class OrderController extends Controller
         [
           "name.required"=>" *Provide Your Name",
           "phone.required"=>"*Provide Phone Number",
-          "address.required"=>"*Provide Your Address",     
+          "address.required"=>"*Provide Your Address",
+          "payment.required"=>"*Select Payment Method",      
         ]);
         // $products=ProductModel::where('p_title',$req->title)->first();
         // //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
@@ -242,6 +243,7 @@ class OrderController extends Controller
           "name.required"=>" *Provide Your Name",
           "phone.required"=>"*Provide Phone Number",
           "address.required"=>"*Provide Your Address",
+          "payment.required"=>"*Select Payment Method",      
           "total.min"=>"You have no product on cart",     
         ]);
 

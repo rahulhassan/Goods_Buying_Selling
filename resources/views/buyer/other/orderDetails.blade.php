@@ -34,7 +34,7 @@
             
                         <div class="col-sm-4">
                         <h5>Shipping Information</h5>
-                        <table  class="table table-striped table-active table-responsive-sm" style="width:300px; height:320px">
+                        <table  class="table table-striped table-dark table-responsive-sm" style="width:300px; height:320px">
                         <tr>
                             <td><b>Name</b></td>
                             <td><b>:</b></td>
@@ -80,7 +80,7 @@
 
 
                         <div class="payment-method">
-                                <table  class="table table-striped table-active table-responsive-sm" style="width:300px; height:200px">
+                                <table  class="table table-striped table-dark table-responsive-sm" style="width:300px; height:200px">
                                         <tr>
                                                 <td>
                                                         <div class="input-radio">
@@ -149,7 +149,7 @@
                                        
                                 </table>
                                         @error('payment')
-                                                <span class="text-danger">{{$message}}</span>
+                                        <span class="text-danger"><b>{{$message}}</b></span>
                                          @enderror
 
                                          <br><br>
