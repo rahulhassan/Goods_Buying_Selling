@@ -5,10 +5,11 @@
 <hr>
 
 @if(session('orderPlaced'))
-        <div class="alert alert-warning" role="alert">
-            <b>{{session('orderPlaced')}}</b>
-            
+        <div class="alert alert-success" role="alert">
+            <b style="margin-left:480px;font-size:20px">{{session('orderPlaced')}}</b><br><br>
+           
         </div>
 @endif
+<img src="dummy/order_completed.png" alt="" height="300px" width="500px" style="margin-left:400px">
 
 @endsection

@@ -25,10 +25,10 @@
     $quantity=App\Models\buyer\CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum('p_quantity');
 @endphp 
 
-<div class="alert alert-secondary" role="alert" style="float:right">
+<div class="alert alert-secondary" role="alert" style="float:right;margin-right:70px">
 <span><b>Total: {{$total}}</b> </span> 
 <span style="margin-right:10px"><b>Quantity: {{$quantity}}</b> </span> 
-<span><b><a href="{{route('buyer.other.cart')}}">Cart <i class="fa fa-shopping-cart" style="font-size:48px;"></i> </a></b></span>
+<span><b><a href="{{route('buyer.other.cart')}}" style="text-decoration:none">Cart <i class="fa fa-shopping-cart" style="font-size:48px;"></i> </a></b></span>
 </div>
 <br><br><br>
 
@@ -80,7 +80,10 @@
                           
 
 <!-- {{Session::get('added')}} -->
-                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="float:left;">Buy Now</button></a>
+                            <a href="{{route('buyer.other.orderDetails',['title'=>$products->p_title])}}"><button type="button" class="btn btn-success" style="margin-right:20px;float:left;">Buy Now</button></a>
+
+
+                            <a href="{{route('buyer.other.dashboard')}}"><button type="button" class="btn btn-info">Continue Shopping</button></a>
                             
 
             </div>

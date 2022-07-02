@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<marquee behavior="" direction="right"><b>|-- Welcome {{Session::get('LoggedInName')}} --|</b></marquee>
+<marquee behavior="" direction="right"><b>|--- Welcome {{Session::get('LoggedInName')}} ---|</b></marquee>
 <form action="{{route('buyer.other.search')}}" method="get">
 
 
