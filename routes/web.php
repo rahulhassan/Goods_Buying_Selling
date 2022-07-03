@@ -5,6 +5,7 @@ use App\Http\Controllers\seller\postController;
 use App\Http\Controllers\seller\sDashboardController;
 use App\Http\Controllers\seller\sProfileController;
 use App\Http\Controllers\seller\sStatementController;
+use App\Http\Controllers\seller\sOrderController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
@@ -44,14 +45,22 @@ Route::post('/seller/post',[postController::class,'validateSellerPost'])->name('
 
 Route::get('/seller/dashboard',[sDashboardController::class,'showProduct'])->name('seller.dashboard')->middleware('isLoggedIn');
 
-Route::get('/seller/delete/{id}',[sDashboardController::class,'sellerDelete']);
+Route::get('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
-Route::post('/seller/edit',[postController::class,'sellerUpdate'])->name('seller.postUpdate');
+Route::post('/seller/edit',[postController::class,'sellerPostUpdate'])->name('seller.postUpdate');
 
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->name('seller.profile')->middleware('isLoggedIn');
 
+Route::get('/seller/update/profile',[sProfileController::class,'sellerEditInfo'])->name('seller.update')->middleware('isLoggedIn');
+
+
+Route::post('/seller/update/profile',[sProfileController::class,'sellerInfoUpdate'])->name('submit.sellerInfo');
+
+Route::get('/seller/orders',[sOrderController::class,'orderInfo'])->name('seller.orders')->middleware('isLoggedIn');
+
 Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])->name('seller.statement')->middleware('isLoggedIn');
 
+Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 //___________________________Buyer_________________________________
 
@@ -150,8 +159,15 @@ Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->na
 
 //-----------------------------COUPON
 
+
 Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name('admin.files.addCoupon');
 Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');
+
+Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
+//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupon']);
 

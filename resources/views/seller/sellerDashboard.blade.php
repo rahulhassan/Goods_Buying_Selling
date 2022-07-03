@@ -1,7 +1,10 @@
 @extends('seller.layouts.navbar')
 @section('content')
+
+<hr>
+<h4 style="text-align:center;font-family: myFirstFont;">Seller Dashboard</h4>
+<hr>
 <div class="container-md p-4">
-    <h2 class="p-4 d-flex justify-content-center">Seller Dashboard</h2>
     <h3>Your posted products:</h3>
 
     @if (!empty($empty))

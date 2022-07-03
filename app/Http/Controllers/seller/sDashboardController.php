@@ -23,7 +23,7 @@ class sDashboardController extends Controller
         }
     }
 
-    function sellerDelete($id){
+    function sellerProductDelete($id){
         $data = sellerProduct::find($id);
         $data->delete();
         return redirect()->route('seller.dashboard');
