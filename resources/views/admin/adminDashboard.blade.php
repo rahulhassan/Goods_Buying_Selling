@@ -44,7 +44,7 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>50</h1>
+                        <h1>{{$ord}}</h1>
                         <h3>ORDER</h3>
                     </div>
                     <div class="icon-case">
@@ -69,46 +69,16 @@
                     </div>
                     <table>
                         <tr>
+                            <th>Payment Id</th>
                             <th>Order Id</th>
                             <th>Quantity</th>
                             <th>Price</th>
-                            <th>Option</th>
                         </tr>
                         <tr>
                             <td>John Doe</td>
                             <td>5</td>
+                            <td>1</td>
                             <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
                         </tr>
                     </table>
                 </div>

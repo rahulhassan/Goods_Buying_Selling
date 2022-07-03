@@ -7,6 +7,9 @@ use App\Models\employee\employeeUser;
 use App\Models\buyer\buyerUser;
 use App\Models\buyer\productModel;
 use App\Models\seller\sellerUser;
+use App\Models\buyer\CouponModel;
+use App\Models\buyer\Order;
+use App\Models\buyer\OrderItem;
 use DB;
 
 class adminDashboardC extends Controller
@@ -17,10 +20,10 @@ class adminDashboardC extends Controller
         $emp = DB::table('employee')->count();
         $buy = DB::table('buyer')->count();
         $sell = DB::table('seller')->count();
-        //$ord = DB::table('order_queue')->count();
+        $ord = DB::table('orders')->count();
         $emp = DB::table('employee')->count();
         $empl=employeeUser::all();
-        return view('admin/adminDashboard', compact('emp', 'buy', 'sell'), ['emplall' => $empl]);
+        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord'), ['emplall' => $empl]);
     }
     //--------------------------STATEMENTS-----------------------------------
 
@@ -297,11 +300,33 @@ class adminDashboardC extends Controller
 
     //--------------------------SELL INFORMATION-----------------------------------
     function SellInfo(){
-        return view('admin/files/sellInfo');
+        $order = Order::paginate(2);
+        $orderItem = OrderItem::paginate(2);
+        return view('admin/files/sellInfo')->with('order',$order)->with('orderItem',$orderItem);
     }
-    //--------------------------BUY INFORMATION-----------------------------------
-    function BuyInfo(){
-        return view('admin/files/buyInfo');
+    //--------------------------COUPON-----------------------------------
+    function coupon(){
+        $cupall=CouponModel::paginate(5);
+        $cup = DB::table('coupon')->count();
+
+        return view('admin/files/coupon', ['cupall' => $cupall], compact('cup'));
+    }
+    function addCoupon(){
+        return view('admin/files/addCoupon');
+    }
+    function storeCoupon(Request $request){
+        $c = new CouponModel();
+        $c->cpn_name = $request->cpn_name;
+        $c->discount = $request->discount;
+        $c->save();
+        
+        return redirect()->route('admin.files.coupon');
+    }
+    function DeleteCoupon(Request $request){
+        $cpn_id=$request->id;
+        $data = CouponModel::where('cpn_id',$cpn_id)->first();
+        $data->delete();
+        return redirect()->route('admin.files.coupon');
     }
     //--------------------------PROFILE-----------------------------------
     function Profile(){
