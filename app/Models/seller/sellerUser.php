@@ -9,5 +9,6 @@ class sellerUser extends Model
 {
     use HasFactory;
     protected $table = 'seller';
-    protected $primaryKey='s_id';
+    protected $primaryKey = 's_id';
+
 }

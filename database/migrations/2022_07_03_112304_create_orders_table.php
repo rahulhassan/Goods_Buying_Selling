@@ -15,8 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('b_id');
+            $table->foreignId('b_id')->references('b_id')->on('buyer');
+            $table->foreignId('p_id')->references('p_id')->on('product');
+            $table->foreignId('s_id')->references('s_id')->on('seller');
+            
             $table->string('payment_type');
+            $table->string('payment_status');
+            $table->string('quantity');
             $table->string('sub_total');
             $table->integer('discount')->nullable();
             $table->string('total');

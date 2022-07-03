@@ -16,6 +16,7 @@
             <a class="nav-item nav-link" href="{{route('seller.dashboard')}}">Dashboard</a>
             <a class="nav-item nav-link" href="{{route('seller.profile')}}">Profile</a>
             <a class="nav-item nav-link" href="{{route('seller.post')}}">Post Product</a>
+            <a class="nav-item nav-link" href="{{route('seller.orders')}}">Orders</a>
             <a class="nav-item nav-link" href="{{route('seller.statement')}}">Statement</a>
             <a href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-primary">Sign Out</button></a>
           </div>

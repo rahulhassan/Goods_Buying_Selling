@@ -21,6 +21,7 @@ class CreateCartTable extends Migration
             $table->integer('p_quantity');
             
             $table->timestamps();
+
         });
     }
 

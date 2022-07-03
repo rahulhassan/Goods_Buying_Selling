@@ -47,7 +47,7 @@ class postController extends Controller
         }
         return view('seller/sellerPost');
     }
-    function sellerUpdate(Request $req){
+    function sellerPostUpdate(Request $req){
         $req->validate([
             'image' => 'mimes:jpg,png',
             'p_title'=> 'required',
