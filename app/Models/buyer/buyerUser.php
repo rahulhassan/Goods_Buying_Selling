@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class buyerUser extends Model
 {
     use HasFactory;
+    protected $table = 'buyer';
+    protected $primaryKey='b_id';
     protected $table="buyer";
 }

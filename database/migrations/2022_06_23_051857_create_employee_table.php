@@ -23,6 +23,7 @@ class CreateEmployeeTable extends Migration
             $table->string('e_image');
             $table->timestamps();
         });
+        
     }
 
     /**
