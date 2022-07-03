@@ -1,5 +1,8 @@
 @extends('seller.layouts.navbar')
 @section('content')
+<hr>
+<h4 style="text-align:center;font-family: myFirstFont;">Post Product</h4>
+<hr>
 <div class="w-75 p-3 justify-content-center">
     <form action="{{route('submit.sellerPost')}}" method="POST" enctype="multipart/form-data">
         @if(Session::has('success'))
