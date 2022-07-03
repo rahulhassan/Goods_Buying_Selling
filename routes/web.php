@@ -116,7 +116,7 @@ Route::get('/admin/files/deleteSeller/{id}',[adminDashboardC::class,'DeleteSelle
 Route::get('/admin/files/showSeller/{s_id}',[adminDashboardC::class,'showSeller']);
 Route::post('/admin/files/showSeller',[adminDashboardC::class,'UpdateSeller'])->name('submit.updateSeller');
 
-//-----------------------------CRUD BUYER
+
 
 Route::get('/admin/files/createBuyer',[adminDashboardC::class,'createBuyer'])->name('admin.files.createBuyer');
 
@@ -127,6 +127,7 @@ Route::get('/admin/files/deleteBuyer/{id}',[adminDashboardC::class,'DeleteBuyer'
 Route::get('/admin/files/showBuyer/{b_id}',[adminDashboardC::class,'showBuyer']);
 Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->name('submit.updateBuyer');
 
+//-----------------------------CRUD BUYER
 
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
@@ -140,8 +141,8 @@ Route::get('/updateProfile',[BuyerController::class,'updateProfile'])->name('buy
 Route::post('/updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
 Route::get('/account',[BuyerController::class,'account'])->name('buyer.other.account');
 Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
-Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
-Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+//Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+//Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
 Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');

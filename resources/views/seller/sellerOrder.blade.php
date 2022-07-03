@@ -4,7 +4,7 @@
 <h4 style="text-align:center;font-family: myFirstFont;">Seller Order</h4>
 <hr>
 <div class="w-75 p-3 justify-content-center">
-  @if (count($order)>0)
+
     <table class="table table-striped">
         <thead>
           <tr>
@@ -16,12 +16,13 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($order as $or)
+        @foreach ($order_item as $or)
             <tr>
               <td>{{$loop->iteration}}</td>
               <td>{{$or->product->p_title}}</td>
-              <td>{{$or->quantity}}</td>
-              <td>{{$or->total}}</td>
+              <td>{{$or->product->p_quantity}}</td>
+
+              <td>{{$order->total}}</td>
               <td>
                 <a href="{{'shipping/'.$or->id}}"><button type="button" class="btn btn-success">Order Shifted</button></a>
               </td>
@@ -29,9 +30,6 @@
         @endforeach
         </tbody>
       </table>
-  @else
-      <h3>There are no order request</h3>
 
-  @endif
 </div>
 @endsection
