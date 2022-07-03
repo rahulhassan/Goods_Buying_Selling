@@ -55,88 +55,36 @@
             <div class="content-2">
                 <div class="recent-payments">
                     <div class="title">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>Payments</h2>
                     </div>
                     <table>
                         <tr>
-                            <th>Order Id</th>
+                            <th>PAYMENT Id</th>
+                            <th>ORDER Id</th>
                             <th>Quantity</th>
                             <th>Price</th>
-                            <th>Option</th>
                         </tr>
+                        @foreach($orderItem as $o)
                         <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
+                            <td>{{$o['order_id']}}</td>
+                            <td>{{$o['p_id']}}</td>
+                            <td>{{$o['p_quantity']}}</td>
+                           
                         </tr>
+                        @endforeach
+                        @foreach($order as $o)
                         <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
+                            <td>{{$o['total']}}</td>
+                           
                         </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>St. James College</td>
-                            <td>$120</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
+                        @endforeach
+                        
                     </table>
-                </div>
-                <div class="new-students">
-                    <div class="title">
-                        <h2>Employees</h2>
-                        <a href="#" class="btn">View All</a>
+                    <div class="pagination">
+                        {{$order->links()}}
                     </div>
-                    <table>
-                        <tr>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>option</th>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-                        <tr>
-                            <td><img src="user.png" alt=""></td>
-                            <td>John Steve Doe</td>
-                            <td><img src="info.png" alt=""></td>
-                        </tr>
-
-                    </table>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -9,4 +9,5 @@ class CouponModel extends Model
 {
     use HasFactory;
     protected $table="coupon";
+    protected $primaryKey="cpn_id";
 }

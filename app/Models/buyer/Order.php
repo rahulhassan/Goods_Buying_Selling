@@ -9,6 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $table="orders";
+    protected $primaryKey="id";
 
     
     // function order_item()
