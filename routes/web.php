@@ -76,6 +76,36 @@ Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders
 //Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
 //Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
+Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
+Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
+
+
+Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
+Route::get('/updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
+Route::post('/updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
+Route::get('/account',[BuyerController::class,'account'])->name('buyer.other.account');
+Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
+Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
+Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
+Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
+Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
+Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
+Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
+Route::post('/coupon/apply',[OrderController::class,'couponApply']);
+Route::get('/coupon/destroy',[OrderController::class,'couponDestroy']);
+Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,'checkout'])->name('buyer.other.checkout');
+
+Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
+Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
+
+
+
 
 //___________________________ADMIN_________________________________
 Route::get('/admin/adminDashboard',[adminDashboardC::class,'Dashboard'])->name('admin.adminDashboard');
@@ -88,7 +118,7 @@ Route::get('/admin/files/employee',[adminDashboardC::class,'Employee'])->name('a
 
 Route::get('/admin/files/seller',[adminDashboardC::class,'Seller'])->name('admin.files.seller');
 
-Route::get('/admin/files/buyInfo',[adminDashboardC::class,'BuyInfo'])->name('admin.files.buyInfo');
+Route::get('/admin/files/coupon',[adminDashboardC::class,'coupon'])->name('admin.files.coupon');
 
 Route::get('/admin/files/sellInfo',[adminDashboardC::class,'SellInfo'])->name('admin.files.sellInfo');
 
@@ -127,13 +157,23 @@ Route::get('/admin/files/deleteBuyer/{id}',[adminDashboardC::class,'DeleteBuyer'
 Route::get('/admin/files/showBuyer/{b_id}',[adminDashboardC::class,'showBuyer']);
 Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->name('submit.updateBuyer');
 
+
 //-----------------------------CRUD BUYER
+
+//-----------------------------COUPON
+
+
+Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name('admin.files.addCoupon');
+Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');
+
 
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
 //Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
+
+Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupon']);
 
 
 Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
@@ -156,4 +196,6 @@ Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,
 
 Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
 Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
+
+
 
