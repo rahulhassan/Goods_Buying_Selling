@@ -69,6 +69,8 @@ class OrderController extends Controller
             'sub_total'=>$products->p_price,
             'discount'=>0,
             'total'=>$products->p_price,
+            's_id'=>$products->s_id,
+            'payment_status'=>'pending',
             'created_at'=>Carbon::Now(),
             'updated_at'=>Carbon::Now()
 
