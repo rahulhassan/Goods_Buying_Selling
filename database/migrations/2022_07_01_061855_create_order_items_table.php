@@ -17,6 +17,9 @@ class CreateOrderItemsTable extends Migration
             $table->id();
             $table->integer('order_id');
             $table->integer('p_id');
+            $table->foreignId('s_id')->references('s_id')->on('seller');
+            $table->foreignId('b_id')->references('b_id')->on('buyer');
+            $table->string('payment_status');
             //$table->string('p_title');
             $table->string('p_quantity');
             $table->timestamps();

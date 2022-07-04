@@ -69,8 +69,6 @@ class OrderController extends Controller
             'sub_total'=>$products->p_price,
             'discount'=>0,
             'total'=>$products->p_price,
-            's_id'=>$products->s_id,
-            'payment_status'=>'pending',
             'created_at'=>Carbon::Now(),
             'updated_at'=>Carbon::Now()
 
@@ -82,6 +80,9 @@ class OrderController extends Controller
                 'order_id'=>$order_id,
                 'p_id'=>$products->p_id,
                 'p_quantity'=>1,
+                's_id'=>$products->s_id,
+                'b_id'=>$buyer->b_id,
+                'payment_status'=>'pending',
                 'created_at'=>Carbon::Now(),
                 'updated_at'=>Carbon::Now()
             ]);
@@ -140,6 +141,7 @@ class OrderController extends Controller
             $cart->p_id=$req->p_id;
             $cart->p_price=$req->p_price;
             $cart->p_quantity=1;
+            $cart->s_id=$req->s_id;
             $cart->save();
             //session()->flash("added","Added into cart");
             return back()->with("cartAdded","Product added on Cart");
@@ -249,12 +251,14 @@ class OrderController extends Controller
           "total.min"=>"You have no product on cart",     
         ]);
 
+    
         $order_id=Order::insertGetId([
             'b_id'=>session()->get('LoggedIn'),
             'payment_type'=>$req->payment,
             'sub_total'=>$req->sub_total,
             'discount'=>$req->discount,
             'total'=>$req->total,
+         
             'created_at'=>Carbon::Now(),
             'updated_at'=>Carbon::Now()
 
@@ -268,6 +272,9 @@ class OrderController extends Controller
                 'order_id'=>$order_id,
                 'p_id'=>$cart->p_id,
                 'p_quantity'=>$cart->p_quantity,
+                's_id'=>$cart->s_id,
+                'b_id'=>$cart->b_id,
+                'payment_status'=>'pending',
                 'created_at'=>Carbon::Now(),
                 'updated_at'=>Carbon::Now()
             ]);
@@ -303,11 +310,12 @@ class OrderController extends Controller
 
     function orders()
     {
-        $order=Order::where('b_id',session()->get('LoggedIn'))->latest()->first();
-        $order_item=OrderItem::with('product')->where('order_id',$order->id)->get();
+        //$order=Order::where('b_id',session()->get('LoggedIn'))->latest()->first();
+        $order_item=OrderItem::with('product')->where('b_id',session()->get('LoggedIn'))->latest()->get();
         return view('buyer.other.orders')
-                    ->with('order_items',$order_item)
-                    ->with('orders',$order);
+                    //->with('orders',$order);
+                    ->with('order_items',$order_item);
+           
 
         //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
         //$orders=OrderModel::where('b_name',$buyer->b_name)->paginate(4);

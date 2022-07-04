@@ -19,8 +19,8 @@
         @foreach ($order_item as $or)
             <tr>
               <td>{{$loop->iteration}}</td>
-              <td>{{$or->product->p_title}}</td>
-              <td>{{$or->product->p_quantity}}</td>
+              <td>{{$or->p_id}}</td>
+              <td>{{$or->p_quantity}}</td>
 
               <td>{{$order->total}}</td>
               <td>

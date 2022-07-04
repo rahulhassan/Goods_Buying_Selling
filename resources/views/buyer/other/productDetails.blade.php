@@ -74,6 +74,7 @@
                                 {{@csrf_field()}}
                                 <input type="hidden" name="p_id" value="{{$products->p_id}}">
                                 <input type="hidden" name="p_price" value="{{$products->p_price}}">
+                                <input type="hidden" name="s_id" value="{{$products->s_id}}">
                                 <button type="Submit" id="addToCart" onclick="myFunction()" class="btn btn-warning" style="margin-right:20px; float:left">Add to Cart</button>
                             </form>
 
