@@ -22,7 +22,7 @@
                     <td><b>Brand:</b>{{" ".$p->p_brand}}</td>
                 </tr>
                 <tr>
-                    <td>{{$p->p_price}}</td>
+                    <td>BDT {{$p->p_price}}</td>
                 </tr>
                 <tr>
                     <td colspan="2">{{$p->p_description}}</td>

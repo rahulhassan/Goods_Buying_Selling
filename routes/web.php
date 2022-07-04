@@ -62,6 +62,8 @@ Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])
 
 Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 
+
+
 //___________________________Buyer_________________________________
 
 

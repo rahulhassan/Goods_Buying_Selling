@@ -18,48 +18,48 @@ class BuyerController extends Controller
 
 
 
-    function login()
-    {
-        return view('buyer.other.login');
-    }
+    // function login()
+    // {
+    //     return view('buyer.other.login');
+    // }
 
-    //_______________________________________________
+    // //_______________________________________________
 
-    function loginSubmit(Request $req)
-    {
+    // function loginSubmit(Request $req)
+    // {
         
-        $this->validate($req,
-        [
+    //     $this->validate($req,
+    //     [
            
-            "email"=>"required|email",
-            "password"=>"required"     
-        ],
-        [
+    //         "email"=>"required|email",
+    //         "password"=>"required"     
+    //     ],
+    //     [
            
             
-        ]);
+    //     ]);
 
 
-        $buyer=BuyerModel::where('b_mail',$req->email)->where('b_pass',$req->password)->first();
+    //     $buyer=BuyerModel::where('b_mail',$req->email)->where('b_pass',$req->password)->first();
 
-        // $minute=1;
-        // $response=new Response();
-        // $response->withCookie(cookie('b_mail',$req->email,$minute));
-        // return $response;
+    //     // $minute=1;
+    //     // $response=new Response();
+    //     // $response->withCookie(cookie('b_mail',$req->email,$minute));
+    //     // return $response;
 
-        if($buyer)
-        {
+    //     if($buyer)
+    //     {
           
-            session()->put('LoggedIn',$buyer->b_id);
-            session()->put('LoggedInName',$buyer->b_name);
-            return redirect()->route('buyer.other.dashboard');
-        }
-        else
-        {
-            session()->flash('failed','Sorry, Login Failed !!!');
-            return back();
-        }
-    }
+    //         session()->put('LoggedIn',$buyer->b_id);
+    //         session()->put('LoggedInName',$buyer->b_name);
+    //         return redirect()->route('buyer.other.dashboard');
+    //     }
+    //     else
+    //     {
+    //         session()->flash('failed','Sorry, Login Failed !!!');
+    //         return back();
+    //     }
+    // }
 
     //_________________________________________
 

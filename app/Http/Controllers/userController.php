@@ -78,9 +78,9 @@ class userController extends Controller
         $user3 = buyerUser::where('b_mail', '=', $req->email)->first();
         $user4 = sellerUser::where('s_mail', '=', $req->email)->first();
         if($user1){
-            if(md5($req->pass) == $user1->a_pass){
+            if($req->pass == $user1->a_pass){
 
-                //return redirect()->route('user.dashboard');
+                return redirect()->route('admin.adminDashboard');
 
             }else{
                 return back()->with('fail','Password incorrect');
@@ -97,6 +97,8 @@ class userController extends Controller
         }elseif($user3){
             if(md5($req->pass) == $user3->b_pass){
 
+                $req->session()->put('LoggedIn',$user3->b_id);
+                $req->session()->put('LoggedInName',$user3->b_name);
                 return redirect()->route('buyer.other.dashboard');
 
             }else{
@@ -118,12 +120,8 @@ class userController extends Controller
 
     }
     function userLogout(){
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect()->route('user.login');
-        }else{
+            session()->flush();
             return redirect()->route('user.login');
         }
     }
 
-}
