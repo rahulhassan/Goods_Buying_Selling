@@ -5,11 +5,8 @@
 <h4 style="text-align:center;font-family: myFirstFont;">Seller Dashboard</h4>
 <hr>
 <div class="container-md p-4">
+    @if (count($productInfo)>0)
     <h3>Your posted products:</h3>
-
-    @if (!empty($empty))
-        <div class="alert alert-success">{{$empty}}</div>
-    @endif
     <div class="w-75">
         @foreach ($productInfo as $p)
         <table class="table table-striped">
@@ -39,5 +36,8 @@
             {{$productInfo->links('pagination::bootstrap-4')}}
         </div>
     </div>
+    @else
+    <h3>You didn't post any product yet.</h3>
+    @endif
 </div>
 @endsection

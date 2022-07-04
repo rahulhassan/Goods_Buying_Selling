@@ -139,7 +139,7 @@ Route::get('/admin/files/deleteSeller/{id}',[adminDashboardC::class,'DeleteSelle
 Route::get('/admin/files/showSeller/{s_id}',[adminDashboardC::class,'showSeller']);
 Route::post('/admin/files/showSeller',[adminDashboardC::class,'UpdateSeller'])->name('submit.updateSeller');
 
-
+//-----------------------------CRUD BUYER
 
 Route::get('/admin/files/createBuyer',[adminDashboardC::class,'createBuyer'])->name('admin.files.createBuyer');
 
@@ -150,11 +150,7 @@ Route::get('/admin/files/deleteBuyer/{id}',[adminDashboardC::class,'DeleteBuyer'
 Route::get('/admin/files/showBuyer/{b_id}',[adminDashboardC::class,'showBuyer']);
 Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->name('submit.updateBuyer');
 
-
-//-----------------------------CRUD BUYER
-
 //-----------------------------COUPON
-
 
 Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name('admin.files.addCoupon');
 Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');

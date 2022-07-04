@@ -78,9 +78,9 @@ class userController extends Controller
         $user3 = buyerUser::where('b_mail', '=', $req->email)->first();
         $user4 = sellerUser::where('s_mail', '=', $req->email)->first();
         if($user1){
-            if(md5($req->pass) == $user1->a_pass){
+            if($req->pass == $user1->a_pass){
 
-                //return redirect()->route('user.dashboard');
+                return redirect()->route('admin.adminDashboard');
 
             }else{
                 return back()->with('fail','Password incorrect');

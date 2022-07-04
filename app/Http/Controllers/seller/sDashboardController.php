@@ -12,11 +12,7 @@ class sDashboardController extends Controller
     function showProduct(){
         if(Session::has('loginId')){
             $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(2);
-            if($productInfo){
-                return view('seller/sellerDashboard')->with('productInfo', $productInfo);
-            }else{
-                return view('seller/sellerDashboard')->with('empty',"You didn't post any poduct yet");
-            }            
+            return view('seller/sellerDashboard')->with('productInfo', $productInfo);        
         }
         else{
             return "session invalid";
