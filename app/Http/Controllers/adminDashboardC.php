@@ -332,5 +332,6 @@ class adminDashboardC extends Controller
     function Profile(){
         return view('admin/files/profile');
     }
+    //Hello
    
 }
