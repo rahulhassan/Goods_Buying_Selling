@@ -11,7 +11,6 @@ use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
 use App\Http\Controllers\adminDashboardC;
 use App\Http\Controllers\buyer\OrderController;
-use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +53,7 @@ Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->name(
 
 Route::get('/seller/update/profile',[sProfileController::class,'sellerEditInfo'])->name('seller.update')->middleware('isLoggedIn');
 
+
 Route::post('/seller/update/profile',[sProfileController::class,'sellerInfoUpdate'])->name('submit.sellerInfo');
 
 Route::get('/seller/orders',[sOrderController::class,'orderInfo'])->name('seller.orders')->middleware('isLoggedIn');
@@ -66,23 +66,30 @@ Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 
 
+Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
+//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
+Route::get('account',[BuyerController::class,'account'])->name('buyer.other.account');
+Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
+
+//Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
+//Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 
-//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
 Route::get('/updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
 Route::post('/updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
 Route::get('/account',[BuyerController::class,'account'])->name('buyer.other.account');
 Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
-
-
-//Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
-//Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
 Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
@@ -113,9 +120,12 @@ Route::get('/admin/files/seller',[adminDashboardC::class,'Seller'])->name('admin
 
 Route::get('/admin/files/coupon',[adminDashboardC::class,'coupon'])->name('admin.files.coupon');
 
-Route::get('/admin/files/sellInfo',[adminDashboardC::class,'SellInfo'])->name('admin.files.sellInfo');
+Route::get('/admin/files/order',[adminDashboardC::class,'OrderO'])->name('admin.files.order');
 
 Route::get('/admin/files/profile',[adminDashboardC::class,'Profile'])->name('admin.files.profile');
+Route::post('/admin/files/profile',[adminDashboardC::class,'updatePass'])->name('admin.files.updatePass');
+Route::post('/admin/files/upload',[adminDashboardC::class,'upload'])->name('admin.files.upload');
+
 
 //-----------------------------CRUD EMPLOYEE
 
@@ -152,13 +162,11 @@ Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->na
 
 //-----------------------------COUPON
 
+
 Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name('admin.files.addCoupon');
 Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');
+Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupon']);
+
+// Route::get('/admin/files/otp',[adminDashboardC::class, 'mailer']);//MAIL SENDING
 
 
-//----------------------------------Employee 
-
-Route::get('employee/emphome' , [EmployeeController::class, 'EmpHome']);
-Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
-Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
-Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
