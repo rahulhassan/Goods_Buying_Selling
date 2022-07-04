@@ -158,7 +158,9 @@ Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->na
 
 //----------------------------------Employee 
 
-Route::get('employee/emphome' , [EmployeeController::class, 'EmpHome']);
-Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',]);
+Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
 Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
 Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('employee/update/{id}', [EmployeeController::class, 'update']);

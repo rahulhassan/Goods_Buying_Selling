@@ -1,3 +1,5 @@
+@extends('employee.layout.navbar1')
+@section('content')
 <html>
 
 <head>
@@ -21,4 +23,4 @@
 </head>
 
 </html>
-  
+@endsection
