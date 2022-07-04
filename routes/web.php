@@ -11,6 +11,7 @@ use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
 use App\Http\Controllers\adminDashboardC;
 use App\Http\Controllers\buyer\OrderController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -155,3 +156,9 @@ Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name(
 Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');
 
 
+//----------------------------------Employee 
+
+Route::get('employee/emphome' , [EmployeeController::class, 'EmpHome']);
+Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
