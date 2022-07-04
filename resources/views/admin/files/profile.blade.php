@@ -10,28 +10,52 @@
     <link rel="stylesheet" href="{{asset('css/profile.css')}}">
     <title>PROFILE</title>
 </head>
+<style>
+    h1{
+        font-size: 30px;
+        text-align: center;
+        margin-bottom:50px;
+    }
+    form{
+        text-align: center;
+    }
+    .error{
+        color:red;
+    }
+</style>
 
 <body>
     <div class="p-img">
         <div class="img-sec">
-            <img src="{{asset('images/PPIC.png')}}">
+            <img src="{{asset('storage/images/'. $data->a_image)}}">
         </div>
-        <form action="" method="POST">
+        <form action="{{route('admin.files.upload')}}" method="POST" enctype="multipart/form-data">
+            {{@csrf_field()}}
             <div class="icon">
-                <input type="file" placeholder="{{asset('images/ADD.png')}}">
-                <a href="#"><img src="{{asset('images/ADD.png')}}"></a>
+                <input type="file" name="pf">
+                <button>Upload</button>
                 </div>
         </form>
     </div>
     <div class="p-sec">
         <h2>PASSWORD CHANGE</h2>
-        <form action="">
+        <form action="{{route('admin.files.updatePass')}}" method="POST">
+            {{@csrf_field()}}
             <label>OLD PASSWORD</label></br>
             <input type="text" name="o_pass" id="opass"></br>
+            @error('o_pass')
+                 <span class="error">{{$message}}</span><br>
+            @enderror
             <label>NEW PASSWORD</label></br>
-            <input type="text" name="n_pass" id="npass"></br>
+            <input type="text" name="a_pass" id="npass"></br>
+            @error('a_pass')
+                 <span class="error">{{$message}}</span><br>
+            @enderror
             <label>RE-TYPE PASSWORD</label></br>
             <input type="text" name="r_pass" id="rpass"></br>
+            @error('r_pass')
+                 <span class="error">{{$message}}</span><br>
+            @enderror
             <button>Submit</button>
         </form>
     </div>

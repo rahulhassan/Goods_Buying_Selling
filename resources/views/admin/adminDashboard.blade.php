@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/adminDashboard.css')}}">
     <title>Admin Dashboard</title>
 </head>
-
 <body>
     <div class="container">
         <div class="content">
@@ -64,23 +64,39 @@
             <div class="content-2">
                 <div class="recent-payments">
                     <div class="title">
-                        <h2>Recent Payments</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>ORDERS</h2>
+                        <a href="{{route('admin.files.order')}}" class="btn">View All</a>
                     </div>
                     <table>
                         <tr>
-                            <th>Payment Id</th>
-                            <th>Order Id</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th>SELLER ID</th>
+                            <th>PRODUCT ID</th>
+                            <th>BUYER ID</th>
+                            <th>PAYMENT TYPE</th>
+                            <th>PAYMENT STATUS</th>
+                            <th>QUANTITY</th>
+                            <th>SUBTOTAL</th>
+                            <th>DISCOUNT</th>
+                            <th>TOTAL</th>
                         </tr>
+                        @foreach($orderall as $o)
                         <tr>
-                            <td>John Doe</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td>$120</td>
+                            <td>{{$o['buyer_id']}}</td>
+                            <td>{{$o['product_id']}}</td>
+                            <td>{{$o['seller_id']}}</td>
+                            <td>{{$o['payment_type']}}</td>
+                            <td>{{$o['payment_status']}}</td>
+                            <td>{{$o['quantity']}}</td>
+                            <td>{{$o['sub_total']}}</td>
+                            <td>{{$o['discount']}}</td>
+                            <td>{{$o['total']}}</td>
                         </tr>
+                        @endforeach
+                        
                     </table>
+                    <div class="pagination">
+                        {{$orderall->links()}}
+                    </div>
                 </div>
                 <div class="new-students">
                     <div class="title">
