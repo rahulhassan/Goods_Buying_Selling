@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/adminDashboard.css')}}">
     <title>SELL INFORMATION</title>
 </head>
@@ -17,8 +18,8 @@
             <div class="cards">
                 <div class="card">
                     <div class="box">
-                        <h1>30</h1>
-                        <h3>TOTAL SELL</h3>
+                        <h1>{{$ord}}</h1>
+                        <h3>TOTAL ORDER</h3>
                     </div>
                     <div class="icon-case">
                         <img src="teachers.png" alt="">
@@ -26,7 +27,7 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>120</h1>
+                        <h1>12000</h1>
                         <h3>TODAY'S SELL</h3>
                     </div>
                     <div class="icon-case">
@@ -35,7 +36,7 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>50</h1>
+                        <h1>500000</h1>
                         <h3>MONTHLY SELL</h3>
                     </div>
                     <div class="icon-case">
@@ -44,7 +45,7 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>2000</h1>
+                        <h1>10</h1>
                         <h3>PENDING ORDERS</h3>
                     </div>
                     <div class="icon-case">
@@ -59,31 +60,36 @@
                     </div>
                     <table>
                         <tr>
-                            <th>PAYMENT Id</th>
-                            <th>ORDER Id</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th>SELLER ID</th>
+                            <th>PRODUCT ID</th>
+                            <th>BUYER ID</th>
+                            <th>PAYMENT TYPE</th>
+                            <th>PAYMENT STATUS</th>
+                            <th>QUANTITY</th>
+                            <th>SUBTOTAL</th>
+                            <th>DISCOUNT</th>
+                            <th>TOTAL</th>
                         </tr>
-                        @foreach($orderItem as $o)
+                        @foreach($orderall as $o)
                         <tr>
-                            <td>{{$o['order_id']}}</td>
-                            <td>{{$o['p_id']}}</td>
-                            <td>{{$o['p_quantity']}}</td>
-                           
-                        </tr>
-                        @endforeach
-                        @foreach($order as $o)
-                        <tr>
+                            <td>{{$o['buyer_id']}}</td>
+                            <td>{{$o['product_id']}}</td>
+                            <td>{{$o['seller_id']}}</td>
+                            <td>{{$o['payment_type']}}</td>
+                            <td>{{$o['payment_status']}}</td>
+                            <td>{{$o['quantity']}}</td>
+                            <td>{{$o['sub_total']}}</td>
+                            <td>{{$o['discount']}}</td>
                             <td>{{$o['total']}}</td>
-                           
                         </tr>
                         @endforeach
                         
                     </table>
                     <div class="pagination">
-                        {{$order->links()}}
+                        {{$orderall->links()}}
                     </div>
                 </div>
+                
                 
             </div>
         </div>

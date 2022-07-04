@@ -9,4 +9,5 @@ class adminUser extends Model
 {
     use HasFactory;
     protected $table = 'admin';
+    protected $primaryKey ='a_id';
 }
