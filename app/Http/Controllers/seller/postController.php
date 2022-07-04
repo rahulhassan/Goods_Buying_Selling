@@ -40,7 +40,7 @@ class postController extends Controller
         $product->s_id = Session::get('loginId');
         $res = $product->save();
         if($res){
-            return back()->with('success', 'Data Inserted');
+            return back()->with('success', 'Product Posted Successfully');
 
         }else{
             return back()->with('fail', 'something wrong');

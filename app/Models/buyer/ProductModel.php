@@ -10,7 +10,7 @@ class ProductModel extends Model
 {
     use HasFactory;
     protected $table="product";
-    // protected $primaryKey="p_id";
+    protected $primaryKey="p_id";
     // public $incrementing=true;
 
     // function cart()
