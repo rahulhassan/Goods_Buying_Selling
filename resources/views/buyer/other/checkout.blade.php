@@ -80,7 +80,8 @@
                                 <tr>
                                     <td>Discount</td>
                                     <td>:</td>
-                                    <td>
+                                    <td>        
+                                        
                                                 
                                                             {{session()->get('coupon')['discount']}}%
                                     

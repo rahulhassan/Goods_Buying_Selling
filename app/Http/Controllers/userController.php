@@ -96,7 +96,8 @@ class userController extends Controller
             }
         }elseif($user3){
             if(md5($req->pass) == $user3->b_pass){
-
+                session()->put('LoggedIn',$user3->b_id);
+                session()->put('LoggedInName',$user3->b_name);
                 return redirect()->route('buyer.other.dashboard');
 
             }else{
@@ -118,12 +119,9 @@ class userController extends Controller
 
     }
     function userLogout(){
-        if(Session::has('loginId')){
-            Session::pull('loginId');
+            session()->flush();
             return redirect()->route('user.login');
-        }else{
-            return redirect()->route('user.login');
-        }
+        
     }
 
 }

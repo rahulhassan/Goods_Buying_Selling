@@ -17,9 +17,8 @@
             <th></th>
             <th>Product Name</th>
             <th>Product Quantity</th>
-            <th>Sub Total</th>
-            <th>Discount</th>
-            <th>Total</th>
+            <th>Price</th>
+            <th>Payment Status</th>
 
 
                     @foreach($order_items as $ord)
@@ -28,24 +27,16 @@
                         <td><img src="{{asset('images/'.$ord->product->image_path)}}" height="80px" width="80px" alt=""></td>
                         <td>{{$ord->product->p_title}}</td>
                         <td>{{$ord->p_quantity}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$ord->p_quantity * $ord->product->p_price}}</td>
+                        <td>{{$ord->payment_status}}</td>
+
                     
                     </tr>
                     
                     @endforeach
           
 
-                    <tr>
-                        <td></td>
-                        <td><td>     
-                        </td></td>
-                        <td>{{$orders->sub_total}}</td>
-                        <td>{{$orders->discount}}%</td>
-                        <td>{{$orders->total}}</td>
-                    </tr>
-        
+            
 </table>
 
            
