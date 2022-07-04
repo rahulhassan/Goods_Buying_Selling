@@ -9,14 +9,17 @@ use Session;
 
 class sDashboardController extends Controller
 {
-    function showProduct(){
-        if(Session::has('loginId')){
-            $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(2);
-            return view('seller/sellerDashboard')->with('productInfo', $productInfo);        
+    function showProduct(Request $req){
+        $search = $req['search']?? "";
+        if($search != ""){
+            $productInfo = sellerProduct::where([
+                ['s_id', '=', Session::get('loginId')],
+                ['p_title', 'LIKE', "%$search%"]
+                ])->paginate(2);
+        }else{
+            $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(2);           
         }
-        else{
-            return "session invalid";
-        }
+        return view('seller/sellerDashboard')->with('productInfo', $productInfo)->with('search', $search);   
     }
 
     function sellerProductDelete($id){
@@ -30,4 +33,5 @@ class sDashboardController extends Controller
 
         return view('seller/sPages/updateProduct')->with('data', $data);
     }
+
 }

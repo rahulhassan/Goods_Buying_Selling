@@ -5,6 +5,17 @@
 <h4 style="text-align:center;font-family: myFirstFont;">Seller Dashboard</h4>
 <hr>
 <div class="container-md p-4">
+
+    
+    <form class="form-inline" action="">
+        @csrf
+        <div class="input-group" style="width:50%">
+        <input class="form-control mr-sm-2" type="search" placeholder="Write product name..." name="search" value="{{$search}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+    
+    <br>
     @if (count($productInfo)>0)
     <h3>Your posted products:</h3>
     <div class="w-75">

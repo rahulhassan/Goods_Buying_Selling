@@ -53,7 +53,6 @@ Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->name(
 
 Route::get('/seller/update/profile',[sProfileController::class,'sellerEditInfo'])->name('seller.update')->middleware('isLoggedIn');
 
-
 Route::post('/seller/update/profile',[sProfileController::class,'sellerInfoUpdate'])->name('submit.sellerInfo');
 
 Route::get('/seller/orders',[sOrderController::class,'orderInfo'])->name('seller.orders')->middleware('isLoggedIn');

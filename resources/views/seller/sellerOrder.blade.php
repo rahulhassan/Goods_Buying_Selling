@@ -14,6 +14,7 @@
           <th scope="col">Product Title</th>
           <th scope="col">Quantity</th>
           <th scope="col">Amount</th>
+          <th scope="col">Shipping Address</th>
           <th scope="col"></th>
         </tr>
       </thead>
