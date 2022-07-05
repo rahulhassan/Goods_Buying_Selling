@@ -29,7 +29,12 @@ class adminDashboardC extends Controller
         $empl=employeeUser::all();
         $data = adminUser::where('a_id','=',1)->first();
         $orderall=Order::paginate(10);
-        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
+        $x=0;
+        foreach ($orderall as $o)
+        {
+            $x+=$o->total;
+        }
+        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
     }
     //--------------------------STATEMENTS-----------------------------------
 

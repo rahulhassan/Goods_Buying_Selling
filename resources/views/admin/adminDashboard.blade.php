@@ -53,7 +53,7 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>2000</h1>
+                        <h1>{{$x}}</h1>
                         <h3>INCOME</h3>
                     </div>
                     <div class="icon-case">
