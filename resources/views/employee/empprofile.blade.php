@@ -2,6 +2,9 @@
 @section('content')
 <div class="container">
 <table class="table">
+
+<h3>Employee Profile</h3>
+<a href=" {{ url('employee/create')}}" class = "btn btn-sm btn-info"> Add Employee </a> 
   <thead>
     <tr>
       <td >Employee Name</td>
@@ -18,8 +21,10 @@
       <td>{{$employee->e_mail}}</td>
       <td>{{$employee->e_add}}</td>
       <td>
+        
         <a href="{{ url('employee/edit/{id}')}} " class = "btn btn-sm btn-info"> Edit </a> 
-        <a href=" " class = "btn btn-sm btn-info"> Delete </a> 
+        <a href=" {{ url('employee/delete/{id}')}}" class = "btn btn-sm btn-info"> Delete </a> 
+         
 
       </td>
     </tr> 
