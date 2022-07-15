@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateEmployeeTable extends Migration
 {
     /**
@@ -15,7 +16,7 @@ class CreateEmployeeTable extends Migration
     {
         Schema::create('employee', function (Blueprint $table) {
             $table->id('e_id');
-            $table->string('e_name');
+            $table->string('e_name')->nullable();
             $table->string('e_phn');
             $table->string('e_mail');
             $table->string('e_pass');

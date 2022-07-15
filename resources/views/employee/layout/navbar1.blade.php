@@ -13,14 +13,10 @@
         <a class="ps-3 navbar-brand" href="{{route('home')}}">GBS</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{{route('seller.dashboard')}}">Dashboard</a>
-            <a class="nav-item nav-link" href="{{route('seller.profile')}}">Profile</a>
-            <a class="nav-item nav-link" href="{{route('seller.post')}}">Post Product</a>
-            <a class="nav-item nav-link" href="{{route('seller.orders')}}">Orders</a>
-            <a class="nav-item nav-link" href="{{route('seller.statement')}}">Statement</a>
-            <a style="margin-left:600px"href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-primary">Sign Out</button></a>
+            <a class="nav-item nav-link" href="{{url('employee/empprofile')}}">Profile</a>
+            <a class="nav-item nav-link" href="{{url('employee/buyerlist')}}">Buyer List</a>
+            <a class="nav-item nav-link" href="{{url('employee/sellerlist')}}">Seller List</a>
           </div>
-          <h5 class="nav-item" style="margin-left:20px">Welcome, {{Session::get('loginName')}}</h5>
         </div>
       </nav>
       @yield('content')

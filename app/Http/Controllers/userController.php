@@ -113,6 +113,7 @@ class userController extends Controller
             if(md5($req->pass) == $user4->s_pass){
 
                 $req->session()->put('loginId',$user4->s_id);
+                $req->session()->put('loginName',$user4->s_name);
 
                 return redirect()->route('seller.dashboard');
 

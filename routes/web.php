@@ -11,6 +11,7 @@ use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
 use App\Http\Controllers\adminDashboardC;
 use App\Http\Controllers\buyer\OrderController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,7 @@ Route::post('/seller/edit',[postController::class,'sellerPostUpdate'])->name('se
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->name('seller.profile')->middleware('isLoggedIn');
 
 Route::get('/seller/update/profile',[sProfileController::class,'sellerEditInfo'])->name('seller.update')->middleware('isLoggedIn');
+
 
 Route::post('/seller/update/profile',[sProfileController::class,'sellerInfoUpdate'])->name('submit.sellerInfo');
 
@@ -99,6 +101,7 @@ Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('b
 
 
 
+
 //___________________________ADMIN_________________________________
 Route::get('/admin/adminDashboard',[adminDashboardC::class,'Dashboard'])->name('admin.adminDashboard');
 
@@ -112,9 +115,12 @@ Route::get('/admin/files/seller',[adminDashboardC::class,'Seller'])->name('admin
 
 Route::get('/admin/files/coupon',[adminDashboardC::class,'coupon'])->name('admin.files.coupon');
 
-Route::get('/admin/files/sellInfo',[adminDashboardC::class,'SellInfo'])->name('admin.files.sellInfo');
+Route::get('/admin/files/order',[adminDashboardC::class,'OrderO'])->name('admin.files.order');
 
 Route::get('/admin/files/profile',[adminDashboardC::class,'Profile'])->name('admin.files.profile');
+Route::post('/admin/files/profile',[adminDashboardC::class,'updatePass'])->name('admin.files.updatePass');
+Route::post('/admin/files/upload',[adminDashboardC::class,'upload'])->name('admin.files.upload');
+
 
 //-----------------------------CRUD EMPLOYEE
 
@@ -151,7 +157,22 @@ Route::post('/admin/files/showBuyer',[adminDashboardC::class,'UpdateBuyer'])->na
 
 //-----------------------------COUPON
 
+
 Route::get('/admin/files/addCoupon',[adminDashboardC::class,'addCoupon'])->name('admin.files.addCoupon');
 Route::post('/admin/files/addCoupon',[adminDashboardC::class,'storeCoupon'])->name('submit.storeCoupon');
+Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupon']);
 
+// Route::get('/admin/files/otp',[adminDashboardC::class, 'mailer']);//MAIL SENDING
+
+//=====================Employeee
+
+Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',]);
+Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
+Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('employee/update/{id}', [EmployeeController::class, 'update']);
+Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy']);
+Route::get('employee/create}', [EmployeeController::class, 'create'])->name('employee.create');
+Route::post('employee/insert}', [EmployeeController::class, 'insert'])->name('employee.insert');
 
