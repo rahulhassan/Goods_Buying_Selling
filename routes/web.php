@@ -68,29 +68,22 @@ Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
-
-Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
-//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
-Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
-Route::get('account',[BuyerController::class,'account'])->name('buyer.other.account');
-Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
-
-//Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
-//Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
-
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 
+//Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
 Route::get('/updateProfile',[BuyerController::class,'updateProfile'])->name('buyer.other.updateProfile');
 Route::post('/updateProfile',[BuyerController::class,'updateProfileSubmit'])->name('buyer.other.updateProfileSubmit');
 Route::get('/account',[BuyerController::class,'account'])->name('buyer.other.account');
 Route::get('/orders',[BuyerController::class,'orders'])->name('buyer.other.orders');
-Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
-Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
+
+
+//Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
+//Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
 Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart');
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
@@ -104,6 +97,7 @@ Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,
 
 Route::post('/placeOrder',[OrderController::class,'placeOrder'])->name('buyer.other.placeOrder');
 Route::get('/orderCompleted',[OrderController::class,'orderCompleted'])->name('buyer.other.orderCompleted');
+
 
 
 

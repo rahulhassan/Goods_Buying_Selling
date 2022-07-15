@@ -89,14 +89,17 @@ class BuyerController extends Controller
         $this->validate($req,
         [
            
-            "name"=>"required",
+            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
             "phone"=>"required",
             "address"=>"required",
             "pro_pic"=>"mimes:jpg,jpeg,png"
             
         ],
         [
-              
+            "name.required"=>" *Provide Your Name",
+            "name.regex"=>"Please provide valid name",
+            "phone.required"=>"*Provide Phone Number",
+            "address.required"=>"*Provide Your Address", 
         ]);
       
    

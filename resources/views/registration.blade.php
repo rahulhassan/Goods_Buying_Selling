@@ -2,6 +2,21 @@
 @section('content')
 <div class="w-25 p-3 justify-content-center">
 
+@if(session('alert_success'))
+        <div class="alert alert-warning" role="alert">
+            <b>{{session('alert_success')}}</b>
+            
+        </div>
+@endif
+
+@if(session('alert_danger'))
+        <div class="alert alert-warning" role="alert">
+            <b>{{session('alert_danger')}}</b>
+            
+        </div>
+@endif
+
+
 <form action="{{route('submit.registration')}}" method="POST">
     {{ csrf_field() }}
     <h3>Registration</h3>

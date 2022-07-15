@@ -27,8 +27,8 @@ class SignUpMail extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
-        return $this->from(env(key('MAIL_USERNAME')),name('GBS_APP') )->subject(subject('Welcome to GBS_APP'))->view('view.mail.signUpMail')->with('email_data',$this->email_data);
-    }
+    // public function build()
+    // {
+    //     return $this->from(env(key(['MAIL_USERNAME'])),name('Goods_Buying_Selling') )->subject(subject('Welcome to GBS_APP'))->view('view.mail.signUpMail')->with('email_data',$this->email_data);
+    // }
 }
