@@ -26,6 +26,7 @@
             <td>{{$or->p_quantity}}</td>
 
             <td>{{$or->order->total}}</td>
+            <td>{{$or->order->buyer->b_add.", ".$or->order->buyer->b_phn}}</td>
             <td>
               <a href="{{'shipping/'.$or->id}}"><button type="button" class="btn btn-success">Order Shifted</button></a>
             </td>

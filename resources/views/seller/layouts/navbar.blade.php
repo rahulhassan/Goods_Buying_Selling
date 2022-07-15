@@ -18,8 +18,9 @@
             <a class="nav-item nav-link" href="{{route('seller.post')}}">Post Product</a>
             <a class="nav-item nav-link" href="{{route('seller.orders')}}">Orders</a>
             <a class="nav-item nav-link" href="{{route('seller.statement')}}">Statement</a>
-            <a href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-primary">Sign Out</button></a>
+            <a style="margin-left:600px"href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-primary">Sign Out</button></a>
           </div>
+          <h5 class="nav-item" style="margin-left:20px">Welcome, {{Session::get('loginName')}}</h5>
         </div>
       </nav>
       @yield('content')
