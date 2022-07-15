@@ -26,4 +26,5 @@ class OrderItem extends Model
     {
         return $this->belongsTo(BuyerModel::class,'b_id','b_id');
     }
+    
 }

@@ -97,6 +97,7 @@ class userController extends Controller
         }elseif($user3){
             if(md5($req->pass) == $user3->b_pass){
                 session()->put('LoggedIn',$user3->b_id);
+                session()->put('loginId',$user3->b_id);
                 session()->put('LoggedInName',$user3->b_name);
                 return redirect()->route('buyer.other.dashboard');
 
@@ -107,6 +108,7 @@ class userController extends Controller
             if(md5($req->pass) == $user4->s_pass){
 
                 $req->session()->put('loginId',$user4->s_id);
+                $req->session()->put('loginName',$user4->s_name);
 
                 return redirect()->route('seller.dashboard');
 

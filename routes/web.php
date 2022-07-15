@@ -67,7 +67,8 @@ Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 
 
-Route::get('dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
+
 Route::get('productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 //Route::get('logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('profile',[BuyerController::class,'profile'])->name('buyer.other.profile');
@@ -77,7 +78,6 @@ Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders
 //Route::get('/login',[BuyerController::class,'login'])->name('buyer.other.login');
 //Route::post('/login',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
-Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
 Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');

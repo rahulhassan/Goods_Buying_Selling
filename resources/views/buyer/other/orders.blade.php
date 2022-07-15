@@ -18,7 +18,7 @@
             <th>Product Name</th>
             <th>Product Quantity</th>
             <th>Price</th>
-            <th>Payment Status</th>
+            <th>Status</th>
 
 
                     @foreach($order_items as $ord)
