@@ -8,6 +8,7 @@ use App\Models\seller\sellerUser;
 use App\Models\buyer\buyerUser;
 use App\Models\employee\employeeUser;
 use App\Models\seller\sellerProduct;
+use Illuminate\Auth\Event\Registered;
 use Session;
 
 class userController extends Controller
@@ -39,8 +40,12 @@ class userController extends Controller
             $user->b_pass = md5($req->psw_repeat);
             $res = $user->save();
 
+        
+
+               
+
             if($res){
-                return back()->with('success', 'Registration successfully done');
+               return back()->with('success', 'Registration successfully done');
     
             }else{
                 return back()->with('fail', 'something wrong');
@@ -97,6 +102,7 @@ class userController extends Controller
         }elseif($user3){
             if(md5($req->pass) == $user3->b_pass){
                 session()->put('LoggedIn',$user3->b_id);
+                session()->put('loginId',$user3->b_id);
                 session()->put('LoggedInName',$user3->b_name);
                 return redirect()->route('buyer.other.dashboard');
 
