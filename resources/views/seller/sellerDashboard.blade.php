@@ -14,6 +14,14 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>
+    <br>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">TV</button>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Computer</button>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Mobile & Tablet</button>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Camera</button>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Fridge</button>
+    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Accessories</button>
+    <br>
     
     <br>
     @if (count($productInfo)>0)

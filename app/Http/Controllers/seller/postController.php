@@ -16,7 +16,8 @@ class postController extends Controller
             'brand_name'=> 'required',
             'qnty'=> 'required',
             'price'=> 'required',
-            'desc'=> 'required'
+            'desc'=> 'required',
+            'category_name'=>'required'
         ],
         [
             'image.required'=> 'Provide a product photo',
@@ -36,6 +37,7 @@ class postController extends Controller
         $product->p_price = $req->price;
         $product->p_description = $req->desc;
         $product->p_quantity = $req->qnty;
+        $product->Category = $req->category_name;
         $product->image_path = $imageName;
         $product->s_id = Session::get('loginId');
         $res = $product->save();
