@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\employee\employeeUser;
 use App\Models\buyer\buyerUser;
 use App\Models\seller\sellerUser;
-use DB;
-use Illuminate\Support\Str;
+
+
+
 
 
 
@@ -47,50 +48,48 @@ class EmployeeController extends Controller
        return view('employee.edit',compact('data')); 
     } 
 
-    function update(Request $req){
+    function update(Request $req) {
         
         
-       $data= employeeUser::find($req->e_id);
-       $data-> e_name = $req-> name;
-       $data-> e_phn= $req-> phone;
-       $data-> e_mail= $req->Email;
-       $data-> e_add= $req-> address;
-       $data->save(); 
+       //$data= employeeUser::find($id);
+      // $data-> e_name = $req-> e_name;
+     // $data-> e_phn= $req-> e_phn; 
+     //  $data-> e_mail= $req->e_mail;
+      // $data-> e_add= $req-> e_add;
+      // $data->save(); 
+        //return redirect('empprofile')->with('status','Employee Data Successfully Updated');
 
-      
-        return redirect()->route('employee.empprofile');
+
+        $this->validate($req,
+             [
+                "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
+                "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
+                "e_phn"=>"required|regex:/^\+[8]{2}[0-9]{11}+$/i",//11 Digits And Need +880
+                "e_add"=>"required",
+                
+             ],
+             [
+                "e_name.required"=> "Please provide your name!!!",
+                "e_name.regex"=> "Please provide your name properly (. & - is accepted)!!!",
+                "e_mail.required"=> "Please provide your email!!!",
+                "e_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
+                "e_phn.required"=> "Please provide your phone number!!!",
+                "e_phn.regex"=> "Please provide correct phone number like +880---------!!!",
+                "e_add.required"=> "Please provide your address!!!",
+        
+             ]
+        );
+        $data = employeeUser::find($req->e_id);
+        $data->e_name = $req->e_name;
+        $data->e_phn = $req->e_phn;
+        $data->e_mail = $req->e_mail;
+        $data->e_pass = $req->e_pass;
+        $data->e_add = $req->e_add;
+        $data->save();
+        return redirect()->route('/employee/empprofile')->with('status','Employee Data Successfully Updated');
+
     }
 
-    function destroy($id){
-     //$data = employeeUser::find($id);
-     //$data->delete();
-     employeeUser::destroy($id);
-     return redirect()->route('employee.empprofile');
-    }
-
-    function create(){
-
-        return view('employee.insert');
-    }
     
-
-    function insert(Request $req){
-        $validated = $request->validate([
-            'e_name' => 'required|unique:categories|max:255',
-            'e_phn' => 'required',
-            'e_mail' => 'required',
-            'e_add' => 'required',
-        ]);
-
-        $data = new employeUser;
-        $data -> e_name = $req->Name  ;
-        $data -> e_phn = $req->Phone;
-        $data -> e_mail = $req->Email ;
-        $data -> e_add = $req->Address ;
-        $data ->save();
-
-     return redirect()->back();
-    }
-
-
+   
 }
