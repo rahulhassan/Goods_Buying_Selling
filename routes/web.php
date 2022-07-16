@@ -80,7 +80,7 @@ Route::get('orders',[BuyerController::class,'orders'])->name('buyer.other.orders
 
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 

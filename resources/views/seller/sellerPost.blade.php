@@ -29,6 +29,21 @@
         @enderror
         <br>
         <div class="form-group">
+            <label for="exampleFormControlSelect1">Category</label>
+            <select class="form-control" name="category_name">
+                <option>TV</option>
+                <option>Computer</option>
+                <option>Mobile & Tablet</option>
+                <option>Camera</option>
+                <option>Fridge</option>
+                <option>Accessories</option>
+            </select>
+        </div>
+        @error('category_name')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+        <br>
+        <div class="form-group">
             <label>Product Price</label>
             <input type="text" value="{{old('price')}}" name="price" class="form-control">
         </div>
