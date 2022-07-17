@@ -15,11 +15,11 @@ class CreateCartTable extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id('c_id');
-            $table->foreignId('b_id')->references('b_id')->on('buyer');
-            $table->foreignId('p_id')->references('p_id')->on('product');
+            $table->foreignId('buyer_id')->references('b_id')->on('buyer');
+            $table->foreignId('product_id')->references('p_id')->on('product');
             $table->integer('p_price');
             $table->integer('p_quantity');
-            $table->foreignId('s_id')->references('s_id')->on('seller');
+            $table->foreignId('seller_id')->references('s_id')->on('seller');
             $table->timestamps();
         });
     }

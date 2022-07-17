@@ -24,7 +24,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('b_add');
             $table->string('payment_method');
             $table->string('status');
-            $table->foreignId('s_id')->references('s_id')->on('seller');
+            $table->foreignId('seller_id')->references('s_id')->on('seller');
             //$table->foreignId('p_id')->references('p_id')->on('product');
             $table->timestamps();
         });

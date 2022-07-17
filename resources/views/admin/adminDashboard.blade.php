@@ -20,17 +20,11 @@
                         <h1>{{$emp}}</h1>
                         <h3>EMPLOYEE</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="students.png" alt="">
-                    </div>
                 </div>
                 <div class="card">
                     <div class="box">
                         <h1>{{$buy}}</h1>
                         <h3>BUYER</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="teachers.png" alt="">
                     </div>
                 </div>
                 <div class="card">
@@ -38,26 +32,23 @@
                         <h1>{{$sell}}</h1>
                         <h3>SELLER</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="schools.png" alt="">
-                    </div>
                 </div>
                 <div class="card">
                     <div class="box">
                         <h1>{{$ord}}</h1>
                         <h3>ORDER</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h1>{{$ofr}}</h1>
+                        <h3>RUNNING OFFERS</h3>
                     </div>
                 </div>
                 <div class="card">
                     <div class="box">
                         <h1>{{$x}}</h1>
-                        <h3>INCOME</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
+                        <h3>TOTAL EARN</h3>
                     </div>
                 </div>
             </div>
@@ -73,8 +64,6 @@
                             <th>PRODUCT ID</th>
                             <th>BUYER ID</th>
                             <th>PAYMENT TYPE</th>
-                            <th>PAYMENT STATUS</th>
-                            <th>QUANTITY</th>
                             <th>SUBTOTAL</th>
                             <th>DISCOUNT</th>
                             <th>TOTAL</th>
@@ -85,8 +74,6 @@
                             <td>{{$o['product_id']}}</td>
                             <td>{{$o['seller_id']}}</td>
                             <td>{{$o['payment_type']}}</td>
-                            <td>{{$o['payment_status']}}</td>
-                            <td>{{$o['quantity']}}</td>
                             <td>{{$o['sub_total']}}</td>
                             <td>{{$o['discount']}}</td>
                             <td>{{$o['total']}}</td>

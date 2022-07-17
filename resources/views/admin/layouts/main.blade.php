@@ -14,14 +14,14 @@
             <h1>GBS</h1>
         </div>
         <ul>
-            <li><img src="" alt="">&nbsp; <span><a href="{{route('admin.adminDashboard')}}">DASHBOARD</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.statement')}}">STATEMENT</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.order')}}">ORDER</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.coupon')}}">COUPON</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.employee')}}">SEE EMPLOYEE</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.buyer')}}">SEE BUYER</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.seller')}}">SEE SELLER</a></span> </li>
-            <li><img src="" alt="">&nbsp;<span><a href="{{route('admin.files.profile')}}">SETTINGS</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.adminDashboard')}}">DASHBOARD</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.statement')}}">STATEMENT</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.order')}}">ORDER</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.coupon')}}">COUPON</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.employee')}}">SEE EMPLOYEE</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.buyer')}}">SEE BUYER</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.seller')}}">SEE SELLER</a></span> </li>
+            <li><img src="" alt=""><span><a href="{{route('admin.files.profile')}}">SETTINGS</a></span> </li>
         </ul>
     </div>
     <div class="container">
