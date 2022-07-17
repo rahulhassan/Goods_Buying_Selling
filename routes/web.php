@@ -181,10 +181,15 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupo
 
 Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
 Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile',])->name('profile.employee');
-Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
-Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList'])->name('profile.buyer');
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList'])->name('profile.seller');
 Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
 Route::post('/employee/edit', [EmployeeController::class, 'update'])->name('update.employee');
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate'])->name('update.buyer');
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate'])->name('update.seller');
+
 
 
 
