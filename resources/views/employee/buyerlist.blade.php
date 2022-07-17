@@ -16,10 +16,10 @@
  <tbody>
     @foreach($buyer as $buyerList)
     <tr>
-      <td>{{$$buyerList->b_name}}</td>
-      <td>{{$$buyerList->b_phn}}</td>
-      <td>{{$$buyerList->b_mail}}</td>
-      <td>{{$$buyerList->b_add}}</td>
+      <td>{{$buyerList->b_name}}</td>
+      <td>{{$buyerList->b_phn}}</td>
+      <td>{{$buyerList->b_mail}}</td>
+      <td>{{$buyerList->b_add}}</td>
      
 
     </tr> 

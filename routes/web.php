@@ -167,12 +167,24 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupo
 //=====================Employeee
 
 
+//Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
+//Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
+//Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+//Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
+//Route::get('employee/edit/{id}', [EmployeeController::class, 'edit']);
+//Route::post('employee/update/{id}', [EmployeeController::class, 'update']);
+//Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy']);
+//Route::get('employee/create}', [EmployeeController::class, 'create'])->name('employee.create');
+//Route::post('employee/insert}', [EmployeeController::class, 'insert'])->name('employee.insert');
 
-Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',]);
-Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
+
+
+Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
+Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile',])->name('profile.employee');
 Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
 Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
-Route::get('/employee/edit/{e_id}', [EmployeeController::class, 'edit']);
-Route::post('/employee/edit', [EmployeeController::class, 'update']);
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('/employee/edit', [EmployeeController::class, 'update'])->name('update.employee');
+
 
 

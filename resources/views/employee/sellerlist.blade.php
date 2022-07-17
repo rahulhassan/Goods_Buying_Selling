@@ -1,7 +1,7 @@
 @extends('employee.layout.navbar1')
 @section('content')
 
-<h1>Welcome to My Buyerlist</h1>
+<h1>Welcome to My Seller list</h1>
 
 <div class="container">
 <table class="table">
@@ -16,10 +16,10 @@
  <tbody>
     @foreach($seller as $sellerList)
     <tr>
-      <td>{{$$sellerList->s_name}}</td>
-      <td>{{$$sellerList->s_phn}}</td>
-      <td>{{$$sellerList->s_mail}}</td>
-      <td>{{$$sellerList->s_add}}</td>
+      <td>{{$sellerList->s_name}}</td>
+      <td>{{$sellerList->s_phn}}</td>
+      <td>{{$sellerList->s_mail}}</td>
+      <td>{{$sellerList->s_add}}</td>
      
 
     </tr> 

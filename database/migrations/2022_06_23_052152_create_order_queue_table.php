@@ -17,8 +17,8 @@ class CreateOrderQueueTable extends Migration
             $table->id('o_id');
             $table->string('o_quantity');
             $table->string('o_amount');
-            $table->foreignId('b_id')->references('b_id')->on('buyer');
-            $table->foreignId('p_id')->references('p_id')->on('product');
+            $table->foreignId('buyer_id')->references('b_id')->on('buyer');
+            $table->foreignId('product_id')->references('p_id')->on('product');
             $table->timestamps();
         });
     }
