@@ -21,9 +21,6 @@
                         <h1>{{$cup}}</h1>
                         <h3>Total Coupon</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="students.png" alt="">
-                    </div>
                 </div>
             </div>
             <div class="content-2">

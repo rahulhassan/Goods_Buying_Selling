@@ -48,7 +48,7 @@
                         <span class="error">{{$message}}</span><br>
                   @enderror
                   <label>PASSWORD</label></br>
-                  <input type="text" name="s_pass" id="pass"></br>
+                  <input type="password" name="s_pass" id="pass"></br>
                   @error('s_pass')
                         <span class="error">{{$message}}</span><br>
                   @enderror

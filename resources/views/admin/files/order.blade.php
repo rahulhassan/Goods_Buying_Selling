@@ -21,17 +21,11 @@
                         <h1>{{$ord}}</h1>
                         <h3>TOTAL ORDER</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="teachers.png" alt="">
-                    </div>
                 </div>
                 <div class="card">
                     <div class="box">
                         <h1>12000</h1>
                         <h3>TODAY'S SELL</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="schools.png" alt="">
                     </div>
                 </div>
                 <div class="card">
@@ -39,17 +33,11 @@
                         <h1>500000</h1>
                         <h3>MONTHLY SELL</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
-                    </div>
                 </div>
                 <div class="card">
                     <div class="box">
                         <h1>10</h1>
                         <h3>PENDING ORDERS</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
                     </div>
                 </div>
             </div>
@@ -64,8 +52,6 @@
                             <th>PRODUCT ID</th>
                             <th>BUYER ID</th>
                             <th>PAYMENT TYPE</th>
-                            <th>PAYMENT STATUS</th>
-                            <th>QUANTITY</th>
                             <th>SUBTOTAL</th>
                             <th>DISCOUNT</th>
                             <th>TOTAL</th>
@@ -76,8 +62,6 @@
                             <td>{{$o['product_id']}}</td>
                             <td>{{$o['seller_id']}}</td>
                             <td>{{$o['payment_type']}}</td>
-                            <td>{{$o['payment_status']}}</td>
-                            <td>{{$o['quantity']}}</td>
                             <td>{{$o['sub_total']}}</td>
                             <td>{{$o['discount']}}</td>
                             <td>{{$o['total']}}</td>

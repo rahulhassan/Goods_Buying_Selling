@@ -26,6 +26,7 @@ class adminDashboardC extends Controller
         $sell = DB::table('seller')->count();
         $ord = DB::table('orders')->count();
         $emp = DB::table('employee')->count();
+        $ofr = DB::table('coupon')->count();
         $empl=employeeUser::all();
         $data = adminUser::where('a_id','=',1)->first();
         $orderall=Order::paginate(10);
@@ -34,7 +35,7 @@ class adminDashboardC extends Controller
         {
             $x+=$o->total;
         }
-        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
+        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x', 'ofr'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
     }
     //--------------------------STATEMENTS-----------------------------------
 
@@ -326,7 +327,7 @@ class adminDashboardC extends Controller
         return redirect()->route('admin.files.employee')->with('data', $data);
     }
 
-    //--------------------------SELL INFORMATION-----------------------------------
+    //--------------------------ORDER-----------------------------------
     function OrderO(){
         $orderall = Order::paginate(10);
         $ord = DB::table('orders')->count();
@@ -375,7 +376,7 @@ class adminDashboardC extends Controller
         $image = adminUser::find(1);
         $image->a_image = $name;
         $image -> save();
-        return redirect()->route('admin.files.profile')->with('image', $image);
+        return redirect()->route('admin.files.profile')->with('image', $image)->with('successImg', 'YOUR IMAGE IS CHANGE');
     }
     function updatePass(Request $req){
         $this->validate($req,
@@ -394,7 +395,7 @@ class adminDashboardC extends Controller
         $data =adminUser::where('a_PASS',$PASS)->first();
         $data->a_PASS=$req->a_pass;
         $data->save();
-        return redirect()->back()->with('success', 'OLD PASSWORD CHANGE SUCCESSFULLY'); 
+        return redirect()->back()->with('success', 'PASSWORD CHANGE SUCCESSFULLY'); 
         
     }
     // function mialer(){
