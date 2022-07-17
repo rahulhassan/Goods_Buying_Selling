@@ -20,7 +20,7 @@ class userController extends Controller
             'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
             'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             'psw_repeat'=>"required|same:psw",
-            'phone'=>"required",
+            'phone'=>"required|regex:/^[0-9]{11}+$/i",
             'address'=>"required",
             'type'=>"required"
         ],
@@ -32,6 +32,7 @@ class userController extends Controller
            'psw_repeat.same'=>'Password must match with repeat password',
            'phone.required'=>'Provide your phone number',
            'address.required'=>'Provide your address',
+           "phone.regex"=> "Please provide correct phone number",
         ]);
 
         if($req->type == 'Buyer'){

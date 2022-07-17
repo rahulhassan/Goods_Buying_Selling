@@ -41,55 +41,41 @@ class EmployeeController extends Controller
        
     }
 
-    function edit(Request $req){
+    function edit($id){
        
-       $data= employeeUser::find($req->e_id);
+       $data= employeeUser::find($id);
        
-       return view('employee.edit',compact('data')); 
+       return view('employee/edit',compact('data')); 
     } 
 
-    function update(Request $req) {
+   function update(Request $req) {
         
-        
-       //$data= employeeUser::find($id);
-      // $data-> e_name = $req-> e_name;
-     // $data-> e_phn= $req-> e_phn; 
-     //  $data-> e_mail= $req->e_mail;
-      // $data-> e_add= $req-> e_add;
-      // $data->save(); 
-        //return redirect('empprofile')->with('status','Employee Data Successfully Updated');
+      $this->validate($req,
+         [
+            "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
+            "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
+            "e_phn"=>"required|regex:/^[0-9]{11}+$/i",//11 Digits And Need +880
+            "e_add"=>"required"
+            
+         ],
+         [
+            "e_name.required"=> "Please provide your name!!!",
+            "e_name.regex"=> "Please provide your name properly (. & - is accepted)!!!",
+            "e_mail.required"=> "Please provide your email",
+            "e_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
+            "e_phn.required"=> "Please provide your phone number",
+            "e_phn.regex"=> "Please provide correct phone number",
+            "e_add.required"=> "Please provide your address!!!"
+         ]
+      );
+      
+      $data = employeeUser::find($req->e_id);
+      $data->e_name = $req->e_name;
+      $data->e_phn = $req->e_phn;
+      $data->e_mail = $req->e_mail;
+      $data->e_add = $req->e_add;
+      $data->save();
+      return redirect()->route('profile.employee');
 
-
-        $this->validate($req,
-             [
-                "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
-                "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
-                "e_phn"=>"required|regex:/^\+[8]{2}[0-9]{11}+$/i",//11 Digits And Need +880
-                "e_add"=>"required",
-                
-             ],
-             [
-                "e_name.required"=> "Please provide your name!!!",
-                "e_name.regex"=> "Please provide your name properly (. & - is accepted)!!!",
-                "e_mail.required"=> "Please provide your email!!!",
-                "e_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
-                "e_phn.required"=> "Please provide your phone number!!!",
-                "e_phn.regex"=> "Please provide correct phone number like +880---------!!!",
-                "e_add.required"=> "Please provide your address!!!",
-        
-             ]
-        );
-        $data = employeeUser::find($req->e_id);
-        $data->e_name = $req->e_name;
-        $data->e_phn = $req->e_phn;
-        $data->e_mail = $req->e_mail;
-        $data->e_pass = $req->e_pass;
-        $data->e_add = $req->e_add;
-        $data->save();
-        return redirect()->route('/employee/empprofile')->with('status','Employee Data Successfully Updated');
-
-    }
-
-    
-   
+   } 
 }
