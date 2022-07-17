@@ -48,7 +48,7 @@ class EmployeeController extends Controller
        return view('employee/edit',compact('data')); 
     } 
 
-   function update(Request $req) {
+function update(Request $req) {
         
       $this->validate($req,
          [
@@ -78,4 +78,5 @@ class EmployeeController extends Controller
       return redirect()->route('profile.employee');
 
    } 
+
 }
