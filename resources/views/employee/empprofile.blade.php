@@ -22,7 +22,7 @@
       <td>{{$employee->e_add}}</td>
       <td>
         
-        <a href="{{ url('employee/edit/{id}')}} " class = "btn btn-sm btn-info"> Edit </a> 
+        <a href="{{'edit/'.$employee->e_id}}" class = "btn btn-sm btn-info"> Edit </a> 
          
 
       </td>

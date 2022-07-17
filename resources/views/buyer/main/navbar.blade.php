@@ -46,7 +46,7 @@
 
 
     
-              <input class="form-control" style="height:40px;width: 350px; margin-left:220px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
+              <input class="form-control" style="height:40px;width: 350px; margin-left:420px;margin-right:10px" name="search" type="search" value="{{old('search')}}" placeholder="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
               <h3 class="text-white" style="margin-left:20px"><i class="fa fa-solid fa-user"></i></h3>
               <b class="text-white" style="margin-left:10px">{{Session::get('LoggedInName')}}</b>
