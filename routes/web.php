@@ -166,7 +166,7 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupo
 
 //=====================Employeee
 
-Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',]);
+Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
 Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
 Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
 Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);

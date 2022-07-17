@@ -21,6 +21,7 @@ class userController extends Controller
             'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             'psw_repeat'=>"required|same:psw",
             'phone'=>"required",
+            'address'=>"required",
             'type'=>"required"
         ],
         [
@@ -28,7 +29,9 @@ class userController extends Controller
            'email.required'=>'Provide a valid email',
            'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
            'psw_repeat.required'=>'Must enter the password again',
-           'psw_repeat.same'=>'Password must match with repeat password'
+           'psw_repeat.same'=>'Password must match with repeat password',
+           'phone.required'=>'Provide your phone number',
+           'address.required'=>'Provide your address',
         ]);
 
         if($req->type == 'Buyer'){
@@ -92,9 +95,9 @@ class userController extends Controller
             }
 
         }elseif($user2){
-            if(md5($req->pass) == $user2->e_pass){
+            if($req->pass == $user2->e_pass){
 
-                //return redirect()->route('user.dashboard');
+                return redirect()->route('employee.dashboard');
 
             }else{
                 return back()->with('fail','Password incorrect');
