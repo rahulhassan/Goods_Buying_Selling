@@ -11,28 +11,28 @@
         <form method="POST"  action=" {{url ('/employee/edit')}} " >
         <div class="form-group">
         {{@csrf_field()}}
-          <input type="hidden" name="e_id" value="">
+          <input type="hidden" name="e_id" value="{{$data->e_id}}">
           <label for="name">Employee Name</label>
-          <input type="text" class="form-control" name="e_name"  value = " "> <br>
+          <input type="text" class="form-control" name="e_name"  value = "{{$data->e_id}} "> <br>
           @error('name')
           <span class="text-danger">{{$message}}</span>
          @enderror
          <br><br>
           <label for="phone">Employee Phone</label>
-          <input type="text" class="form-control" name="e_phn" value =" " > <br>
+          <input type="text" class="form-control" name="e_phn" value ="{{$data->e_id}} " > <br>
           @error('phone')
           <span class="text-danger">{{$message}}</span>
           @enderror
           <br><br>
           <label for="Email">Employee Email</label>
-          <input type="text" class="form-control" name="e_mail"  value = "" > <br>
+          <input type="text" class="form-control" name="e_mail"  value = "{{$data->e_id}}" > <br>
           @error('Email')
          <span class="text-danger">{{$message}}</span>
          @enderror
          <br><br>
 
           <label for="address">Employee Address</label>
-          <input type="text" class="form-control" name="e_add"  value = ""> <br>
+          <input type="text" class="form-control" name="e_add"  value = "{{$data->e_id}}"> <br>
           @error('address')
          <span class="text-danger">{{$message}}</span>
          @enderror

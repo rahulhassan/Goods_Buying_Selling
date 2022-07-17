@@ -73,13 +73,13 @@ class EmployeeController extends Controller
                 "e_name.regex"=> "Please provide your name properly (. & - is accepted)!!!",
                 "e_mail.required"=> "Please provide your email!!!",
                 "e_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
-                "e_phn.required"=> "Please provide your phone number!!!",
-                "e_phn.regex"=> "Please provide correct phone number like +880---------!!!",
+                "e_phn.required"=> "Please provide your phone number",
+                "e_phn.regex"=> "Please provide correct phone number like ",
                 "e_add.required"=> "Please provide your address!!!",
         
              ]
         );
-        $data = employeeUser::find($req->e_id);
+        $data = employeeUser::find(1);
         $data->e_name = $req->e_name;
         $data->e_phn = $req->e_phn;
         $data->e_mail = $req->e_mail;
