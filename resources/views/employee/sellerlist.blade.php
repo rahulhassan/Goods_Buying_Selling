@@ -1,10 +1,11 @@
 @extends('employee.layout.navbar1')
 @section('content')
 
-<h1>Welcome to My Seller list</h1>
+
 
 <div class="container">
 <table class="table">
+<h3>Seller Profile</h3>
   <thead>
     <tr>
       <td >Seller Name</td>
@@ -14,13 +15,18 @@
     </tr>
   </thead>
  <tbody>
-    @foreach($seller as $sellerList)
+    @foreach($seller as $sellerlist)
     <tr>
-      <td>{{$sellerList->s_name}}</td>
-      <td>{{$sellerList->s_phn}}</td>
-      <td>{{$sellerList->s_mail}}</td>
-      <td>{{$sellerList->s_add}}</td>
-     
+      <td>{{$sellerlist->s_name}}</td>
+      <td>{{$sellerlist->s_phn}}</td>
+      <td>{{$sellerlist->s_mail}}</td>
+      <td>{{$sellerlist->s_add}}</td>
+      <td>
+        
+        <a href="{{'editseller/'.$sellerlist->s_id}}" class = "btn btn-sm btn-info"> Edit </a> 
+         
+
+      </td>
 
     </tr> 
     </tbody>

@@ -22,10 +22,21 @@
     .error{
         color:red;
     }
+    .success{
+        font-size: 20px;
+        font-weight: 500;
+        text-align:center;
+        color: orange;
+    }
 </style>
 
 <body>
     <div class="p-img">
+        @if (session('successImg'))
+          <div class="success">
+             {{ session('successImg')}}
+        </div>
+        @endif
         <div class="img-sec">
             <img src="{{asset('storage/images/'. $data->a_image)}}">
         </div>
@@ -39,6 +50,11 @@
     </div>
     <div class="p-sec">
         <h2>PASSWORD CHANGE</h2>
+        @if (session('success'))
+        <div class="success">
+            {{ session('success')}}
+        </div>
+        @endif
         <form action="{{route('admin.files.updatePass')}}" method="POST">
             {{@csrf_field()}}
             <label>OLD PASSWORD</label></br>
@@ -47,12 +63,12 @@
                  <span class="error">{{$message}}</span><br>
             @enderror
             <label>NEW PASSWORD</label></br>
-            <input type="text" name="a_pass" id="npass"></br>
+            <input type="password" name="a_pass" id="npass"></br>
             @error('a_pass')
                  <span class="error">{{$message}}</span><br>
             @enderror
             <label>RE-TYPE PASSWORD</label></br>
-            <input type="text" name="r_pass" id="rpass"></br>
+            <input type="password" name="r_pass" id="rpass"></br>
             @error('r_pass')
                  <span class="error">{{$message}}</span><br>
             @enderror

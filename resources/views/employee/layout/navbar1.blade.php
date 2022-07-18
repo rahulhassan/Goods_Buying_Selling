@@ -16,6 +16,8 @@
             <a class="nav-item nav-link" href="{{url('employee/empprofile')}}">Profile</a>
             <a class="nav-item nav-link" href="{{url('employee/buyerlist')}}">Buyer List</a>
             <a class="nav-item nav-link" href="{{url('employee/sellerlist')}}">Seller List</a>
+            <a class="nav-item nav-link" href="{{route('user.logout')}}">Logout</a>
+            
           </div>
         </div>
       </nav>
