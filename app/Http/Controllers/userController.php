@@ -118,7 +118,7 @@ class userController extends Controller
 
                 $req->session()->put('loginId',$user4->s_id);
                 $req->session()->put('loginName',$user4->s_name);
-
+                $req->session()->put('profilePhoto',$user4->s_image);
                 return redirect()->route('seller.dashboard');
 
             }else{

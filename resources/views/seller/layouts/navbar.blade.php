@@ -21,6 +21,7 @@
             <a style="margin-left:600px"href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-primary">Sign Out</button></a>
           </div>
           <h5 class="nav-item" style="margin-left:20px">Welcome, {{Session::get('loginName')}}</h5>
+          <a href="{{route('seller.profile')}}"><img src="{{asset('images/seller/'.Session::get('profilePhoto'))}}" alt="Avatar" style="margin-left:20px; vertical-align: middle;width: 45px;height: 45px;border-radius: 50%;"></a> 
         </div>
       </nav>
       @yield('content')

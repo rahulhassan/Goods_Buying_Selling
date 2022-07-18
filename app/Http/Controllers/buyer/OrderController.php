@@ -27,19 +27,31 @@ class OrderController extends Controller
         //dd($req->all());
 
         $this->validate($req,
+
         [
-           
-            "name"=>"required",
-            "phone"=>"required",
+            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+
+            "phone"=>"required|regex:/^[0-9]{11}+$/i",
+
             "address"=>"required",
-            "payment"=>"required", 
-     
+
+            "payment"=>"required",
         ],
+
         [
+
           "name.required"=>" *Provide Your Name",
+
+          "name.regex"=>"*Please provide valid name",
+
           "phone.required"=>"*Provide Phone Number",
+
+          "phone.regex"=> "*Please provide valid phone number",
+
           "address.required"=>"*Provide Your Address",
+
           "payment.required"=>"*Select Payment Method",      
+
         ]);
         // $products=ProductModel::where('p_title',$req->title)->first();
         // //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
@@ -232,24 +244,26 @@ class OrderController extends Controller
     function placeOrder(Request $req)
     {
         // dd($req->all());
-
-        $this->validate($req,
+    $this->validate($req,
         [
-           
-            "name"=>"required",
-            "phone"=>"required",
+
+            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+            "phone"=>"required|regex:/^[0-9]{11}+$/i",
             "address"=>"required",
             "payment"=>"required", 
             "total"=>"min:2"
-      
+
         ],
         [
-          "name.required"=>" *Provide Your Name",
-          "phone.required"=>"*Provide Phone Number",
-          "address.required"=>"*Provide Your Address",
-          "payment.required"=>"*Select Payment Method",      
-          "total.min"=>"You have no product on cart",     
+            "name.required"=>" *Provide Your Name",
+            "name.regex"=>"*Please provide valid name",
+            "phone.required"=>"*Provide Phone Number",
+            "phone.regex"=> "*Please provide valid phone number",
+            "address.required"=>"*Provide Your Address",
+            "payment.required"=>"*Select Payment Method",
+            "total.min"=>"You have no product on cart"
         ]);
+
 
     
         $order_id=Order::insertGetId([
