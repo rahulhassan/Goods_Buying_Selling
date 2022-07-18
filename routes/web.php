@@ -45,6 +45,7 @@ Route::get('/seller/post', function(){ return view('seller/sellerPost'); })->nam
 Route::post('/seller/post',[postController::class,'validateSellerPost'])->name('submit.sellerPost');
 
 Route::get('/seller/dashboard',[sDashboardController::class,'showProduct'])->name('seller.dashboard')->middleware('isLoggedIn');
+Route::get('/seller/dashboard/{ct}',[sDashboardController::class,'showCategoryProduct'])->middleware('isLoggedIn');
 
 Route::get('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
@@ -185,6 +186,3 @@ Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
 Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
 Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
 Route::post('/employee/edit', [EmployeeController::class, 'update'])->name('update.employee');
-
-
-
