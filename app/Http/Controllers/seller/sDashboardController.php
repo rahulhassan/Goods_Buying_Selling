@@ -17,7 +17,7 @@ class sDashboardController extends Controller
                 ['p_title', 'LIKE', "%$search%"]
                 ])->paginate(2);
         }else{
-            $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(4);           
+            $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(2);           
         }
         return view('seller/sellerDashboard')->with('productInfo', $productInfo)->with('search', $search);   
     }
