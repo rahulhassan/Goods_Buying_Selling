@@ -44,8 +44,8 @@
                     <td colspan="2">{{$p->p_description}}</td>
                 </tr>
                 <tr>
-                    <td><a href="{{'/seller/edit/'.encrypt($p->p_id)}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-                    <td><a href="{{'/seller/delete/'.$p->p_id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                    <td><a href="{{'edit/'.encrypt($p->p_id)}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+                    <td><a href="{{'delete/'.$p->p_id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
                 </tr>
             </tbody>
         </table>

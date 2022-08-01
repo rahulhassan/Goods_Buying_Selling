@@ -18,7 +18,7 @@ class userController extends Controller
         $req->validate([
             'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
             'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
-            'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
             'psw_repeat'=>"required|same:psw",
             'phone'=>"required|regex:/^[0-9]{11}+$/i",
             'address'=>"required",
