@@ -1,10 +1,10 @@
 @extends('employee.layout.navbar1')
 @section('content')
-
-<h1>Welcome to My Buyerlist</h1>
-
 <div class="container">
 <table class="table">
+
+<h3>Buyer Profile</h3>
+
   <thead>
     <tr>
       <td >Buyer Name</td>
@@ -14,14 +14,18 @@
     </tr>
   </thead>
  <tbody>
-    @foreach($buyer as $buyerList)
+    @foreach($buyer as $buyerlist)
     <tr>
-      <td>{{$$buyerList->b_name}}</td>
-      <td>{{$$buyerList->b_phn}}</td>
-      <td>{{$$buyerList->b_mail}}</td>
-      <td>{{$$buyerList->b_add}}</td>
-     
+      <td>{{$buyerlist->b_name}}</td>
+      <td>{{$buyerlist->b_phn}}</td>
+      <td>{{$buyerlist->b_mail}}</td>
+      <td>{{$buyerlist->b_add}}</td>
+      <td>
+        
+        <a href="{{'editbuyer/'.$buyerlist->b_id}}" class = "btn btn-sm btn-info"> Edit </a> 
+         
 
+      </td>
     </tr> 
     </tbody>
 @endforeach

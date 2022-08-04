@@ -15,12 +15,12 @@
         </div>
     </form>
     <br>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">TV</button>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Computer</button>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Mobile & Tablet</button>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Camera</button>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Fridge</button>
-    <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Accessories</button>
+    <a href="{{'/seller/dashboard/TV'}}"> <button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">TV</button></a>
+    <a href="{{'/seller/dashboard/Computer'}}"><button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Computer</button></a>
+    <a href="{{'/seller/dashboard/Mobile'}}"><button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Mobile & Tablet</button></a>
+    <a href="{{'/seller/dashboard/Camera'}}"><button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Camera</button></a> 
+    <a href="{{'/seller/dashboard/Fridge'}}"><button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Fridge</button></a> 
+    <a href="{{'/seller/dashboard/Accessories'}}"><button type="button" style="border-radius: 40px;" class="btn btn-outline-secondary">Accessories</button></a> 
     <br>
     
     <br>
@@ -38,7 +38,7 @@
                     <td><b>Brand:</b>{{" ".$p->p_brand}}</td>
                 </tr>
                 <tr>
-                    <td>{{$p->p_price}}</td>
+                    <td><b>BDT </b>{{$p->p_price}}</td>
                 </tr>
                 <tr>
                     <td colspan="2">{{$p->p_description}}</td>

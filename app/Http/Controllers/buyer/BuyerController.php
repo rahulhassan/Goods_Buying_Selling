@@ -76,6 +76,7 @@ class BuyerController extends Controller
     function updateProfile()
     {
         $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+        
         return view('buyer.other.updateProfile')
                 ->with('buyer',$buyer);
     }
@@ -87,23 +88,29 @@ class BuyerController extends Controller
     {
 
         $this->validate($req,
+
         [
-           
+
             "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+
             "phone"=>"required|regex:/^[0-9]{11}+$/i",
+
             "address"=>"required",
+
             "pro_pic"=>"mimes:jpg,jpeg,png"
-            
+
         ],
+
         [
+
             "name.required"=>" *Provide Your Name",
+
             "name.regex"=>"*Please provide valid name",
             "phone.required"=>"*Provide Phone Number",
             "phone.regex"=> "*Please provide valid phone number",
             "address.required"=>"*Provide Your Address", 
+
         ]);
-      
-   
 
        
         //$buyer=new BuyerModel();

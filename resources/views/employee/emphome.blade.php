@@ -9,13 +9,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{{url('employee/empprofile')}}">Profile</a>
+        <a class="nav-link" href="{{url('/empprofile')}}">Profile</a>
       </li> <br>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('employee/buyerlist')}}">Buyerlist</a>
+        <a class="nav-link" href="{{url('/buyerlist')}}">Buyerlist</a>
       </li> <br>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('employee/sellerlist')}}">Sellerlist</a>
+        <a class="nav-link" href="{{url('/sellerlist')}}">Sellerlist</a>
       </li> <br>
     </ul>
   </div>

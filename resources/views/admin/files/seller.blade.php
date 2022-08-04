@@ -21,9 +21,6 @@
                         <h1>{{$sel}}</h1>
                         <h3>Total Seller</h3>
                     </div>
-                    <div class="icon-case">
-                        <img src="students.png" alt="">
-                    </div>
                 </div>
             </div>
             <div class="content-2">

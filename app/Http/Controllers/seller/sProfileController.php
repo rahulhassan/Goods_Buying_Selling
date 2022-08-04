@@ -10,9 +10,9 @@ use Session;
 class sProfileController extends Controller
 {
     function sellerDetails(){
-        $seller=sellerUser::where('s_id', '=', Session::get('loginId'))->first();
+        $seller=sellerUser::where('s_id', '=', 1)->first();
 
-        return view('seller/sellerProfile')->with('seller',$seller);
+        return response()->json($seller); 
     }
 
     function sellerEditInfo(){
@@ -26,7 +26,8 @@ class sProfileController extends Controller
         $req->validate([
         'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
         'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
-        'phone'=>"required"
+        'phone'=>"required|regex:/^[0-9]{11}+$/i",
+        'address'=>"required"
         ],
         [
         'name.required'=>'Provide a valid name',

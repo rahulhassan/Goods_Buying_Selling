@@ -41,7 +41,7 @@
       
     </ul>
 
-  <h3 class="text-white" style="margin-left:650px"><i class="fa fa-solid  fa-user"></i></h3>
+  <h3 class="text-white" style="margin-left:850px"><i class="fa fa-solid  fa-user"></i></h3>
    <b class="text-white" style="margin-left:10px">{{Session::get('LoggedInName')}}</b>
   </div>
 </nav>

@@ -6,6 +6,7 @@ use App\Http\Controllers\seller\sDashboardController;
 use App\Http\Controllers\seller\sProfileController;
 use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\seller\sOrderController;
+
 use App\Http\Controllers\userController;
 use App\Http\Controllers\buyer\ProductController;
 use App\Http\Controllers\buyer\BuyerController;
@@ -14,6 +15,9 @@ use App\Http\Controllers\buyer\OrderController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+
+use App\Http\Controllers\apiLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +34,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard');
+
 
 
 //_________________________________Buyer___________________________________________
@@ -66,4 +70,13 @@ Route::get('/productDetails/cart/checkout/orderDetails',[OrderController::class,
 
 Route::post('/placeOrder',[OrderController::class,'placeOrder']);
 Route::get('/orderCompleted',[OrderController::class,'orderCompleted']);
+
+
+Route::post('/login',[apiLoginController::class,'login']);
+Route::any('/logout',[apiLoginController::class,'logout']);
+
+// _________________Seller__________________________
+
+Route::get('/seller/products',[sDashboardController::class,'showProduct']);
+Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
 

@@ -20,7 +20,9 @@ class userController extends Controller
             'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
             'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             'psw_repeat'=>"required|same:psw",
-            'phone'=>"required",
+
+            'phone'=>"required|regex:/^[0-9]{11}+$/i",
+
             'address'=>"required",
             'type'=>"required"
         ],
@@ -31,7 +33,10 @@ class userController extends Controller
            'address.required'=>'Provide your address',
            'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
            'psw_repeat.required'=>'Must enter the password again',
-           'psw_repeat.same'=>'Password must match with repeat password'
+           'psw_repeat.same'=>'Password must match with repeat password',
+           'phone.required'=>'Provide your phone number',
+           'address.required'=>'Provide your address',
+           "phone.regex"=> "Please provide correct phone number",
         ]);
 
         if($req->type == 'Buyer')
@@ -98,9 +103,9 @@ class userController extends Controller
             }
 
         }elseif($user2){
-            if(md5($req->pass) == $user2->e_pass){
+            if($req->pass == $user2->e_pass){
 
-                //return redirect()->route('user.dashboard');
+                return redirect()->route('employee.dashboard');
 
             }else{
                 return back()->with('fail','Password incorrect');
@@ -120,7 +125,7 @@ class userController extends Controller
 
                 $req->session()->put('loginId',$user4->s_id);
                 $req->session()->put('loginName',$user4->s_name);
-
+                $req->session()->put('profilePhoto',$user4->s_image);
                 return redirect()->route('seller.dashboard');
 
             }else{

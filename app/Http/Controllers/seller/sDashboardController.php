@@ -13,11 +13,26 @@ class sDashboardController extends Controller
         $search = $req['search']?? "";
         if($search != ""){
             $productInfo = sellerProduct::where([
-                ['s_id', '=', Session::get('loginId')],
+                ['s_id', '=', 1],
                 ['p_title', 'LIKE', "%$search%"]
                 ])->paginate(2);
         }else{
-            $productInfo = sellerProduct::where('s_id', '=', Session::get('loginId'))->paginate(2);           
+            $productInfo = sellerProduct::where('s_id', '=', 1)->get();           
+        }
+        return response()->json($productInfo);   
+    }
+    function showCategoryProduct(Request $req, $ct){
+        $search = $req['search']?? "";
+        if($search != ""){
+            $productInfo = sellerProduct::where([
+                ['s_id', '=', Session::get('loginId')],
+                ['p_title', 'LIKE', "%$search%"]
+                ])->get();
+        }else{
+            $productInfo = sellerProduct::where([
+                ['s_id', '=', Session::get('loginId')],
+                ['Category', '=', "$ct"]
+                ])->get();
         }
         return view('seller/sellerDashboard')->with('productInfo', $productInfo)->with('search', $search);   
     }

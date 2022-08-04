@@ -17,13 +17,14 @@
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['ORDER', 'Payment'],
-          ['Order',     11],
-          ['Payment',      2]
+          ['Weekly', 'Monthly', 'Yearly'],
+          ['Weekly',     2],
+          ['Monthly',     5],
+          ['Yearly',      11]
         ]);
 
         var options = {
-          title: 'Activities'
+          title: 'INCOME'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

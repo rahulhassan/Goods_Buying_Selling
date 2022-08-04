@@ -66,6 +66,7 @@ Route::get('/seller/post', function(){ return view('seller/sellerPost'); })->nam
 Route::post('/seller/post',[postController::class,'validateSellerPost'])->name('submit.sellerPost');
 
 Route::get('/seller/dashboard',[sDashboardController::class,'showProduct'])->name('seller.dashboard')->middleware('isLoggedIn');
+Route::get('/seller/dashboard/{ct}',[sDashboardController::class,'showCategoryProduct'])->middleware('isLoggedIn');
 
 Route::get('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
@@ -187,13 +188,30 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupo
 
 //=====================Employeee
 
-Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',]);
-Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
-Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
-Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
-Route::get('employee/edit/{id}', [EmployeeController::class, 'edit']);
-Route::post('employee/update/{id}', [EmployeeController::class, 'update']);
-Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy']);
-Route::get('employee/create}', [EmployeeController::class, 'create'])->name('employee.create');
-Route::post('employee/insert}', [EmployeeController::class, 'insert'])->name('employee.insert');
+
+//Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
+//Route::get('employee/empprofile' , [EmployeeController::class, 'EmpProfile',]);
+//Route::get('employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+//Route::get('employee/sellerlist', [EmployeeController::class, 'SellerList']);
+//Route::get('employee/edit/{id}', [EmployeeController::class, 'edit']);
+//Route::post('employee/update/{id}', [EmployeeController::class, 'update']);
+//Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy']);
+//Route::get('employee/create}', [EmployeeController::class, 'create'])->name('employee.create');
+//Route::post('employee/insert}', [EmployeeController::class, 'insert'])->name('employee.insert');
+
+
+
+Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
+Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile',])->name('profile.employee');
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList'])->name('profile.buyer');
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList'])->name('profile.seller');
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+
+Route::post('/employee/edit', [EmployeeController::class, 'update'])->name('update.employee');
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate'])->name('update.buyer');
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate'])->name('update.seller');
+
+
 
