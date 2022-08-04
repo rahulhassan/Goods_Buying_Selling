@@ -14,6 +14,9 @@ class ProductController extends Controller
         $products=ProductModel::paginate(4);
         return view('buyer.other.dashboard')
                     ->with('products',$products);
+
+        //$products=ProductModel::all();
+        //return response()->json($products);
     }
 
     //_____________________________________
