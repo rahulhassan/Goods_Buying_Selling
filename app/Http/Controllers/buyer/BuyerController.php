@@ -90,15 +90,16 @@ class BuyerController extends Controller
         [
            
             "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
-            "phone"=>"required",
+            "phone"=>"required|regex:/^[0-9]{11}+$/i",
             "address"=>"required",
             "pro_pic"=>"mimes:jpg,jpeg,png"
             
         ],
         [
             "name.required"=>" *Provide Your Name",
-            "name.regex"=>"Please provide valid name",
+            "name.regex"=>"*Please provide valid name",
             "phone.required"=>"*Provide Phone Number",
+            "phone.regex"=> "*Please provide valid phone number",
             "address.required"=>"*Provide Your Address", 
         ]);
       
@@ -139,7 +140,7 @@ class BuyerController extends Controller
             return back()->with('profileUpdated', 'Information Updated Successfully');
 
         }else{
-            return back()->with('profileNotUpdated', 'Informatin not updated');
+            return back()->with('profileNotUpdated', 'Information not updated');
         }
         return view('buyer.other.updateProfile')
                 ->with('buyer',$buyer);

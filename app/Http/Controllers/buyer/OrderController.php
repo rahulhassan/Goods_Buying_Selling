@@ -29,15 +29,17 @@ class OrderController extends Controller
         $this->validate($req,
         [
            
-            "name"=>"required",
-            "phone"=>"required",
+            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+            "phone"=>"required|regex:/^[0-9]{11}+$/i",
             "address"=>"required",
             "payment"=>"required", 
      
         ],
         [
           "name.required"=>" *Provide Your Name",
+          "name.regex"=>"*Please provide valid name",
           "phone.required"=>"*Provide Phone Number",
+          "phone.regex"=> "*Please provide valid phone number",
           "address.required"=>"*Provide Your Address",
           "payment.required"=>"*Select Payment Method",      
         ]);
@@ -165,6 +167,7 @@ class OrderController extends Controller
         CartModel::where('c_id',$c_id)->where('b_id',session()->get('LoggedIn'))->delete();
 
        return back()->with("cartDeleted","Product deleted from Cart");
+       //return back()->with(session()->flash("cartDeleted","Product deleted from Cart"));
 
     }
 
@@ -236,8 +239,8 @@ class OrderController extends Controller
         $this->validate($req,
         [
            
-            "name"=>"required",
-            "phone"=>"required",
+            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+            "phone"=>"required|regex:/^[0-9]{11}+$/i",
             "address"=>"required",
             "payment"=>"required", 
             "total"=>"min:2"
@@ -245,7 +248,9 @@ class OrderController extends Controller
         ],
         [
           "name.required"=>" *Provide Your Name",
+          "name.regex"=>"*Please provide valid name",
           "phone.required"=>"*Provide Phone Number",
+          "phone.regex"=> "*Please provide valid phone number",
           "address.required"=>"*Provide Your Address",
           "payment.required"=>"*Select Payment Method",      
           "total.min"=>"You have no product on cart",     
