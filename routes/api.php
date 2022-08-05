@@ -39,6 +39,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/login',[apiLoginController::class,'login']);
+Route::any('/logout',[apiLoginController::class,'logout']);
+
+Route::post('/registration',[userController::class, 'validateRegistration']);
 
 
 
@@ -76,13 +80,13 @@ Route::get('/productDetails/cart/checkout/orderDetails',[ApiOrderController::cla
 Route::post('/placeOrder',[ApiOrderController::class,'placeOrder']);
 Route::get('/orderCompleted',[ApiOrderController::class,'orderCompleted']);
 
-//_______________________________________________________________
-
-Route::post('/login',[apiLoginController::class,'login']);
-Route::any('/logout',[apiLoginController::class,'logout']);
 
 // _________________Seller__________________________
 
 Route::get('/seller/products',[sDashboardController::class,'showProduct']);
+Route::delete('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
+Route::put('/seller/post',[postController::class,'validateSellerPost']);
+Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
+Route::put('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
 
