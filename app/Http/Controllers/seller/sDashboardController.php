@@ -39,14 +39,31 @@ class sDashboardController extends Controller
 
     function sellerProductDelete($id){
         $data = sellerProduct::find($id);
-        $data->delete();
-        return redirect()->route('seller.dashboard');
+        if($data){
+            $data->delete();
+            return response()->json([
+                'status'=>200,
+                'message' => 'Product Deleted Successfully'
+            ]);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'No Product found'
+            ]);
+        }
 
     }
     function sellerUpdateShow($id){
-        $data = sellerProduct::find(decrypt($id));
-
-        return view('seller/sPages/updateProduct')->with('data', $data);
+        $data = sellerProduct::where('p_id', '=', $id)->first();
+        if($data){
+            return response()->json($data);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'No Product found'
+            ]);
+        }
+        
     }
 
 }

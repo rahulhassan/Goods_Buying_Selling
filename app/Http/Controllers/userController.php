@@ -9,6 +9,7 @@ use App\Models\buyer\buyerUser;
 use App\Models\employee\employeeUser;
 use App\Models\seller\sellerProduct;
 use Illuminate\Auth\Event\Registered;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class userController extends Controller
