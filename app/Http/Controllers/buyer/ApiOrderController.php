@@ -16,7 +16,7 @@ use App\Models\buyer\Shipping;
 use Illuminate\Support\Facades\Session;
 
 
-class OrderController extends Controller
+class ApiOrderController extends Controller
 {
     //
     
@@ -111,7 +111,7 @@ class OrderController extends Controller
 
         //return back()->with("orderPlaced"," Your Order has been completed");
 
-        return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced"," Your Order has been completed");
+        //return redirect()->route('buyer.other.orderCompleted')->with("orderPlaced"," Your Order has been completed");
 
 
 
@@ -123,13 +123,16 @@ class OrderController extends Controller
 
     function addToCart()
     {
-        $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
-        $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
-            return $t->p_price * $t->p_quantity;
-        });
-        return view('buyer.other.cart')
-                    ->with('carts',$cart)
-                    ->with('sub_total',$sub_total);
+        // $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        // $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+        //     return $t->p_price * $t->p_quantity;
+        // });
+        // return view('buyer.other.cart')
+        //             ->with('carts',$cart)
+        //             ->with('sub_total',$sub_total);
+
+        $cart=CartModel::where('b_id',17)->latest()->get();
+        return response()->json($cart);
     }
   
 
@@ -229,14 +232,16 @@ class OrderController extends Controller
 
     function checkout()
     {
-        $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
-        $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
-            return $t->p_price * $t->p_quantity;
-        });
-        return view('buyer.other.checkout')
-                    ->with('carts',$cart)
-                    ->with('sub_total',$sub_total);
-       
+        // $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        // $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
+        //     return $t->p_price * $t->p_quantity;
+        // });
+        // return view('buyer.other.checkout')
+        //             ->with('carts',$cart)
+        //             ->with('sub_total',$sub_total);
+
+        $cart=CartModel::where('b_id',17)->latest()->get();
+        return response()->json($cart);
     }
 
     //_______________________________Place Order With Cart______________________________

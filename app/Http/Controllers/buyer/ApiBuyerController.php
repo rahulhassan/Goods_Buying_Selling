@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use App\Models\buyer\BuyerModel;
 use Illuminate\Support\Facades\DB;
 
-class BuyerController extends Controller
+class ApiBuyerController extends Controller
 {
     //
 

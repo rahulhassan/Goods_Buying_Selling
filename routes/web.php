@@ -7,12 +7,16 @@ use App\Http\Controllers\seller\sProfileController;
 use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\seller\sOrderController;
 use App\Http\Controllers\userController;
-use App\Http\Controllers\buyer\ProductController;
-use App\Http\Controllers\buyer\BuyerController;
-use App\Http\Controllers\adminDashboardC;
-use App\Http\Controllers\buyer\OrderController;
-use App\Http\Controllers\EmployeeController;
 
+use App\Http\Controllers\buyer\ProductController;
+use App\Http\Controllers\buyer\ApiProductController;
+use App\Http\Controllers\buyer\BuyerController;
+use App\Http\Controllers\buyer\OrderController;
+
+use App\Http\Controllers\adminDashboardC;
+use App\Http\Controllers\EmployeeController;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +40,26 @@ Route::get('/login',[function () {return view('login');}])->name('user.login')->
 Route::post('/login',[userController::class, 'checkLogin'])->name('submit.login');
 
 Route::get('/logout',[userController::class, 'userLogout'])->name('user.logout');
+
+
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->name('verification.notice');
+
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
 
 //___________________________Seller_________________________________
 
