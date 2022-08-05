@@ -72,7 +72,7 @@ class ApiOrderController extends Controller
         // return back();
 
          $products=ProductModel::where('p_title',$req->title)->first();
-        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
+        $buyer=BuyerModel::where('b_id',17)->first();
        
         $order_id=Order::insertGetId([
             'b_id'=>$buyer->b_id,
@@ -108,6 +108,8 @@ class ApiOrderController extends Controller
             'created_at'=>Carbon::Now(),
             'updated_at'=>Carbon::Now()
         ]);
+
+        return response()->json(["msg"=>"News Added Successfully"]);
 
         //return back()->with("orderPlaced"," Your Order has been completed");
 
