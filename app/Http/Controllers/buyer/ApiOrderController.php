@@ -14,6 +14,7 @@ use App\Models\buyer\Order;
 use App\Models\buyer\OrderItem;
 use App\Models\buyer\Shipping;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 
 class ApiOrderController extends Controller
@@ -24,59 +25,34 @@ class ApiOrderController extends Controller
 
     function placeOrderSubmit(Request $req)
     {
-        //dd($req->all());
-
-        $this->validate($req,
-
-        [
-
+        
+        
+        $validator = Validator::make($req->all(),[
+            
+            "b_name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
+            "b_phn"=>"required|regex:/^[0-9]{11}+$/i",
+            "b_add"=>"required",
+            "payment_type"=>"required",
+        ],[
            
-            "name"=>"required|regex:/^[a-zA-Z\s\.\-]+$/i",
-            "phone"=>"required|regex:/^[0-9]{11}+$/i",
-
-            "address"=>"required",
-
-            "payment"=>"required",
-        ],
-
-        [
-
-          "name.required"=>" *Provide Your Name",
-
-          "name.regex"=>"*Please provide valid name",
-          "phone.required"=>"*Provide Phone Number",
-          "phone.regex"=> "*Please provide valid phone number",
-
-          "address.required"=>"*Provide Your Address",
-
-          "payment.required"=>"*Select Payment Method",      
-
+          "b_name.required"=>" *Provide Your Name",
+          "b_name.regex"=>"*Please provide valid name",
+          "b_phn.required"=>"*Provide Phone Number",
+          "b_phn.regex"=> "*Please provide valid phone number",
+          "b_add.required"=>"*Provide Your Address",
+          "payment_type.required"=>"*Select Payment Method",  
         ]);
-        // $products=ProductModel::where('p_title',$req->title)->first();
-        // //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
-       
-        // $order=new OrderModel();
-        // $order->b_name=$req->name;
-        // $order->b_phn=$req->phone;
-        // $order->b_add=$req->address;
-        // $order->payment_method=$req->payment;
-        // $order->status="pending";
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
 
-        // $order->p_title=$products->p_title;
-        // $order->p_price=$products->p_price;
-        // $order->p_quantity=$req->quantity;
-        // $order->p_image=$products->image_path;
-
-        // $order->save();
-        // session()->flash("added","Added into cart");
-        // return back();
 
          $products=ProductModel::where('p_title',$req->title)->first();
         $buyer=BuyerModel::where('b_id',17)->first();
        
         $order_id=Order::insertGetId([
             'b_id'=>$buyer->b_id,
-            'payment_type'=>$req->payment,
+            'payment_type'=>$req->payment_type,
             'sub_total'=>$products->p_price,
             'discount'=>0,
             'total'=>$products->p_price,
@@ -87,7 +63,7 @@ class ApiOrderController extends Controller
 
 
    
-            OrderItem::insert([
+            $order_item=OrderItem::insert([
                 'order_id'=>$order_id,
                 'p_id'=>$products->p_id,
                 'p_quantity'=>1,
@@ -100,16 +76,16 @@ class ApiOrderController extends Controller
    
         //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
 
-        Shipping::insert([
+        $Shipping=Shipping::insert([
             'order_id'=>$order_id,
-            'b_name'=>$req->name,
-            'b_phn'=>$req->phone,
-            'b_add'=>$req->address,
+            'b_name'=>$req->b_name,
+            'b_phn'=>$req->b_phn,
+            'b_add'=>$req->b_add,
             'created_at'=>Carbon::Now(),
             'updated_at'=>Carbon::Now()
         ]);
 
-        return response()->json(["msg"=>"News Added Successfully"]);
+        return response()->json(["msg"=>"Order has been completed successfully"]);
 
         //return back()->with("orderPlaced"," Your Order has been completed");
 
@@ -142,33 +118,45 @@ class ApiOrderController extends Controller
 
     function addToCartSubmit(Request $req)
     {
-        if($req->session()->has("LoggedIn"))
-        {
-          $check=CartModel::where('p_id',$req->p_id)->where('b_id',$req->session()->get("LoggedIn"))->first();
+        $validator = Validator::make($req->all(),[
+            "p_id"=>"required",
+            "p_price"=>"required",
+            "s_id"=>"required",
+        ],[
+           
+           
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+
+
+
+          $check=CartModel::where('p_id',$req->p_id)->where('b_id',17)->first();
           if($check)
           {
-            CartModel::where('p_id',$req->p_id)->where('b_id',$req->session()->get("LoggedIn"))->increment('p_quantity');
-            return back()->with("cartAdded","Product added on Cart");
+            CartModel::where('p_id',$req->p_id)->where('b_id',17)->increment('p_quantity');
+            //return back()->with("cartAdded","Product added on Cart");
+            return response()->json(["msg"=>"Product Added On Cart"]);
           }
           else
           {
             $cart=new CartModel();
-            $cart->b_id=$req->session()->get("LoggedIn");
+            $cart->b_id=17;
             $cart->p_id=$req->p_id;
             $cart->p_price=$req->p_price;
             $cart->p_quantity=1;
             $cart->s_id=$req->s_id;
             $cart->save();
             //session()->flash("added","Added into cart");
-            return back()->with("cartAdded","Product added on Cart");
+            //return back()->with("cartAdded","Product added on Cart");
+
+            return response()->json(["msg"=>"Product Added On Cart"]);
 
           }
            
-        }
-        else
-        {
-            return redirect()->route('buyer.other.login');
-        }
+       
        
     }
 
