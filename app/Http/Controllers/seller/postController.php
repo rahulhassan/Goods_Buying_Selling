@@ -12,27 +12,35 @@ class postController extends Controller
 {
     function validateSellerPost(Request $req){
         $validator = Validator::make($req->all(),[
-            //'image' => 'required|mimes:jpg,png',
+            'image' => 'required|mimes:jpg,png',
             'p_title'=> 'required|unique:product',
             'p_brand'=> 'required',
             'p_quantity'=> 'required',
             'p_price'=> 'required',
             'p_description'=> 'required',
-            //'Category'=>'required'
         ],[
-            //'image.required'=> 'Provide a product photo',
+            'image.required'=> 'Provide a product photo',
+            'image.mimes'=> 'Image type will be jpg or png',
             'p_title.required'=> 'Provide a unique title',
+            'p_title.unique'=> 'Product title has already been taken',
             'p_brand.required'=> 'Provide product brand',
             'p_quantity.required'=> 'Provide product available quantity',
             'p_price.required'=> 'Provide product price',
             'p_description.required'=> 'Product description needed',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors(),422);
+            return response()->json([
+                'status'=>422,
+                'errors'=> $validator->errors(),
+            ]);
         }
         
-        // $image_path = time().'_'.$req->brand_name.'.'.$req->image->extension();
-        // $req->image->move(public_path('images'), $imageName);
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            $image_path = time().'_'.$req->p_brand.'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $image_path);
+        }
+        
 
         
         $product = new sellerProduct();
@@ -42,11 +50,11 @@ class postController extends Controller
         $product->p_description = $req->p_description;
         $product->p_quantity = $req->p_quantity;
         $product->Category = $req->Category;
-        //$product->image_path = $image_path;
+        $product->image_path = $image_path;
         $product->s_id = 1;
         $res = $product->save();
         if($res){
-            return response()->json(["msg"=>"Success","data"=>$product]);
+            return response()->json(["msg"=>"Your Product posted successfully!","status"=>200]);
         }
         return response()->json(["msg"=>"Something Wrong"]);
     }
@@ -55,31 +63,42 @@ class postController extends Controller
 
 
     function sellerPostUpdate(Request $req, $id){
-        // $req->validate([
-        //     'image' => 'mimes:jpg,png',
-        //     'p_title'=> 'required',
-        //     'brand_name'=> 'required',
-        //     'qnty'=> 'required',
-        //     'price'=> 'required',
-        //     'desc'=> 'required'
-        // ],
-        // [
-        //     'image.required'=> 'Provide a product photo',
-        //     'p_title.required'=> 'Provide a unique title',
-        //     'brand_name.required'=> 'Provide product brand',
-        //     'qnty.required'=> 'Provide product available quantity',
-        //     'price.required'=> 'Provide product price',
-        //     'desc.required'=> 'Product description needed',
-        // ]);
-
+        $validator = Validator::make($req->all(),[
+            //'image' => 'mimes:jpg,png',
+            'p_title'=> 'required',
+            'p_brand'=> 'required',
+            'p_quantity'=> 'required',
+            'p_price'=> 'required',
+            'p_description'=> 'required',
+        ],[
+            //'image.mimes'=> 'Image type will be jpg or png',
+            'p_title.required'=> 'Provide a unique title',
+            'p_brand.required'=> 'Provide product brand',
+            'p_quantity.required'=> 'Provide product available quantity',
+            'p_price.required'=> 'Provide product price',
+            'p_description.required'=> 'Product description needed',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>422,
+                'errors'=> $validator->errors(),
+            ]);
+        }
         
-
         $data = sellerProduct::find($id);
         $data->p_title = $req->p_title;
         $data->p_brand = $req->p_brand;
         $data->p_price = $req->p_price;
         $data->p_description = $req->p_description;
         $data->p_quantity = $req->p_quantity;
+        $data->Category = $req->Category;
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            $image_path = time().'_'.$req->p_brand.'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $image_path);
+            $data->image_path = $image_path;
+        }
+        
         // if($req->image){
         //     $imageName = time().'_'.$req->brand_name.'.'.$req->image->extension();
         //     $req->image->move(public_path('images'), $imageName);
@@ -88,7 +107,10 @@ class postController extends Controller
         
         $res = $data->save();
         if($res){
-            return response()->json('success');
+            return response()->json([
+                'msg'=>'Product is updated!',
+                'status'=>200,
+            ]);
         }
 
         return response()->json('something wrong');

@@ -81,12 +81,14 @@ Route::post('/placeOrder',[ApiOrderController::class,'placeOrder']);
 Route::get('/orderCompleted',[ApiOrderController::class,'orderCompleted']);
 
 
-// _________________Seller__________________________
+//_________________________________Seller___________________________________________
+
 
 Route::get('/seller/products',[sDashboardController::class,'showProduct']);
 Route::delete('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
-Route::put('/seller/post',[postController::class,'validateSellerPost']);
+Route::post('/seller/post',[postController::class,'validateSellerPost']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
 Route::put('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
 
+Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails']);
