@@ -15,6 +15,6 @@ class ProductModel extends Model
 
     // function cart()
     // {
-    //     return $this->belongsTo(CartModel::class,'p_id','p_id');
+    //     return $this->hasMany(CartModel::class,'p_id','p_id');
     // }
 }

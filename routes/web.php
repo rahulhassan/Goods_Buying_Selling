@@ -114,6 +114,8 @@ Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
 Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
 Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/my_orders/delete/{id}',[OrderController::class,'ordersDelete']);
+
 Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
 Route::post('/coupon/apply',[OrderController::class,'couponApply']);
