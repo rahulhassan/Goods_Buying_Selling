@@ -9,10 +9,10 @@ use Session;
 
 class sProfileController extends Controller
 {
-    function sellerDetails(){
-        $seller=sellerUser::where('s_id', '=', Session::get('loginId'))->first();
+    function sellerDetails($id){
+        $seller=sellerUser::where('s_id', '=', $id)->first();
 
-        return view('seller/sellerProfile')->with('seller',$seller);
+        return response()->json($seller); 
     }
 
     function sellerEditInfo(){

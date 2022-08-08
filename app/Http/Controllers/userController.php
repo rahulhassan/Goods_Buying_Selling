@@ -9,6 +9,7 @@ use App\Models\buyer\buyerUser;
 use App\Models\employee\employeeUser;
 use App\Models\seller\sellerProduct;
 use Illuminate\Auth\Event\Registered;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class userController extends Controller
@@ -20,13 +21,17 @@ class userController extends Controller
             'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
             'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             'psw_repeat'=>"required|same:psw",
+
             'phone'=>"required|regex:/^[0-9]{11}+$/i",
+
             'address'=>"required",
             'type'=>"required"
         ],
         [
            'name.required'=>'Provide a valid name',
            'email.required'=>'Provide a valid email',
+           'phone.required'=>'Provide your phone number',
+           'address.required'=>'Provide your address',
            'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
            'psw_repeat.required'=>'Must enter the password again',
            'psw_repeat.same'=>'Password must match with repeat password',
@@ -35,7 +40,8 @@ class userController extends Controller
            "phone.regex"=> "Please provide correct phone number",
         ]);
 
-        if($req->type == 'Buyer'){
+        if($req->type == 'Buyer')
+        {
             $user = new buyerUser();
             $user->b_name = $req->name;
             $user->b_mail = $req->email;
@@ -46,15 +52,17 @@ class userController extends Controller
 
         
 
-               
-
             if($res){
+                //event(new Registered($res));
+                //return redirect()->route('dashboard');
                return back()->with('success', 'Registration successfully done');
     
             }else{
                 return back()->with('fail', 'something wrong');
             }
-        }else{
+        }
+        
+        else{
             $user = new sellerUser();
             $user->s_name = $req->name;
             $user->s_mail = $req->email;
@@ -118,7 +126,7 @@ class userController extends Controller
 
                 $req->session()->put('loginId',$user4->s_id);
                 $req->session()->put('loginName',$user4->s_name);
-
+                $req->session()->put('profilePhoto',$user4->s_image);
                 return redirect()->route('seller.dashboard');
 
             }else{

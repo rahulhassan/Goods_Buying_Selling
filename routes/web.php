@@ -7,12 +7,16 @@ use App\Http\Controllers\seller\sProfileController;
 use App\Http\Controllers\seller\sStatementController;
 use App\Http\Controllers\seller\sOrderController;
 use App\Http\Controllers\userController;
-use App\Http\Controllers\buyer\ProductController;
-use App\Http\Controllers\buyer\BuyerController;
-use App\Http\Controllers\adminDashboardC;
-use App\Http\Controllers\buyer\OrderController;
-use App\Http\Controllers\EmployeeController;
 
+use App\Http\Controllers\buyer\ProductController;
+use App\Http\Controllers\buyer\ApiProductController;
+use App\Http\Controllers\buyer\BuyerController;
+use App\Http\Controllers\buyer\OrderController;
+
+use App\Http\Controllers\adminDashboardC;
+use App\Http\Controllers\EmployeeController;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +41,26 @@ Route::post('/login',[userController::class, 'checkLogin'])->name('submit.login'
 
 Route::get('/logout',[userController::class, 'userLogout'])->name('user.logout');
 
+
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->name('verification.notice');
+
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+
 //___________________________Seller_________________________________
 
 
@@ -45,6 +69,7 @@ Route::get('/seller/post', function(){ return view('seller/sellerPost'); })->nam
 Route::post('/seller/post',[postController::class,'validateSellerPost'])->name('submit.sellerPost');
 
 Route::get('/seller/dashboard',[sDashboardController::class,'showProduct'])->name('seller.dashboard')->middleware('isLoggedIn');
+Route::get('/seller/dashboard/{ct}',[sDashboardController::class,'showCategoryProduct'])->middleware('isLoggedIn');
 
 Route::get('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
@@ -89,6 +114,8 @@ Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
 Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
 Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/my_orders/delete/{id}',[OrderController::class,'ordersDelete']);
+
 Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
 Route::post('/coupon/apply',[OrderController::class,'couponApply']);
@@ -181,10 +208,15 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminDashboardC::class,'DeleteCoupo
 
 Route::get('/layout/navbar1' , [EmployeeController::class, 'navbar',])->name('employee.dashboard');
 Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile',])->name('profile.employee');
-Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
-Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList'])->name('profile.buyer');
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList'])->name('profile.seller');
 Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+
 Route::post('/employee/edit', [EmployeeController::class, 'update'])->name('update.employee');
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate'])->name('update.buyer');
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate'])->name('update.seller');
 
 
 

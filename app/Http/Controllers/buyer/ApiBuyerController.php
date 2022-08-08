@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use App\Models\buyer\BuyerModel;
 use Illuminate\Support\Facades\DB;
 
-class BuyerController extends Controller
+class ApiBuyerController extends Controller
 {
     //
 
@@ -65,9 +65,8 @@ class BuyerController extends Controller
 
     function profile()
     {
-        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
-        return view('buyer.other.profile')
-                ->with('buyer',$buyer);
+        $buyer=BuyerModel::where('b_id',17)->first();
+        return response()->json($buyer);
     }
 
 
@@ -75,10 +74,8 @@ class BuyerController extends Controller
 
     function updateProfile()
     {
-        $buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
-        
-        return view('buyer.other.updateProfile')
-                ->with('buyer',$buyer);
+        $buyer=BuyerModel::where('b_id',17)->first();
+        return response()->json($buyer);
     }
 
     //___________________________________________

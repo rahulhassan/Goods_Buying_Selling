@@ -6,17 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\buyer\ProductModel;
 
-class ProductController extends Controller
+class ApiProductController extends Controller
 {
     //
     function dashboard()
     {
-        $products=ProductModel::paginate(4);
-        return view('buyer.other.dashboard')
-                    ->with('products',$products);
+        // $products=ProductModel::paginate(4);
+        // return view('buyer.other.dashboard')
+        //             ->with('products',$products);
 
-        //$products=ProductModel::all();
-        //return response()->json($products);
+        $products=ProductModel::all();
+        return response()->json($products);
     }
 
     //_____________________________________
@@ -24,12 +24,12 @@ class ProductController extends Controller
 
     function productDetails(Request $req)
     {
-        $products=ProductModel::where('p_title',$req->title)->first();
-        return view('buyer.other.productDetails')
-                ->with('products',$products);
-
         // $products=ProductModel::where('p_title',$req->title)->first();
-        // return response()->json($products);
+        // return view('buyer.other.productDetails')
+        //         ->with('products',$products);
+
+        $products=ProductModel::where('p_title',$req->title)->first();
+        return response()->json($products);
     }
 
 
@@ -37,12 +37,12 @@ class ProductController extends Controller
 
     function orderDetails(Request $req)
     {
-        $products=ProductModel::where('p_title',$req->title)->first();
-        return view('buyer.other.orderDetails')
-                ->with('products',$products);
-
         // $products=ProductModel::where('p_title',$req->title)->first();
-        // return response()->json($products);
+        // return view('buyer.other.orderDetails')
+        //         ->with('products',$products);
+
+        $products=ProductModel::where('p_title',$req->title)->first();
+        return response()->json($products);
     }
 
     //______________________________________
