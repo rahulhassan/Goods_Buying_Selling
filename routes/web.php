@@ -70,7 +70,7 @@ Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+// Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 

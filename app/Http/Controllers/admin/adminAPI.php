@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\employee\employeeUser;
 use App\Models\admin\adminUser;
 use App\Models\buyer\buyerUser;
@@ -13,14 +15,11 @@ use App\Models\buyer\Order;
 use App\Models\buyer\OrderItem;
 use DB;
 
-use Illuminate\Support\Facades\mailer;
-
-
-class adminDashboardC extends Controller
+class adminAPI extends Controller
 {
-    //--------------------------DASHBOARD-----------------------------------
+     //--------------------------DASHBOARD-----------------------------------
     
-    function Dashboard(){
+     function Dashboard(){
         $emp = DB::table('employee')->count();
         $buy = DB::table('buyer')->count();
         $sell = DB::table('seller')->count();
@@ -45,17 +44,22 @@ class adminDashboardC extends Controller
     //--------------------------BUYER-----------------------------------
 
     function Buyer(){
-        $buyall=buyerUser::paginate(5);
-        $buy = DB::table('buyer')->count();
-        $data = adminUser::where('a_id','=',1)->first();
+        $buyall=buyerUser::all();
+        // $buy = DB::table('buyer')->count();
+        // $data = adminUser::where('a_id','=',1)->first();
+
+        return response()->json($buyall);
 
         
-        return view('admin/files/buyer', ['buyall' => $buyall], compact('buy'))->with('data', $data);
+        //return view('admin/files/buyer', ['buyall' => $buyall], compact('buy'))->with('data', $data);
     }
     function CreateBuyer(){
-        $data = adminUser::where('a_id','=',1)->first();
+        //$data = adminUser::where('a_id','=',1)->first();
+
+        return response()->json();
+
         
-        return view('admin/files/createBuyer')->with('data', $data);
+        //return view('admin/files/createBuyer')->with('data', $data);
     }
     function storeBuyer(Request $request){
         $this->validate($request,
@@ -86,20 +90,27 @@ class adminDashboardC extends Controller
         $a->b_pass= $request->b_pass;
         $a->b_add= $request->b_add;
         $a->save();
+
+        return response()->json($a);
+
         
-        return redirect()->route('admin.files.buyer');
+        //return redirect()->route('admin.files.buyer');
     
     }
     function DeleteBuyer(Request $request){
         $b_id=$request->id;
         $data = buyerUser::where('b_id',$b_id)->first();
         $data->delete();
-        return redirect()->route('admin.files.buyer');
+
+        return response()->json($data);
+
+       // return redirect()->route('admin.files.buyer');
     }
     function showBuyer($b_id){
         
         $data = buyerUser::find($b_id);
-        return view('admin.files.updateBuyer',['data'=>$data]);
+        return response()->json($data);
+        //return view('admin.files.updateBuyer',['data'=>$data]);
     }
     function UpdateBuyer(Request $req){
         $this->validate($req,
@@ -132,25 +143,26 @@ class adminDashboardC extends Controller
         $buyData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
+        return response()->json($data);
         
-        return redirect()->route('admin.files.buyer')->with('data', $data);
+        //return redirect()->route('admin.files.buyer')->with('data', $data);
     }
     //--------------------------SELLER-----------------------------------
 
     function Seller(){
-        $sellall=sellerUser::paginate(5);
-        $sel = DB::table('seller')->count();
-        $data = adminUser::where('a_id','=',1)->first();
+        $sellall=sellerUser::all();
+        // $sel = DB::table('seller')->count();
+        // $data = adminUser::where('a_id','=',1)->first();
 
-
+        return response()->json($sellall);
         
-        return view('admin/files/seller', ['sellall' => $sellall], compact('sel'))->with('data', $data);
+        //return view('admin/files/seller', ['sellall' => $sellall], compact('sel'))->with('data', $data);
     }
     function CreateSeller(){
         $data = adminUser::where('a_id','=',1)->first();
 
-        
-        return view('admin/files/createSeller')->with('data', $data);
+        return response()->json();
+        //return view('admin/files/createSeller')->with('data', $data);
     }
     function storeSeller(Request $request){
         $this->validate($request,
@@ -181,20 +193,26 @@ class adminDashboardC extends Controller
         $a->s_pass= $request->s_pass;
         $a->s_add= $request->s_add;
         $a->save();
+
+        return response()->json($a);
         
-        return redirect()->route('admin.files.seller');
+        //return redirect()->route('admin.files.seller');
     
     }
     function DeleteSeller(Request $request){
         $s_id=$request->id;
         $data = sellerUser::where('s_id',$s_id)->first();
         $data->delete();
-        return redirect()->route('admin.files.seller');
+        return response()->json($data);
+
+        //return redirect()->route('admin.files.seller');
     }
     function showSeller($s_id){
         
         $data = sellerUser::find($s_id);
-        return view('admin.files.updateSeller',['data'=>$data]);
+        return response()->json($data);
+
+        //return view('admin.files.updateSeller',['data'=>$data]);
     }
     function UpdateSeller(Request $req){
         $this->validate($req,
@@ -227,25 +245,26 @@ class adminDashboardC extends Controller
         $selData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
+        return response()->json($data);
         
-        return redirect()->route('admin.files.seller')->with('data', $data);
+        //return redirect()->route('admin.files.seller')->with('data', $data);
     }
     //--------------------------EMPLOYEE-----------------------------------
 
     function Employee(){
-        $empall=employeeUser::paginate(5);
-        $emp = DB::table('employee')->count();
-        $data = adminUser::where('a_id','=',1)->first();
+        $empall=employeeUser::all();
+        // $emp = DB::table('employee')->count();
+        // $data = adminUser::where('a_id','=',1)->first();
 
-
+        return response()->json($empall);
         
-        return view('admin/files/employee', ['empall' => $empall], compact('emp'))->with('data', $data);
+        // return view('admin/files/employee', ['empall' => $empall], compact('emp'))->with('data', $data);
     }
     function CreateEmp(){
         $data = adminUser::where('a_id','=',1)->first();
 
-        
-        return view('admin/files/createEmp')->with('data', $data);
+        return response()->json();
+        //return view('admin/files/createEmp')->with('data', $data);
     }
     function storeEmp(Request $request){
         $this->validate($request,
@@ -276,20 +295,25 @@ class adminDashboardC extends Controller
         $a->e_pass= $request->e_pass;
         $a->e_add= $request->e_add;
         $a->save();
-        
-        return redirect()->route('admin.files.employee');
+        return response()->json($a);
+        //return redirect()->route('admin.files.employee');
     
     }
     function DeleteEmp(Request $request){
         $e_id=$request->id;
         $data = employeeUser::where('e_id',$e_id)->first();
         $data->delete();
-        return redirect()->route('admin.files.employee');
+        return response()->json($data);
+
+        //return redirect()->route('admin.files.employee');
     }
     function showEmp($e_id){
         
         $data = employeeUser::find($e_id);
-        return view('admin.files.updateEmp',['data'=>$data]);
+
+        return response()->json($data);
+
+        //return view('admin.files.updateEmp',['data'=>$data]);
     }
     function UpdateEmp(Request $req){
         $this->validate($req,
@@ -322,26 +346,29 @@ class adminDashboardC extends Controller
         $empData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
+        return response()->json($data);
         
-        return redirect()->route('admin.files.employee')->with('data', $data);
+        //return redirect()->route('admin.files.employee')->with('data', $data);
     }
 
     //--------------------------ORDER-----------------------------------
     function OrderO(){
-        $orderall = Order::paginate(10);
-        $ord = DB::table('orders')->count();
-        $data = adminUser::where('a_id','=',1)->first();
+        $orderall = Order::all();
+        // $ord = DB::table('orders')->count();
+        // $data = adminUser::where('a_id','=',1)->first();
 
-        return view('admin/files/order', ['orderall' => $orderall], compact('ord'))->with('data', $data);
+        return response()->json($orderall);
+
+        //return view('admin/files/order', ['orderall' => $orderall], compact('ord'))->with('data', $data);
     }
     //--------------------------COUPON-----------------------------------
     function coupon(){
-        $cupall=CouponModel::paginate(5);
-        $cup = DB::table('coupon')->count();
-        $data = adminUser::where('a_id','=',1)->first();
+        $cupall=CouponModel::all();
+        // $cup = DB::table('coupon')->count();
+        // $data = adminUser::where('a_id','=',1)->first();
+        return response()->json($cupall);
 
-
-        return view('admin/files/coupon', ['cupall' => $cupall], compact('cup'))->with('data', $data);
+        //return view('admin/files/coupon', ['cupall' => $cupall], compact('cup'))->with('data', $data);
     }
     function addCoupon(){
         $data = adminUser::where('a_id','=',1)->first();
@@ -397,8 +424,4 @@ class adminDashboardC extends Controller
         return redirect()->back()->with('success', 'PASSWORD CHANGE SUCCESSFULLY'); 
         
     }
-    // function mialer(){
-    //     Mail::to(["a_mail"])->send(new mailer('Subject','Body'));
-    // }
-   
 }
