@@ -9,8 +9,8 @@ use Session;
 
 class sProfileController extends Controller
 {
-    function sellerDetails(){
-        $seller=sellerUser::where('s_id', '=', 1)->first();
+    function sellerDetails($id){
+        $seller=sellerUser::where('s_id', '=', $id)->first();
 
         return response()->json($seller); 
     }
