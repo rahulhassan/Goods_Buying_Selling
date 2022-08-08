@@ -64,6 +64,7 @@ Route::get('/account',[ApiBuyerController::class,'account']);
 Route::get('/orders',[ApiBuyerController::class,'orders']);
 
 
+
 //Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
 //Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
@@ -71,6 +72,8 @@ Route::get('/cart',[ApiOrderController::class,'addToCart']);
 Route::post('/cart',[ApiOrderController::class,'addToCartSubmit']);
 Route::post('/placeOrder/{title}',[ApiOrderController::class,'placeOrderSubmit']);
 Route::get('/my_orders',[ApiOrderController::class,'orders']);
+Route::get('/my_orders/delete/{id}',[ApiOrderController::class,'ordersDelete']);
+
 Route::get('/cart/destroy/{c_id}',[ApiOrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);
 Route::post('/coupon/apply',[ApiOrderController::class,'couponApply']);

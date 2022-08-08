@@ -340,6 +340,16 @@ class OrderController extends Controller
 
     }
 
+    function ordersDelete($order_id)
+    {
+        OrderItem::where('order_id',$order_id)->where('b_id',17)->delete();
+        //Order::where('id',$order_id)->where('b_id',17)->delete();
+
+       return back()->with("orderDeleted","Your order has been removed");
+       //return back()->with(session()->flash("cartDeleted","Product deleted from Cart"));
+
+    }
+
     //______________________________________________________________
 
     function orderCompleted()

@@ -109,7 +109,7 @@ class ApiOrderController extends Controller
         //             ->with('carts',$cart)
         //             ->with('sub_total',$sub_total);
 
-        $cart=CartModel::where('b_id',17)->latest()->get();
+        $cart=CartModel::with('product')->where('b_id',17)->latest()->get();
         return response()->json($cart);
     }
   
@@ -322,11 +322,8 @@ class ApiOrderController extends Controller
     function orders()
     {
         //$order=Order::where('b_id',session()->get('LoggedIn'))->latest()->first();
-        $order_item=OrderItem::with('product')->where('b_id',session()->get('LoggedIn'))->latest()->get();
-        return view('buyer.other.orders')
-                    //->with('orders',$order);
-                    ->with('order_items',$order_item);
-           
+        $order_item=OrderItem::with('product')->where('b_id',17)->latest()->get();
+        return response()->json($order_item);
 
         //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
         //$orders=OrderModel::where('b_name',$buyer->b_name)->paginate(4);
@@ -334,6 +331,17 @@ class ApiOrderController extends Controller
         //            ->with('orders',$orders);
 
     }
+
+    function ordersDelete($order_id)
+    {
+        OrderItem::where('order_id',$order_id)->where('b_id',17)->delete();
+
+       return response()->json(["orderDeleted"=>"Your order has been removed"]);
+       //return back()->with(session()->flash("cartDeleted","Product deleted from Cart"));
+
+    }
+
+
 
     //______________________________________________________________
 
