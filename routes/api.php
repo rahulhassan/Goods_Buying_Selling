@@ -124,7 +124,7 @@ Route::post('/search',[ApiProductController::class,'search']);
 //Route::get('logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile',[ApiBuyerController::class,'profile']);
 Route::get('/updateProfile',[ApiBuyerController::class,'updateProfile']);
-Route::post('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
+Route::put('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
 Route::get('/account',[ApiBuyerController::class,'account']);
 Route::get('/orders',[ApiBuyerController::class,'orders']);
 
@@ -137,7 +137,7 @@ Route::get('/cart',[ApiOrderController::class,'addToCart']);
 Route::post('/cart',[ApiOrderController::class,'addToCartSubmit']);
 Route::post('/placeOrder/{title}',[ApiOrderController::class,'placeOrderSubmit']);
 Route::get('/my_orders',[ApiOrderController::class,'orders']);
-Route::get('/my_orders/delete/{id}',[ApiOrderController::class,'ordersDelete']);
+Route::delete('/my_orders/delete/{id}',[ApiOrderController::class,'ordersDelete']);
 
 Route::get('/cart/destroy/{c_id}',[ApiOrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);

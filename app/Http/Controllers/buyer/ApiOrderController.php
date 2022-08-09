@@ -334,9 +334,24 @@ class ApiOrderController extends Controller
 
     function ordersDelete($order_id)
     {
-        OrderItem::where('order_id',$order_id)->where('b_id',17)->delete();
+        // OrderItem::where('order_id',$order_id)->where('b_id',17)->delete();
 
-       return response()->json(["orderDeleted"=>"Your order has been removed"]);
+    //    return response()->json(["orderDeleted"=>"Your order has been removed"]);
+
+            $data=OrderItem::where('order_id',$order_id)->where('b_id',17);
+            if($data){
+                $data->delete();
+                return response()->json([
+                    "status"=>200,
+                    "message" => "Product Deleted Successfully"
+                ]);
+            }else{
+                return response()->json([
+                    "status"=>404,
+                    "message"=>"No Product found"
+                ]);
+            }
+
        //return back()->with(session()->flash("cartDeleted","Product deleted from Cart"));
 
     }
