@@ -120,42 +120,61 @@ class ApiBuyerController extends Controller
         // }
 
         
-        if($req->hasFile('b_image')){
-            $image = $req->file('b_image');
-            $image_path = time().'_'.$req->b_name.'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_path);
-        }
+        // if($req->hasFile('b_image')){
+        //     $image = $req->file('b_image');
+        //     $image_path = time().'_'.$req->b_name.'.'.$image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $image_path);
+        // }
 
         //$buyer=new BuyerModel();
+       //$buyer=BuyerModel::where('b_id',17)->first();
+       // $imageName=$buyer->b_image;
+
+        // if($req->b_image==null)
+        // {
+        //     $imageName== $buyer->b_image;   
+        // }
+        // else 
+        // {
+        //     $imageName = time().'_'.$req->b_name.'.'.$req->b_image->extension();
+        //     $req->b_image->move(public_path('buyerImages'), $imageName);
+        // }
+
         $buyer=BuyerModel::where('b_id',17)->first();
         $imageName=$buyer->b_image;
 
-        if($req->b_image==null)
-        {
-            $imageName== $buyer->b_image;   
+        if($req->hasFile('b_image')){
+            $image = $req->file('b_image');
+            $imageName = time().'_'.$req->b_name.'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('buyerImages'), $imageName);
+        
         }
         else 
         {
-            $imageName = time().'_'.$req->b_name.'.'.$req->b_image->extension();
-            $req->b_image->move(public_path('buyerImages'), $imageName);
+            $imageName== $buyer->b_image;
         }
 
-    
+        $res = DB::table('buyer')
+              ->where('b_id', $buyer->b_id)
+              ->update(['b_name' => $req->b_name,
+                        'b_phn' => $req->b_phn,
+                        'b_add' => $req->b_add,
+                        'b_image'=>$imageName ]);
 
-        // $affected = DB::table('buyer')
-        //       ->where('b_id', $buyer->b_id)
-        //       ->update(['b_name' => $req->name,
-        //                 'b_phn' => $req->phone,
-        //                 'b_add' => $req->address,
-        //                 'b_image'=>$imageName]);
-
-        $buyer = new BuyerModel();
-        $buyer->b_name = $req->b_name;
-        $buyer->b_mail = $req->b_mail;
-        $buyer->b_phn = $req->b_phn;
-        $buyer->b_add = $req->b_add;
+        //  $buyer = new BuyerModel();
+        // $buyer->b_name = $req->b_name;
+        // $buyer->b_mail = $req->b_mail;
+        // $buyer->b_phn = $req->b_phn;
+        // $buyer->b_add = $req->b_add;
         //$buyer->b_image = $imageName;
-        $res = $buyer->save();       
+        // if($req->hasFile('b_image')){
+        //     $image = $req->file('b_image');
+        //     $image_path = time().'_'.$req->b_name.'.'.$image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $image_path);
+        //     $data->b_image = $image_path;
+        // }
+
+        // $res = $buyer->save();       
                         
 
                 if($res){
@@ -164,29 +183,7 @@ class ApiBuyerController extends Controller
                 return response()->json(["msg"=>"Something Wrong"]);
 
                 
-                // if($res){
-                //     return response()->json(["msg"=>"Profile Updated Successfully"]);
-
-                // }
-                //return response()->json(["msg"=>"Product Added On Cart"]);
-
-        // $buyer->b_id=$buyer->b_id;
-        // $buyer->b_name=$req->name;
-        // $buyer->b_mail=$req->email;
-        // $buyer->b_phn=$req->phone;
-        // $buyer->b_add=$req->address;
-        // $buyer->b_image=$imageName;
-
-        // $result=$buyer->save();
-        // if($affected){
-        //     return back()->with('profileUpdated', 'Information Updated Successfully');
-
-        // }else{
-        //     return back()->with('profileNotUpdated', 'Information not updated');
-        // }
-        // return view('buyer.other.updateProfile')
-        //         ->with('buyer',$buyer);
-
+            
 
 
     }

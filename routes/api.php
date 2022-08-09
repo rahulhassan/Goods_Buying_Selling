@@ -124,7 +124,7 @@ Route::post('/search',[ApiProductController::class,'search']);
 //Route::get('logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile',[ApiBuyerController::class,'profile']);
 Route::get('/updateProfile',[ApiBuyerController::class,'updateProfile']);
-Route::put('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
+Route::post('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
 Route::get('/account',[ApiBuyerController::class,'account']);
 Route::get('/orders',[ApiBuyerController::class,'orders']);
 
