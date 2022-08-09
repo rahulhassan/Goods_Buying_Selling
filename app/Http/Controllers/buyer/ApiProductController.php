@@ -5,6 +5,7 @@ namespace App\Http\Controllers\buyer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\buyer\ProductModel;
+use Illuminate\Support\Facades\Validator;
 
 class ApiProductController extends Controller
 {
