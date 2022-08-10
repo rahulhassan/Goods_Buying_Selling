@@ -105,9 +105,11 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminAPI::class,'DeleteCoupon']);
 
 
 Route::post('/login',[apiLoginController::class,'login']);
-Route::any('/logout',[apiLoginController::class,'logout']);
+Route::post('/logout',[apiLoginController::class,'logout']);
+Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
 
 Route::post('/registration',[userController::class, 'validateRegistration']);
+
 
 
 
@@ -152,12 +154,14 @@ Route::get('/orderCompleted',[ApiOrderController::class,'orderCompleted']);
 //_________________________________Seller___________________________________________
 
 
-Route::get('/seller/products',[sDashboardController::class,'showProduct']);
+Route::get('/seller/products/{id}',[sDashboardController::class,'showProduct']);
 Route::delete('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
 Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
 Route::post('/seller/post',[postController::class,'validateSellerPost']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
-Route::put('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
+Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
 
 Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails']);
 
+
+Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate']);
