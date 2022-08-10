@@ -12,6 +12,7 @@ class postController extends Controller
 {
     function validateSellerPost(Request $req){
         $validator = Validator::make($req->all(),[
+            's_id'=>'required',
             'image' => 'required|mimes:jpg,png',
             'p_title'=> 'required|unique:product',
             'p_brand'=> 'required',
@@ -51,7 +52,7 @@ class postController extends Controller
         $product->p_quantity = $req->p_quantity;
         $product->Category = $req->Category;
         $product->image_path = $image_path;
-        $product->s_id = 1;
+        $product->s_id = $req->s_id;
         $res = $product->save();
         if($res){
             return response()->json(["msg"=>"Your Product posted successfully!","status"=>200]);
@@ -64,7 +65,7 @@ class postController extends Controller
 
     function sellerPostUpdate(Request $req, $id){
         $validator = Validator::make($req->all(),[
-            //'image' => 'mimes:jpg,png',
+            //'image' => 'nullable|mimes:png',
             'p_title'=> 'required',
             'p_brand'=> 'required',
             'p_quantity'=> 'required',

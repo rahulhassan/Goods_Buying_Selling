@@ -16,29 +16,38 @@ class userController extends Controller
 {
 
     function validateRegistration(Request $req){
-        $req->validate([
+
+        $validator = Validator::make($req->all(),[
             'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
-            'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
+            'email'=>"required|email|unique:seller,s_mail|unique:buyer,b_mail|unique:employee,e_mail|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
             'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             'psw_repeat'=>"required|same:psw",
 
-            'phone'=>"required|regex:/^[0-9]{11}+$/i",
+            'phone'=>"required|unique:seller,s_phn|unique:buyer,b_phn|unique:employee,e_phn|regex:/^[0-9]{11}+$/i",
 
             'address'=>"required",
             'type'=>"required"
         ],
         [
-           'name.required'=>'Provide a valid name',
-           'email.required'=>'Provide a valid email',
-           'phone.required'=>'Provide your phone number',
-           'address.required'=>'Provide your address',
-           'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
-           'psw_repeat.required'=>'Must enter the password again',
-           'psw_repeat.same'=>'Password must match with repeat password',
-           'phone.required'=>'Provide your phone number',
-           'address.required'=>'Provide your address',
-           "phone.regex"=> "Please provide correct phone number",
+            'name.required'=>'Provide a valid name',
+            'email.required'=>'Provide a valid email',
+            'phone.required'=>'Provide your phone number',
+            'address.required'=>'Provide your address',
+            'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
+            'psw_repeat.required'=>'Must enter the password again',
+            'psw_repeat.same'=>'Password must match with repeat password',
+            'phone.required'=>'Provide your phone number',
+            'address.required'=>'Provide your address',
+            "phone.regex"=> "Please provide correct phone number",
         ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>422,
+                'errors'=> $validator->errors(),
+            ]);
+        }
+
 
         if($req->type == 'Buyer')
         {
@@ -50,18 +59,15 @@ class userController extends Controller
             $user->b_pass = md5($req->psw_repeat);
             $res = $user->save();
 
-        
-
+            
             if($res){
-                //event(new Registered($res));
-                //return redirect()->route('dashboard');
-               return back()->with('success', 'Registration successfully done');
-    
-            }else{
-                return back()->with('fail', 'something wrong');
+                return response()->json([
+                    'msg'=>'Signup completed!',
+                    'status'=>200,
+                ]);
             }
+            return response()->json('something wrong in buyer details');
         }
-        
         else{
             $user = new sellerUser();
             $user->s_name = $req->name;
@@ -69,15 +75,19 @@ class userController extends Controller
             $user->s_phn = $req->phone;
             $user->s_add = $req->address;
             $user->s_pass = md5($req->psw_repeat);
+
             $res = $user->save();
 
             if($res){
-                return back()->with('success', 'Registration successfully done');
-    
-            }else{
-                return back()->with('fail', 'something wrong');
+                return response()->json([
+                    'msg'=>'Signup completed!',
+                    'status'=>200,
+                ]);
             }
+            return response()->json('something wrong in seller details');
         }
+        
+        return response()->json('something wrong');
     }
 
     function checkLogin(Request $req){
@@ -137,10 +147,10 @@ class userController extends Controller
         }
 
     }
-    function userLogout(){
-            session()->flush();
-            return redirect()->route('user.login');
+    // function userLogout(){
+    //         session()->flush();
+    //         return redirect()->route('user.login');
         
-    }
+    // }
 
 }

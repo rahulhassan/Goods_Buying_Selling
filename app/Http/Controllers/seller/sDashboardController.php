@@ -5,19 +5,20 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\seller\sellerProduct;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class sDashboardController extends Controller
 {
-    function showProduct(Request $req){
+    function showProduct(Request $req, $id){
         $search = $req['search']?? "";
         if($search != ""){
             $productInfo = sellerProduct::where([
-                ['s_id', '=', 1],
+                ['s_id', '=', $id],
                 ['p_title', 'LIKE', "%$search%"]
                 ])->paginate(2);
         }else{
-            $productInfo = sellerProduct::where('s_id', '=', 1)->get();           
+            $productInfo = sellerProduct::where('s_id', '=', $id)->get();           
         }
         return response()->json($productInfo);   
     }
