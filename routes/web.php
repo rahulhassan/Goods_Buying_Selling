@@ -95,7 +95,7 @@ Route::get('seller/shipping/{id}',[sOrderController::class,'productShip']);
 Route::get('/dashboard',[ProductController::class,'dashboard'])->name('buyer.other.dashboard')->middleware('isLoggedIn');
 Route::get('/productDetails/{title}',[ProductController::class,'productDetails'])->name('buyer.other.productDetails');
 Route::get('/orderDetails/{title}',[ProductController::class,'orderDetails'])->name('buyer.other.orderDetails');
-//Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
+// Route::get('/logout',[ProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ProductController::class,'search'])->name('buyer.other.search');
 
 
@@ -114,6 +114,8 @@ Route::get('/cart',[OrderController::class,'addToCart'])->name('buyer.other.cart
 Route::post('/cart',[OrderController::class,'addToCartSubmit'])->name('buyer.other.cartSubmit');
 Route::post('/placeOrder/{title}',[OrderController::class,'placeOrderSubmit'])->name('buyer.other.placeOrderSubmit');
 Route::get('/my_orders',[OrderController::class,'orders'])->name('buyer.other.orders');
+Route::get('/my_orders/delete/{id}',[OrderController::class,'ordersDelete']);
+
 Route::get('/cart/destroy/{c_id}',[OrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[OrderController::class,'cartQuantityUpdate']);
 Route::post('/coupon/apply',[OrderController::class,'couponApply']);
