@@ -10,9 +10,12 @@ class CartModel extends Model
 {
     use HasFactory;
     protected $table="cart";
+    protected $primaryKey = "c_id";
 
     function product()
     {
         return $this->belongsTo(ProductModel::class,'p_id','p_id');
     }
+
+  
 }
