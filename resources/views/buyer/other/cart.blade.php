@@ -36,7 +36,7 @@
     </div>
     <div class="col-sm-10">
  
-            <table class="table  table-striped table-dark" style>
+            <table class="table  table-striped table-dark" >
                     <tr>
                         <th>Products</th>
                         <th>Price</th>      
