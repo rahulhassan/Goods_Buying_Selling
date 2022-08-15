@@ -229,7 +229,7 @@ class OrderController extends Controller
 
     function checkout()
     {
-        $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
+        $cart=CartModel::with('product')->where('b_id',session()->get('LoggedIn'))->latest()->get();
         $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
             return $t->p_price * $t->p_quantity;
         });
