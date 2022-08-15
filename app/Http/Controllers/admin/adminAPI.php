@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\employee\employeeUser;
 use App\Models\admin\adminUser;
 use App\Models\buyer\buyerUser;
@@ -33,19 +35,22 @@ class adminAPI extends Controller
         {
             $x+=$o->total;
         }
-        return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x', 'ofr'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
+        return response()->json($emp);
+
+        // return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x', 'ofr'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
     }
     //--------------------------STATEMENTS-----------------------------------
 
     function Statement(){
         $data = adminUser::where('a_id','=',1)->first();
+        
         return view('admin/files/statement')->with('data', $data);
     }
     //--------------------------BUYER-----------------------------------
 
     function Buyer(){
         $buyall=buyerUser::all();
-        // $buy = DB::table('buyer')->count();
+        //$buy = DB::table('buyer')->count();
         // $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json($buyall);
@@ -53,6 +58,7 @@ class adminAPI extends Controller
         
         //return view('admin/files/buyer', ['buyall' => $buyall], compact('buy'))->with('data', $data);
     }
+    
     function CreateBuyer(){
         //$data = adminUser::where('a_id','=',1)->first();
 
@@ -62,7 +68,7 @@ class adminAPI extends Controller
         //return view('admin/files/createBuyer')->with('data', $data);
     }
     function storeBuyer(Request $request){
-        $this->validate($request,
+        $validator = Validator::make($request->all(),
              [
                 "b_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "b_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -83,6 +89,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $a = new buyerUser();
         $a->b_name= $request->b_name;
         $a->b_phn= $request->b_phn;
@@ -91,7 +100,7 @@ class adminAPI extends Controller
         $a->b_add= $request->b_add;
         $a->save();
 
-        return response()->json($a);
+        return response()->json(["msg"=>"Success","data"=>$a]);
 
         
         //return redirect()->route('admin.files.buyer');
@@ -113,7 +122,7 @@ class adminAPI extends Controller
         //return view('admin.files.updateBuyer',['data'=>$data]);
     }
     function UpdateBuyer(Request $req){
-        $this->validate($req,
+        $validator = Validator::make($req->all(),
              [
                 "b_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "b_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -134,6 +143,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $buyData = buyerUser::find($req->b_id);
         $buyData->b_name = $req->b_name;
         $buyData->b_phn = $req->b_phn;
@@ -143,7 +155,8 @@ class adminAPI extends Controller
         $buyData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
-        return response()->json($data);
+        return response()->json(["msg"=>"Success","data"=>$data]);
+
         
         //return redirect()->route('admin.files.buyer')->with('data', $data);
     }
@@ -165,7 +178,7 @@ class adminAPI extends Controller
         //return view('admin/files/createSeller')->with('data', $data);
     }
     function storeSeller(Request $request){
-        $this->validate($request,
+        $validator = Validator::make($request->all(),
              [
                 "s_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "s_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -186,6 +199,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $a = new sellerUser();
         $a->s_name= $request->s_name;
         $a->s_phn= $request->s_phn;
@@ -193,8 +209,7 @@ class adminAPI extends Controller
         $a->s_pass= $request->s_pass;
         $a->s_add= $request->s_add;
         $a->save();
-
-        return response()->json($a);
+        return response()->json(["msg"=>"Success","data"=>$a]);
         
         //return redirect()->route('admin.files.seller');
     
@@ -215,7 +230,7 @@ class adminAPI extends Controller
         //return view('admin.files.updateSeller',['data'=>$data]);
     }
     function UpdateSeller(Request $req){
-        $this->validate($req,
+        $validator = Validator::make($req->all(),
              [
                 "s_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "s_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -236,6 +251,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $selData = sellerUser::find($req->s_id);
         $selData->s_name = $req->s_name;
         $selData->s_phn = $req->s_phn;
@@ -245,7 +263,7 @@ class adminAPI extends Controller
         $selData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
-        return response()->json($data);
+        return response()->json(["msg"=>"Success","data"=>$data]);
         
         //return redirect()->route('admin.files.seller')->with('data', $data);
     }
@@ -267,7 +285,8 @@ class adminAPI extends Controller
         //return view('admin/files/createEmp')->with('data', $data);
     }
     function storeEmp(Request $request){
-        $this->validate($request,
+        $validator = Validator::make($request->all(),
+
              [
                 "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -288,6 +307,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $a = new employeeUser();
         $a->e_name= $request->e_name;
         $a->e_phn= $request->e_phn;
@@ -295,7 +317,7 @@ class adminAPI extends Controller
         $a->e_pass= $request->e_pass;
         $a->e_add= $request->e_add;
         $a->save();
-        return response()->json($a);
+        return response()->json(["msg"=>"Success","data"=>$a]);
         //return redirect()->route('admin.files.employee');
     
     }
@@ -316,7 +338,8 @@ class adminAPI extends Controller
         //return view('admin.files.updateEmp',['data'=>$data]);
     }
     function UpdateEmp(Request $req){
-        $this->validate($req,
+        $validator = Validator::make($req->all(),
+
              [
                 "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
@@ -337,6 +360,9 @@ class adminAPI extends Controller
 
              ]
         );
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $empData = employeeUser::find($req->e_id);
         $empData->e_name = $req->e_name;
         $empData->e_phn = $req->e_phn;
@@ -346,7 +372,7 @@ class adminAPI extends Controller
         $empData->save();
         $data = adminUser::where('a_id','=',1)->first();
 
-        return response()->json($data);
+        return response()->json(["msg"=>"Success","data"=>$data]);
         
         //return redirect()->route('admin.files.employee')->with('data', $data);
     }
@@ -373,36 +399,58 @@ class adminAPI extends Controller
     function addCoupon(){
         $data = adminUser::where('a_id','=',1)->first();
 
-        return view('admin/files/addCoupon')->with('data', $data);
+        return response()->json();
+
+
+        // return view('admin/files/addCoupon')->with('data', $data);
     }
     function storeCoupon(Request $request){
         $c = new CouponModel();
         $c->cpn_name = $request->cpn_name;
         $c->discount = $request->discount;
         $c->save();
+
+        return response()->json($c);
+
         
-        return redirect()->route('admin.files.coupon');
+        // return redirect()->route('admin.files.coupon');
     }
     function DeleteCoupon(Request $request){
         $cpn_id=$request->id;
         $data = CouponModel::where('cpn_id',$cpn_id)->first();
         $data->delete();
-        return redirect()->route('admin.files.coupon');
+        return response()->json($data);
+
+        // return redirect()->route('admin.files.coupon');
     }
     //--------------------------PROFILE-----------------------------------
     function Profile(){
         $data = adminUser::where('a_id','=',1)->first();
-        return view('admin/files/profile')->with('data', $data)->with('data', $data);
-    }
-    function upload(Request $request){
-        $img = $request->pf;
-        $name = $img->getClientOriginalName();
-        $img->storeAs('public/images',$name);
+        return response()->json($data);
 
-        $image = adminUser::find(1);
-        $image->a_image = $name;
-        $image -> save();
-        return redirect()->route('admin.files.profile')->with('image', $image)->with('successImg', 'YOUR IMAGE IS CHANGE');
+        // return view('admin/files/profile')->with('data', $data)->with('data', $data);
+    }
+    function upload(Request $req){
+        $data = adminUser::find(1);
+        if($req->hasFile('file')){
+            $image = $req->file('image');
+            $image_path = time().'_'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $image_path);
+            $data->a_image = $image_path;
+            $data->save();
+            
+        }
+        return response()->json(["msg"=>"No file"]);
+        // $img = $request->pf;
+        // $name = $img->getClientOriginalName();
+        // $img->storeAs('public/images',$name);
+
+        // $image = adminUser::find(1);
+        // $image->a_image;
+        // $image -> save();
+        // return response()->json($image);
+
+        // return redirect()->route('admin.files.profile')->with('image', $image)->with('successImg', 'YOUR IMAGE IS CHANGE');
     }
     function updatePass(Request $req){
         $this->validate($req,
@@ -421,7 +469,11 @@ class adminAPI extends Controller
         $data =adminUser::where('a_PASS',$PASS)->first();
         $data->a_PASS=$req->a_pass;
         $data->save();
-        return redirect()->back()->with('success', 'PASSWORD CHANGE SUCCESSFULLY'); 
+
+        return response()->json($data);
+
+
+        // return redirect()->back()->with('success', 'PASSWORD CHANGE SUCCESSFULLY'); 
         
     }
 }
