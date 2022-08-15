@@ -431,13 +431,14 @@ class adminAPI extends Controller
         // return view('admin/files/profile')->with('data', $data)->with('data', $data);
     }
     function upload(Request $req){
-        $data = adminUser::find(1);
+        $data = adminUser::where('a_id','=',1)->first();
         if($req->hasFile('file')){
-            $image = $req->file('image');
-            $image_path = time().'_'.$image->getClientOriginalExtension();
+            $image = $req->file('file');
+            $image_path = time().'_admin.'.$image->getClientOriginalExtension();
             $image->move(public_path('images'), $image_path);
             $data->a_image = $image_path;
             $data->save();
+            return response()->json(["msg"=>"uploded",200]);
             
         }
         return response()->json(["msg"=>"No file"]);
