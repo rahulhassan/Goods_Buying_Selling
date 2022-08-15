@@ -45,7 +45,11 @@ class apiLoginController extends Controller
         if($user1){
             if($req->pass == $user1->a_pass){
 
-                //return redirect()->route('admin.adminDashboard');
+                $token->token_key = $key;
+                $token->user_email = $user1->a_mail;
+                $token->created_at = new Datetime();
+                $token->save();
+                return response()->json(["token"=>$key, "user"=>"admin"],200);
 
             }else{
                 return response()->json(["msg"=>"Invalid username password!"]);
@@ -54,16 +58,23 @@ class apiLoginController extends Controller
         }else if($user2){
             if($req->pass == $user2->e_pass){
 
-                //return redirect()->route('employee.dashboard');
+                $token->token_key = $key;
+                $token->user_email = $user2->e_mail;
+                $token->created_at = new Datetime();
+                $token->save();
+                return response()->json(["token"=>$key, "user"=>"employee"],200);
 
             }else{
                 return response()->json(["msg"=>"Invalid username password!"]);
             }
         }else if($user3){
             if(md5($req->pass) == $user3->b_pass){
-                
-
-                //return redirect()->route('buyer.other.dashboard');
+                 
+                $token->token_key = $key;
+                $token->user_email = $user3->b_mail;
+                $token->created_at = new Datetime();
+                $token->save();
+                return response()->json(["token"=>$key, "user"=>"buyer"],200);
 
             }else{
                 return response()->json(["msg"=>"Invalid username password!"]);
