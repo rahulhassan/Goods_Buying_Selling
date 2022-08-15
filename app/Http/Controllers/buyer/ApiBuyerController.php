@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\buyer\BuyerModel;
+use App\Models\buyer\CouponModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -204,7 +205,21 @@ class ApiBuyerController extends Controller
         return view('buyer.other.orders');
     }
 
+    function showCoupon()
+    {
+        $coupon=CouponModel::where("b_id",17)->first();
+        // return response()->json($coupon);
+        if($coupon)
+        {
+            return response()->json(["coupon"=>$coupon,"have"=>"You have a tempted coupon"]);
+        }
+        else
+        {
+            return response()->json(["have"=>"You don't have any coupon"]);
+        }
+        
 
+    }
 
     
 

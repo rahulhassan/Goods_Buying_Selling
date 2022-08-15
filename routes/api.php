@@ -120,6 +120,8 @@ Route::get('/orderDetails/{title}',[ApiProductController::class,'orderDetails'])
 //Route::get('/logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ApiProductController::class,'search']);
 
+Route::post('/wishlist',[ApiProductController::class,'addToWishList']);
+
 
 //Route::get('logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile',[ApiBuyerController::class,'profile']);
@@ -127,6 +129,7 @@ Route::get('/updateProfile',[ApiBuyerController::class,'updateProfile']);
 Route::post('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
 Route::get('/account',[ApiBuyerController::class,'account']);
 Route::get('/orders',[ApiBuyerController::class,'orders']);
+Route::get('/showCoupon',[ApiBuyerController::class,'showCoupon']);
 
 
 
@@ -139,8 +142,11 @@ Route::post('/placeOrder/{title}',[ApiOrderController::class,'placeOrderSubmit']
 Route::get('/my_orders',[ApiOrderController::class,'orders']);
 Route::delete('/my_orders/delete/{id}',[ApiOrderController::class,'ordersDelete']);
 
-Route::get('/cart/destroy/{c_id}',[ApiOrderController::class,'destroy']);
+Route::delete('/cart/destroy/{c_id}',[ApiOrderController::class,'destroy']);
 Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);
+
+Route::put('/updateCartQuantity/{cart_id}/{scope}',[ApiOrderController::class,'updateCartQuantity']);
+
 Route::post('/coupon/apply',[ApiOrderController::class,'couponApply']);
 Route::get('/coupon/destroy',[ApiOrderController::class,'couponDestroy']);
 Route::get('/productDetails/cart/checkout/orderDetails',[ApiOrderController::class,'checkout']);
