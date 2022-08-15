@@ -106,8 +106,6 @@ Route::get('/admin/files/deleteCoupon/{id}',[adminAPI::class,'DeleteCoupon']);
 
 Route::post('/login',[apiLoginController::class,'login']);
 Route::post('/logout',[apiLoginController::class,'logout']);
-Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
-
 Route::post('/registration',[userController::class, 'validateRegistration']);
 
 
@@ -160,8 +158,7 @@ Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
 Route::post('/seller/post',[postController::class,'validateSellerPost']);
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
 Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
-
 Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails']);
-
-
 Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate']);
+
+Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
