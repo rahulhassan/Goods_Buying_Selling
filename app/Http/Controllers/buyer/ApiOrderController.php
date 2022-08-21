@@ -13,6 +13,7 @@ use App\Models\buyer\CouponModel;
 use App\Models\buyer\Order;
 use App\Models\buyer\OrderItem;
 use App\Models\buyer\Shipping;
+use App\Models\buyer\WishList;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +24,7 @@ class ApiOrderController extends Controller
     
     //___________________Order Submit______________________
 
-    function placeOrderSubmit(Request $req)
+    function placeOrderSubmit(Request $req,$b_id)
     {
         
         
@@ -47,7 +48,7 @@ class ApiOrderController extends Controller
         }
 
         $products=ProductModel::where('p_title',$req->title)->first();
-        $buyer=BuyerModel::where('b_id',17)->first();
+        $buyer=BuyerModel::where('b_id',$b_id)->first();
        
         $order_id=Order::insertGetId([
             'b_id'=>$buyer->b_id,
@@ -98,7 +99,7 @@ class ApiOrderController extends Controller
 
 //_________________________Add to cart________________________
 
-    function addToCart()
+    function addToCart($b_id)
     {
         // $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
         // $sub_total=CartModel::all()->where('b_id',session()->get('LoggedIn'))->sum(function($t){
@@ -108,8 +109,8 @@ class ApiOrderController extends Controller
         //             ->with('carts',$cart)
         //             ->with('sub_total',$sub_total);
 
-        $cart=CartModel::with('product')->where('b_id',17)->latest()->get();
-        $sub_total=CartModel::all()->where('b_id',17)->sum(function($t){
+        $cart=CartModel::with('product')->where('b_id',$b_id)->latest()->get();
+        $sub_total=CartModel::all()->where('b_id',$b_id)->sum(function($t){
             return $t->p_price * $t->p_quantity;
         });
         return response()->json(["cart"=>$cart,"sub_total"=>$sub_total]);
@@ -118,7 +119,7 @@ class ApiOrderController extends Controller
 
     //_____________________Add to Cart Submit______________________
 
-    function addToCartSubmit(Request $req)
+    function addToCartSubmit(Request $req,$b_id)
     {
         $validator = Validator::make($req->all(),[
             "p_id"=>"required",
@@ -135,17 +136,17 @@ class ApiOrderController extends Controller
 
 
 
-          $check=CartModel::where('p_id',$req->p_id)->where('b_id',17)->first();
+          $check=CartModel::where('p_id',$req->p_id)->where('b_id',$b_id)->first();
           if($check)
           {
-            CartModel::where('p_id',$req->p_id)->where('b_id',17)->increment('p_quantity');
+            CartModel::where('p_id',$req->p_id)->where('b_id',$b_id)->increment('p_quantity');
             //return back()->with("cartAdded","Product added on Cart");
             return response()->json(["msg"=>"Product Added On Cart"]);
           }
           else
           {
             $cart=new CartModel();
-            $cart->b_id=17;
+            $cart->b_id=$b_id;
             $cart->p_id=$req->p_id;
             $cart->p_price=$req->p_price;
             $cart->p_quantity=1;
@@ -166,9 +167,9 @@ class ApiOrderController extends Controller
     //_________________Cart Destroy______________________
 
 
-    function destroy($c_id)
+    function destroy($b_id,$c_id)
     {
-       $data= CartModel::where('c_id',$c_id)->where('b_id',17);
+       $data= CartModel::where('c_id',$c_id)->where('b_id',$b_id);
 
         if($data){
             $data->delete();
@@ -199,9 +200,9 @@ class ApiOrderController extends Controller
 
     //____________________________________________________________________
 
-    function updateCartQuantity($cart_id,$scope)
+    function updateCartQuantity($b_id,$cart_id,$scope)
     {
-            $cart_item=CartModel::where('c_id',$cart_id)->where('b_id',17)->first();
+            $cart_item=CartModel::where('c_id',$cart_id)->where('b_id',$b_id)->first();
             if($cart_item)
             {
                 if($scope== "inc")
@@ -229,10 +230,11 @@ class ApiOrderController extends Controller
 
     }
 
+   
 
     //_______________________Coupon Apply____________________
 
-    function couponApply(Request $req)
+    function couponApply(Request $req,$b_id)
     {
         
         // $validator = Validator::make($req->all(),
@@ -255,7 +257,7 @@ class ApiOrderController extends Controller
 
 
 
-        $check=CouponModel::where('cpn_name',$req->cpn_name)->where('b_id',17)->first();
+        $check=CouponModel::where('cpn_name',$req->cpn_name)->where('b_id',$b_id)->first();
         if($check)
         {
  
@@ -284,23 +286,23 @@ class ApiOrderController extends Controller
     }
     //____________________________Checkout______________________
 
-    function checkout()
+    function checkout($b_id)
     {
         // $cart=CartModel::where('b_id',session()->get('LoggedIn'))->latest()->get();
-        $sub_total=CartModel::all()->where('b_id',17)->sum(function($t){
+        $sub_total=CartModel::all()->where('b_id',$b_id)->sum(function($t){
             return $t->p_price * $t->p_quantity;
          });
         // return view('buyer.other.checkout')
         //             ->with('carts',$cart)
         //             ->with('sub_total',$sub_total);
 
-        $cart=CartModel::with('product')->where('b_id',17)->latest()->get();
+        $cart=CartModel::with('product')->where('b_id',$b_id)->latest()->get();
         return response()->json(["cart"=>$cart,"sub_total"=>$sub_total]);
     }
 
     //_______________________________Place Order With Cart______________________________
 
-    function placeOrder(Request $req)
+    function placeOrder(Request $req,$b_id)
     {
         // dd($req->all());
         $validator = Validator::make($req->all(),[
@@ -330,7 +332,7 @@ class ApiOrderController extends Controller
         }
     
         $order_id=Order::insertGetId([
-            'b_id'=>17,
+            'b_id'=>$b_id,
             'payment_type'=>$req->payment_type,
             'sub_total'=>$req->sub_total,
             'discount'=>$req->discount,
@@ -343,7 +345,7 @@ class ApiOrderController extends Controller
 
      
 
-        $carts=CartModel::where('b_id',17)->latest()->get();
+        $carts=CartModel::where('b_id',$b_id)->latest()->get();
         foreach($carts as $cart)
         {
             OrderItem::insert([
@@ -369,7 +371,7 @@ class ApiOrderController extends Controller
             'updated_at'=>Carbon::Now()
         ]);
 
-        CartModel::where('b_id',17)->delete();
+        CartModel::where('b_id',$b_id)->delete();
         return response()->json(["msg"=>"Order has been completed successfully"]);
 
         // if(Session::has('coupon'))
@@ -388,10 +390,10 @@ class ApiOrderController extends Controller
     //__________________________________Show My Orders________________________________
 
 
-    function orders()
+    function orders($b_id)
     {
         //$order=Order::where('b_id',session()->get('LoggedIn'))->latest()->first();
-        $order_item=OrderItem::with('product')->where('b_id',17)->latest()->get();
+        $order_item=OrderItem::with('product')->where('b_id',$b_id)->latest()->get();
         return response()->json($order_item);
 
         //$buyer=BuyerModel::where('b_id',session()->get('LoggedIn'))->first();
@@ -401,23 +403,23 @@ class ApiOrderController extends Controller
 
     }
 
-    function ordersDelete($order_id)
+    function ordersDelete($b_id,$order_id)
     {
         // OrderItem::where('order_id',$order_id)->where('b_id',17)->delete();
 
     //    return response()->json(["orderDeleted"=>"Your order has been removed"]);
 
-            $data=OrderItem::where('order_id',$order_id)->where('b_id',17);
+            $data=OrderItem::where('order_id',$order_id)->where('b_id',$b_id);
             if($data){
                 $data->delete();
                 return response()->json([
                     "status"=>200,
-                    "message" => "Product Deleted Successfully"
+                    "message" => "Order Deleted Successfully"
                 ]);
             }else{
                 return response()->json([
                     "status"=>404,
-                    "message"=>"No Product found"
+                    "message"=>"No Order found"
                 ]);
             }
 
@@ -425,7 +427,69 @@ class ApiOrderController extends Controller
 
     }
 
+    //__________________________________wishlist________________________________
 
+
+    function showWishList($b_id)
+    {
+        $wishlist=WishList::with('product')->where('b_id',$b_id)->latest()->get();
+        return response()->json($wishlist);
+
+    }
+
+  
+
+     //___________________________Add to Wishlist____________________________________
+
+
+     function addToWishList(Request $req,$b_id)
+     {
+         $validator = Validator::make($req->all(),[
+             "p_id"=>"required",
+          
+            
+         ],[
+            
+            
+         ]);
+         if($validator->fails()){
+             return response()->json($validator->errors());
+         }
+ 
+ 
+         
+             $wishlist=new WishList();
+             $wishlist->b_id=$b_id;
+             $wishlist->p_id=$req->p_id;
+             $wishlist->save();
+             //session()->flash("added","Added into cart");
+             //return back()->with("cartAdded","Product added on Cart");
+ 
+             return response()->json(["msg"=>"Product Added On Wishlist"]);
+ 
+           
+     }
+
+     //_________________________________delete wishlist______________________________
+
+     function deleteProductFromWishList($b_id,$w_id)
+     {
+        
+        $data=WishList::where('w_id',$w_id)->where('b_id',$b_id);
+        if($data){
+            $data->delete();
+            return response()->json([
+                "status"=>200,
+                "message" => "Product Deleted From Wishlist Successfully"
+            ]);
+        }else{
+            return response()->json([
+                "status"=>404,
+                "message"=>"No Product found"
+            ]);
+        }
+
+     }
 
     //______________________________________________________________
 
