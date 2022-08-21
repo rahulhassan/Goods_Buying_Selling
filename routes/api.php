@@ -115,43 +115,53 @@ Route::post('/registration',[userController::class, 'validateRegistration']);
 
 
 Route::get('/dashboard',[ApiProductController::class,'dashboard']);
-Route::get('/productDetails/{title}',[ApiProductController::class,'productDetails']);
+Route::get('/productDetails/{id}/{title}',[ApiProductController::class,'productDetails']);
 Route::get('/orderDetails/{title}',[ApiProductController::class,'orderDetails']);
 //Route::get('/logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ApiProductController::class,'search']);
 
-Route::post('/wishlist',[ApiProductController::class,'addToWishList']);
+
 
 
 //Route::get('logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
-Route::get('/profile',[ApiBuyerController::class,'profile']);
-Route::get('/updateProfile',[ApiBuyerController::class,'updateProfile']);
-Route::post('/updateProfile',[ApiBuyerController::class,'updateProfileSubmit']);
+Route::get('/profile/{id}',[ApiBuyerController::class,'profile']);
+Route::get('/updateProfile/{id}',[ApiBuyerController::class,'updateProfile']);
+Route::post('/updateProfile/{id}',[ApiBuyerController::class,'updateProfileSubmit']);
 Route::get('/account',[ApiBuyerController::class,'account']);
 Route::get('/orders',[ApiBuyerController::class,'orders']);
-Route::get('/showCoupon',[ApiBuyerController::class,'showCoupon']);
+Route::get('/showCoupon/{id}',[ApiBuyerController::class,'showCoupon']);
 
-
+//_________________
 
 //Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
 //Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
 
-Route::get('/cart',[ApiOrderController::class,'addToCart']);
-Route::post('/cart',[ApiOrderController::class,'addToCartSubmit']);
-Route::post('/placeOrder/{title}',[ApiOrderController::class,'placeOrderSubmit']);
-Route::get('/my_orders',[ApiOrderController::class,'orders']);
-Route::delete('/my_orders/delete/{id}',[ApiOrderController::class,'ordersDelete']);
+Route::get('/cart/{id}',[ApiOrderController::class,'addToCart']);
+Route::post('/cart/{id}',[ApiOrderController::class,'addToCartSubmit']);
+Route::post('/placeOrder/{id}/{title}',[ApiOrderController::class,'placeOrderSubmit']);
+Route::get('/my_orders/{id}',[ApiOrderController::class,'orders']);
+Route::delete('/my_orders/delete/{b_id}/{o_id}',[ApiOrderController::class,'ordersDelete']);
 
-Route::delete('/cart/destroy/{c_id}',[ApiOrderController::class,'destroy']);
-Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);
+Route::delete('/cart/destroy/{b_id}/{c_id}',[ApiOrderController::class,'destroy']);
+// Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);
 
-Route::put('/updateCartQuantity/{cart_id}/{scope}',[ApiOrderController::class,'updateCartQuantity']);
+Route::put('/updateCartQuantity/{b_id}/{cart_id}/{scope}',[ApiOrderController::class,'updateCartQuantity']);// problem
 
-Route::post('/coupon/apply',[ApiOrderController::class,'couponApply']);
+//________wishlist__________
+
+Route::get('/wishlist/{b_id}',[ApiOrderController::class,'showWishList']);
+Route::post('/addToWishList/{b_id}',[ApiOrderController::class,'addToWishList']);
+Route::delete('/deleteProductFromWishList/delete/{b_id}/{w_id}',[ApiOrderController::class,'deleteProductFromWishList']);
+
+//______coupon_____________
+
+Route::post('/coupon/apply/{id}',[ApiOrderController::class,'couponApply']);
 Route::get('/coupon/destroy',[ApiOrderController::class,'couponDestroy']);
-Route::get('/productDetails/cart/checkout/orderDetails',[ApiOrderController::class,'checkout']);
 
-Route::post('/placeOrder',[ApiOrderController::class,'placeOrder']);
+//________place order_________
+
+Route::get('/productDetails/cart/checkout/orderDetails/{id}',[ApiOrderController::class,'checkout']);
+Route::post('/placeOrder/{id}',[ApiOrderController::class,'placeOrder']);
 Route::get('/orderCompleted',[ApiOrderController::class,'orderCompleted']);
 
 
