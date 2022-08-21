@@ -46,17 +46,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //___________________________ADMIN_________________________________
 Route::get('/admin/adminDashboard',[adminAPI::class,'Dashboard']);
 
-Route::get('/admin/files/statement',[adminAPI::class,'Statement'])->name('admin.files.statement');
+Route::get('/admin/files/statement',[adminAPI::class,'Statement']);
 
 Route::get('/admin/files/buyer',[adminAPI::class,'Buyer']);
 
-Route::get('/admin/files/employee',[adminAPI::class,'Employee'])->name('admin.files.employee');
+Route::get('/admin/files/employee',[adminAPI::class,'Employee']);
 
-Route::get('/admin/files/seller',[adminAPI::class,'Seller'])->name('admin.files.seller');
+Route::get('/admin/files/seller',[adminAPI::class,'Seller']);
 
 Route::get('/admin/files/coupon',[adminAPI::class,'coupon']);
 
-Route::get('/admin/files/order',[adminAPI::class,'OrderO'])->name('admin.files.order');
+Route::get('/admin/files/order',[adminAPI::class,'OrderO']);
 
 Route::get('/admin/files/profile',[adminAPI::class,'Profile']);
 Route::post('/admin/files/profile',[adminAPI::class,'updatePass']);
