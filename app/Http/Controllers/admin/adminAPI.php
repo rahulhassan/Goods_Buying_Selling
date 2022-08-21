@@ -29,13 +29,13 @@ class adminAPI extends Controller
         $ofr = DB::table('coupon')->count();
         $empl=employeeUser::all();
         $data = adminUser::where('a_id','=',1)->first();
-        $orderall=Order::paginate(10);
+        $orderall=Order::all();
         $x=0;
         foreach ($orderall as $o)
         {
             $x+=$o->total;
         }
-        return response()->json($emp);
+        return response()->json($orderall);
 
         // return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x', 'ofr'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
     }
@@ -51,21 +51,16 @@ class adminAPI extends Controller
     function Buyer(){
         $buyall=buyerUser::all();
         //$buy = DB::table('buyer')->count();
-        // $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json($buyall);
 
         
-        //return view('admin/files/buyer', ['buyall' => $buyall], compact('buy'))->with('data', $data);
     }
     
     function CreateBuyer(){
-        //$data = adminUser::where('a_id','=',1)->first();
 
         return response()->json();
 
-        
-        //return view('admin/files/createBuyer')->with('data', $data);
     }
     function storeBuyer(Request $request){
         $validator = Validator::make($request->all(),
@@ -101,9 +96,6 @@ class adminAPI extends Controller
         $a->save();
 
         return response()->json(["msg"=>"Success","data"=>$a]);
-
-        
-        //return redirect()->route('admin.files.buyer');
     
     }
     function DeleteBuyer(Request $request){
@@ -113,13 +105,11 @@ class adminAPI extends Controller
 
         return response()->json($data);
 
-       // return redirect()->route('admin.files.buyer');
     }
     function showBuyer($b_id){
         
         $data = buyerUser::find($b_id);
         return response()->json($data);
-        //return view('admin.files.updateBuyer',['data'=>$data]);
     }
     function UpdateBuyer(Request $req){
         $validator = Validator::make($req->all(),
@@ -157,25 +147,18 @@ class adminAPI extends Controller
 
         return response()->json(["msg"=>"Success","data"=>$data]);
 
-        
-        //return redirect()->route('admin.files.buyer')->with('data', $data);
     }
     //--------------------------SELLER-----------------------------------
 
     function Seller(){
         $sellall=sellerUser::all();
         // $sel = DB::table('seller')->count();
-        // $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json($sellall);
-        
-        //return view('admin/files/seller', ['sellall' => $sellall], compact('sel'))->with('data', $data);
     }
     function CreateSeller(){
-        $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json();
-        //return view('admin/files/createSeller')->with('data', $data);
     }
     function storeSeller(Request $request){
         $validator = Validator::make($request->all(),
@@ -210,8 +193,6 @@ class adminAPI extends Controller
         $a->s_add= $request->s_add;
         $a->save();
         return response()->json(["msg"=>"Success","data"=>$a]);
-        
-        //return redirect()->route('admin.files.seller');
     
     }
     function DeleteSeller(Request $request){
@@ -220,14 +201,12 @@ class adminAPI extends Controller
         $data->delete();
         return response()->json($data);
 
-        //return redirect()->route('admin.files.seller');
     }
     function showSeller($s_id){
         
         $data = sellerUser::find($s_id);
         return response()->json($data);
 
-        //return view('admin.files.updateSeller',['data'=>$data]);
     }
     function UpdateSeller(Request $req){
         $validator = Validator::make($req->all(),
@@ -264,25 +243,20 @@ class adminAPI extends Controller
         $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json(["msg"=>"Success","data"=>$data]);
-        
-        //return redirect()->route('admin.files.seller')->with('data', $data);
+
     }
     //--------------------------EMPLOYEE-----------------------------------
 
     function Employee(){
         $empall=employeeUser::all();
         // $emp = DB::table('employee')->count();
-        // $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json($empall);
         
-        // return view('admin/files/employee', ['empall' => $empall], compact('emp'))->with('data', $data);
     }
     function CreateEmp(){
-        $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json();
-        //return view('admin/files/createEmp')->with('data', $data);
     }
     function storeEmp(Request $request){
         $validator = Validator::make($request->all(),
@@ -318,7 +292,6 @@ class adminAPI extends Controller
         $a->e_add= $request->e_add;
         $a->save();
         return response()->json(["msg"=>"Success","data"=>$a]);
-        //return redirect()->route('admin.files.employee');
     
     }
     function DeleteEmp(Request $request){
@@ -327,7 +300,6 @@ class adminAPI extends Controller
         $data->delete();
         return response()->json($data);
 
-        //return redirect()->route('admin.files.employee');
     }
     function showEmp($e_id){
         
@@ -335,7 +307,6 @@ class adminAPI extends Controller
 
         return response()->json($data);
 
-        //return view('admin.files.updateEmp',['data'=>$data]);
     }
     function UpdateEmp(Request $req){
         $validator = Validator::make($req->all(),
@@ -374,27 +345,22 @@ class adminAPI extends Controller
 
         return response()->json(["msg"=>"Success","data"=>$data]);
         
-        //return redirect()->route('admin.files.employee')->with('data', $data);
     }
 
     //--------------------------ORDER-----------------------------------
     function OrderO(){
         $orderall = Order::all();
         // $ord = DB::table('orders')->count();
-        // $data = adminUser::where('a_id','=',1)->first();
 
         return response()->json($orderall);
 
-        //return view('admin/files/order', ['orderall' => $orderall], compact('ord'))->with('data', $data);
     }
     //--------------------------COUPON-----------------------------------
     function coupon(){
         $cupall=CouponModel::all();
         // $cup = DB::table('coupon')->count();
-        // $data = adminUser::where('a_id','=',1)->first();
         return response()->json($cupall);
 
-        //return view('admin/files/coupon', ['cupall' => $cupall], compact('cup'))->with('data', $data);
     }
     function addCoupon(){
         $data = adminUser::where('a_id','=',1)->first();
@@ -402,7 +368,6 @@ class adminAPI extends Controller
         return response()->json();
 
 
-        // return view('admin/files/addCoupon')->with('data', $data);
     }
     function storeCoupon(Request $request){
         $c = new CouponModel();
@@ -413,7 +378,6 @@ class adminAPI extends Controller
         return response()->json($c);
 
         
-        // return redirect()->route('admin.files.coupon');
     }
     function DeleteCoupon(Request $request){
         $cpn_id=$request->id;
@@ -421,14 +385,12 @@ class adminAPI extends Controller
         $data->delete();
         return response()->json($data);
 
-        // return redirect()->route('admin.files.coupon');
     }
     //--------------------------PROFILE-----------------------------------
     function Profile(){
         $data = adminUser::where('a_id','=',1)->first();
         return response()->json($data);
 
-        // return view('admin/files/profile')->with('data', $data)->with('data', $data);
     }
     function upload(Request $req){
         $data = adminUser::where('a_id','=',1)->first();
@@ -442,19 +404,10 @@ class adminAPI extends Controller
             
         }
         return response()->json(["msg"=>"No file"]);
-        // $img = $request->pf;
-        // $name = $img->getClientOriginalName();
-        // $img->storeAs('public/images',$name);
 
-        // $image = adminUser::find(1);
-        // $image->a_image;
-        // $image -> save();
-        // return response()->json($image);
-
-        // return redirect()->route('admin.files.profile')->with('image', $image)->with('successImg', 'YOUR IMAGE IS CHANGE');
     }
     function updatePass(Request $req){
-        $this->validate($req,
+        $validator = Validator::make($req->all(),
         [
            "o_pass"=>"required",
            "a_pass"=>"required",
@@ -466,15 +419,17 @@ class adminAPI extends Controller
            "r_pass.required"=> "Please provide your password again!!!",
 
         ]);
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
         $PASS=$req->o_pass;
         $data =adminUser::where('a_PASS',$PASS)->first();
         $data->a_PASS=$req->a_pass;
         $data->save();
 
-        return response()->json($data);
+        return response()->json(["msg"=>"Success","data"=>$data]);
 
 
-        // return redirect()->back()->with('success', 'PASSWORD CHANGE SUCCESSFULLY'); 
         
     }
 }
