@@ -19,6 +19,9 @@ class Order extends Model
     // {
     //     return $this->hasMany(OrderItem::class,'order_id','id');
     // }
+
+    //protected $with = ['product', 'buyer', 'shipping'];
+
     function product(){
         
         return $this->belongsTo(sellerProduct::class, 'p_id', 'p_id');
