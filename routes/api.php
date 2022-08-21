@@ -152,13 +152,26 @@ Route::get('/orderCompleted',[ApiOrderController::class,'orderCompleted']);
 //_________________________________Seller___________________________________________
 
 
-Route::get('/seller/products/{id}',[sDashboardController::class,'showProduct']);
-Route::delete('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
-Route::get('/seller/profile',[sProfileController::class,'sellerDetails']);
-Route::post('/seller/post',[postController::class,'validateSellerPost']);
-Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow']);
-Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
-Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails']);
-Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate']);
+Route::get('/seller/products/{id}',[sDashboardController::class,'showProduct'])->middleware('APIAuth');
 
-Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
+Route::delete('/seller/delete/{id}',[sDashboardController::class,'sellerProductDelete']);
+
+Route::get('/seller/profile',[sProfileController::class,'sellerDetails'])->middleware('APIAuth');
+
+Route::post('/seller/post',[postController::class,'validateSellerPost'])->middleware('APIAuth');
+
+Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow'])->middleware('APIAuth');
+
+Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
+
+Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails'])->middleware('APIAuth');
+
+Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate'])->middleware('APIAuth');
+
+Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo'])->middleware('APIAuth');
+
+Route::get('/seller/orders/{id}',[sOrderController::class,'orderInfo'])->middleware('APIAuth');
+
+Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip']);
+
+Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');

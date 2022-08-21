@@ -10,19 +10,19 @@ use Session;
 
 class sOrderController extends Controller
 {
-    function orderInfo(){
+    function orderInfo($id){
         $order_item = OrderItem::where([
-            ['s_id', '=', Session::get('loginId')],
-            ['payment_status', '=', 'pending']
+            ['s_id', '=', $id],
+            ['payment_status', '!=', 'confirm']
             ])->get();
        
-        return view('seller/sellerOrder')->with('order_item',$order_item);
+        return response()->json($order_item);
     }
     function productShip($id){
 
         $data = OrderItem::find($id);
         $data->payment_status = "confirm";
         $data->save();
-        return redirect()->route('seller.orders');
+        return response()->json(["msg"=>"Order shifted successfully", "status"=>200]);
     }
 }
