@@ -21,30 +21,24 @@ class adminAPI extends Controller
 {
      //--------------------------DASHBOARD-----------------------------------
     
-     function Dashboard(){
-        $emp = DB::table('employee')->count();
-        $buy = DB::table('buyer')->count();
-        $sell = DB::table('seller')->count();
-        $ord = DB::table('orders')->count();
-        $ofr = DB::table('coupon')->count();
+    function Dashboard(){
         $empl=employeeUser::all();
-        $data = adminUser::where('a_id','=',1)->first();
+        $buy=buyerUser::all();
+        $sell=sellerUser::all();
+        $cop=CouponModel::all();
         $orderall=Order::all();
-        $x=0;
-        foreach ($orderall as $o)
-        {
-            $x+=$o->total;
-        }
-        return response()->json($orderall);
+        
+        return response()->json([$orderall, $empl, $buy, $sell, $cop]);
 
-        // return view('admin/adminDashboard', compact('emp', 'buy', 'sell', 'ord', 'x', 'ofr'), ['emplall' => $empl])->with('data', $data)->with('orderall', $orderall);
     }
     //--------------------------STATEMENTS-----------------------------------
 
     function Statement(){
-        $data = adminUser::where('a_id','=',1)->first();
+        $empl=employeeUser::all();
+        $buy=buyerUser::all();
+        $sell=sellerUser::all();
         
-        return view('admin/files/statement')->with('data', $data);
+        return response()->json([$empl, $buy, $sell]);
     }
     //--------------------------BUYER-----------------------------------
 
