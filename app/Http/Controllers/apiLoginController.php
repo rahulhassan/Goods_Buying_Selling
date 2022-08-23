@@ -28,9 +28,9 @@ class apiLoginController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                // 'status'=>422,
-                // 'errors'=> $validator->errors(),
-                "msg"=>"Incorrect entry!"
+                'status'=>422,
+                'errors'=> $validator->errors(),
+                //"msg"=>"Incorrect entry!"
             ]);
         }
 

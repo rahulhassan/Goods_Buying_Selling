@@ -10,10 +10,10 @@ use Carbon\Carbon;
 
 class sStatementController extends Controller
 {
-    function monthlyStatement(){
+    function monthlyStatement($id){
         
         $order_item = OrderItem::where([
-            ['s_id', '=', 1],
+            ['s_id', '=', $id],
             ['payment_status', '=', 'confirm']
             ])->get();
 
