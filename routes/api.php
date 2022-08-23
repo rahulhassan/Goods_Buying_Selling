@@ -192,7 +192,8 @@ Route::get('/seller/orders/{id}',[sOrderController::class,'orderInfo'])->middlew
 
 Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip']);
 
-Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');
+Route::get('/seller/statement/{id}',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');
+
 
 
 
@@ -206,9 +207,5 @@ Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate']);
 Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
 Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
 Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate']);
-
-
-
-
 
 
