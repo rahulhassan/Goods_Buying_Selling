@@ -147,10 +147,10 @@ class userController extends Controller
         }
 
     }
-    // function userLogout(){
-    //         session()->flush();
-    //         return redirect()->route('user.login');
+    function userLogout(){
+            session()->flush();
+            return redirect()->route('user.login');
         
-    // }
+    }
 
 }

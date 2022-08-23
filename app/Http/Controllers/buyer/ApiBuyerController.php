@@ -65,25 +65,25 @@ class ApiBuyerController extends Controller
 
     //_________________________________________
 
-    function profile()
+    function profile($b_id)
     {
-        $buyer=BuyerModel::where('b_id',17)->first();
+        $buyer=BuyerModel::where('b_id',$b_id)->first();
         return response()->json($buyer);
     }
 
 
     //_____________________________________
 
-    function updateProfile()
+    function updateProfile($b_id)
     {
-        $buyer=BuyerModel::where('b_id',17)->first();
+        $buyer=BuyerModel::where('b_id',$b_id)->first();
         return response()->json($buyer);
     }
 
     //___________________________________________
 
 
-    function updateProfileSubmit(Request $req)
+    function updateProfileSubmit(Request $req,$b_id)
     {
 
         $validator = Validator::make($req->all(),
@@ -141,7 +141,7 @@ class ApiBuyerController extends Controller
         //     $req->b_image->move(public_path('buyerImages'), $imageName);
         // }
 
-        $buyer=BuyerModel::where('b_id',17)->first();
+        $buyer=BuyerModel::where('b_id',$b_id)->first();
         $imageName=$buyer->b_image;
 
         if($req->hasFile('b_image')){
@@ -205,9 +205,9 @@ class ApiBuyerController extends Controller
         return view('buyer.other.orders');
     }
 
-    function showCoupon()
+    function showCoupon($b_id)
     {
-        $coupon=CouponModel::where("b_id",17)->first();
+        $coupon=CouponModel::where("b_id",$b_id)->first();
         // return response()->json($coupon);
         if($coupon)
         {
