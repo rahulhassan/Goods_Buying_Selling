@@ -168,3 +168,19 @@ Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails']);
 Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate']);
 
 Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
+
+
+
+//_________________________________Employee___________________________________________
+Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('/employee/edit', [EmployeeController::class, 'update']);
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate']);
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate']);
+
+
+
