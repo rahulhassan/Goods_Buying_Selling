@@ -179,6 +179,9 @@ Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow'])
 
 Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
 
+
+Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
+
 Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails'])->middleware('APIAuth');
 
 Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate'])->middleware('APIAuth');
@@ -190,3 +193,22 @@ Route::get('/seller/orders/{id}',[sOrderController::class,'orderInfo'])->middlew
 Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 Route::get('/seller/statement',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');
+
+
+
+//_________________________________Employee___________________________________________
+Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('/employee/edit', [EmployeeController::class, 'update']);
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate']);
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate']);
+
+
+
+
+
+
