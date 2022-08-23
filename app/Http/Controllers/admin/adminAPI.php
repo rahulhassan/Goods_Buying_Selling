@@ -341,14 +341,6 @@ class adminAPI extends Controller
         
     }
 
-    //--------------------------ORDER-----------------------------------
-    function OrderO(){
-        $orderall = Order::all();
-        // $ord = DB::table('orders')->count();
-
-        return response()->json($orderall);
-
-    }
     //--------------------------COUPON-----------------------------------
     function coupon(){
         $cupall=CouponModel::all();
