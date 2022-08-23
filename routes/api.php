@@ -46,17 +46,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //___________________________ADMIN_________________________________
 Route::get('/admin/adminDashboard',[adminAPI::class,'Dashboard']);
 
-Route::get('/admin/files/statement',[adminAPI::class,'Statement'])->name('admin.files.statement');
+Route::get('/admin/files/statement',[adminAPI::class,'Statement']);
 
 Route::get('/admin/files/buyer',[adminAPI::class,'Buyer']);
 
-Route::get('/admin/files/employee',[adminAPI::class,'Employee'])->name('admin.files.employee');
+Route::get('/admin/files/employee',[adminAPI::class,'Employee']);
 
-Route::get('/admin/files/seller',[adminAPI::class,'Seller'])->name('admin.files.seller');
+Route::get('/admin/files/seller',[adminAPI::class,'Seller']);
 
 Route::get('/admin/files/coupon',[adminAPI::class,'coupon']);
 
-Route::get('/admin/files/order',[adminAPI::class,'OrderO'])->name('admin.files.order');
 
 Route::get('/admin/files/profile',[adminAPI::class,'Profile']);
 Route::post('/admin/files/profile',[adminAPI::class,'updatePass']);
@@ -180,6 +179,9 @@ Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow'])
 
 Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
 
+
+Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
+
 Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails'])->middleware('APIAuth');
 
 Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate'])->middleware('APIAuth');
@@ -191,3 +193,19 @@ Route::get('/seller/orders/{id}',[sOrderController::class,'orderInfo'])->middlew
 Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip']);
 
 Route::get('/seller/statement/{id}',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');
+
+
+
+
+//_________________________________Employee___________________________________________
+Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+Route::post('/employee/edit', [EmployeeController::class, 'update']);
+Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate']);
+Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate']);
+
+
