@@ -39,10 +39,6 @@ use App\Http\Controllers\apiLoginController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 //___________________________ADMIN_________________________________
 Route::get('/admin/adminDashboard',[adminAPI::class,'Dashboard']);
 
@@ -102,12 +98,11 @@ Route::get('/admin/files/addCoupon',[adminAPI::class,'addCoupon']);
 Route::post('/admin/files/addCoupon',[adminAPI::class,'storeCoupon']);
 Route::get('/admin/files/deleteCoupon/{id}',[adminAPI::class,'DeleteCoupon']);
 
+//----------------------------login-registration-user--------------------
 
 Route::post('/login',[apiLoginController::class,'login']);
 Route::post('/logout',[apiLoginController::class,'logout']);
 Route::post('/registration',[userController::class, 'validateRegistration']);
-
-
 
 
 //_________________________________Buyer___________________________________________
@@ -116,13 +111,9 @@ Route::post('/registration',[userController::class, 'validateRegistration']);
 Route::get('/dashboard',[ApiProductController::class,'dashboard']);
 Route::get('/productDetails/{id}/{title}',[ApiProductController::class,'productDetails']);
 Route::get('/orderDetails/{title}',[ApiProductController::class,'orderDetails']);
-//Route::get('/logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::post('/search',[ApiProductController::class,'search']);
 
 
-
-
-//Route::get('logout',[ApiProductController::class,'logout'])->name('buyer.other.logout');
 Route::get('/profile/{id}',[ApiBuyerController::class,'profile']);
 Route::get('/updateProfile/{id}',[ApiBuyerController::class,'updateProfile']);
 Route::post('/updateProfile/{id}',[ApiBuyerController::class,'updateProfileSubmit']);
@@ -132,18 +123,12 @@ Route::get('/showCoupon/{id}',[ApiBuyerController::class,'showCoupon']);
 
 //_________________
 
-//Route::get('/buyerlogin',[BuyerController::class,'login'])->name('buyer.other.login');
-//Route::post('/buyerlogin',[BuyerController::class,'loginSubmit'])->name('buyer.other.loginSubmit');
-
 Route::get('/cart/{id}',[ApiOrderController::class,'addToCart']);
 Route::post('/cart/{id}',[ApiOrderController::class,'addToCartSubmit']);
 Route::post('/placeOrder/{id}/{title}',[ApiOrderController::class,'placeOrderSubmit']);
 Route::get('/my_orders/{id}',[ApiOrderController::class,'orders']);
 Route::delete('/my_orders/delete/{b_id}/{o_id}',[ApiOrderController::class,'ordersDelete']);
-
 Route::delete('/cart/destroy/{b_id}/{c_id}',[ApiOrderController::class,'destroy']);
-// Route::post('/cart/quantity/update/{c_id}',[ApiOrderController::class,'cartQuantityUpdate']);
-
 Route::put('/updateCartQuantity/{b_id}/{cart_id}/{scope}',[ApiOrderController::class,'updateCartQuantity']);// problem
 
 //________wishlist__________
@@ -177,8 +162,7 @@ Route::post('/seller/post',[postController::class,'validateSellerPost'])->middle
 
 Route::get('/seller/edit/{id}',[sDashboardController::class,'sellerUpdateShow'])->middleware('APIAuth');
 
-Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate']);
-
+Route::post('/seller/update/{id}',[postController::class,'sellerPostUpdate'])->middleware('APIAuth');
 
 Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo']);
 
@@ -186,15 +170,17 @@ Route::get('/seller/profile/{id}',[sProfileController::class,'sellerDetails'])->
 
 Route::post('/seller/profile/update',[sProfileController::class,'sellerInfoUpdate'])->middleware('APIAuth');
 
-Route::get('/seller/info/{token}',[apiLoginController::class, 'loginUserInfo'])->middleware('APIAuth');
+Route::get('/seller/orderscount/{id}',[sOrderController::class,'orderCount'])->middleware('APIAuth');
 
 Route::get('/seller/orders/{id}',[sOrderController::class,'orderInfo'])->middleware('APIAuth');
 
-Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip']);
+Route::get('/seller/shipping/{id}',[sOrderController::class,'productShip'])->middleware('APIAuth');
 
 Route::get('/seller/statement/{id}',[sStatementController::class,'monthlyStatement'])->middleware('APIAuth');
-
-
+//__________________________________category________________
+Route::get('/products/category',[sDashboardController::class,'showCategory'])->middleware('APIAuth');
+Route::post('/add/category',[sDashboardController::class,'addCategory'])->middleware('APIAuth');
+Route::get('/delete/category/{id}',[sDashboardController::class,'deleteCategory'])->middleware('APIAuth');
 
 
 //_________________________________Employee___________________________________________

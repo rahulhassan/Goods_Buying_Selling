@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\employee\employeeUser;
 use App\Models\buyer\buyerUser;
 use App\Models\seller\sellerUser;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -48,46 +49,41 @@ class EmployeeController extends Controller
       
     } 
 
-function update(Request $req) {
+    function update(Request $req) {
         
 
-      $validator = Validator::make($req->all(),[
-         
-         'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
-         'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
-         'phone'=>"required|regex:/^[0-9]{11}+$/i",
-         'address'=>"required"
-     ],
-     [
-         'name.required'=>'Provide a valid name',
-         'email.required'=>'Provide a valid email'
-     ]);
-      if($validator->fails()){
-         return response()->json([
-             "status"=> 422,
-             "errors"=> $validator->errors(),
-         ]);
-     }
-         
- 
-     $data = employeeUser::find( $req->e_id);
-     $data->e_name = $req->name;
-     $data->e_mail = $req->email;
-     $data->e_phn = $req->phone;
-     $data->e_add = $req->address;
-     $rsp = $data->save();
+        $validator = Validator::make($req->all(),[
+            
+            'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
+            'email'=>"required|email|unique:users|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
+            'phone'=>"required|regex:/^[0-9]{11}+$/i",
+            'address'=>"required"
+        ],
+        [
+            'name.required'=>'Provide a valid name',
+            'email.required'=>'Provide a valid email'
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                "status"=> 422,
+                "errors"=> $validator->errors(),
+            ]);
+        }
+            
+    
+        $data = employeeUser::find( $req->id);
+        $data->e_name = $req->name;
+        $data->e_mail = $req->email;
+        $data->e_phn = $req->phone;
+        $data->e_add = $req->address;
+        $rsp = $data->save();
 
-     if($rsp){
-      return response()->json([
-         "status"=> 200,
-          "msg"=>"Profile info is updated!",
-          
-      ]);
-  }
+        if($rsp){
+            return response()->json(["status"=> 200, "msg"=>"Profile info is updated!"]);
+        }
 
-  return response()->json("something wrong");
+        return response()->json("something wrong");
 
- 
     }
 
    function buyeredit($id){
