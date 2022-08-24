@@ -20,5 +20,14 @@ class alreadyLoggedIn
             return back();
         }
         return $next($request);
+        // $token = $request->header("Authorization");
+        // if($token){
+        //     $key = Token::where('token_key',$token)
+        //                 ->whereNull('expired_at')->first();
+
+        //     if($key) return response()->json(["msg"=>"You already logged in!"],401); 
+        //     return $next($request);
+        // }
+        // return $next($request);
     }
 }

@@ -18,6 +18,15 @@ class sOrderController extends Controller
        
         return response()->json($order_item);
     }
+    function orderCount($id){
+        $order_item = OrderItem::where([
+            ['s_id', '=', $id],
+            ['payment_status', '!=', 'confirm']
+            ])->get();
+        $count = $order_item->count();
+       
+        return response()->json($count);
+    }
     function productShip($id){
 
         $data = OrderItem::find($id);

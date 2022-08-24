@@ -9,11 +9,6 @@ use App\Models\seller\sellerUser;
 use Illuminate\Support\Facades\Validator;
 
 
-
-
-
-
-
 class EmployeeController extends Controller
 {
     function navbar(){
@@ -201,7 +196,6 @@ class EmployeeController extends Controller
       
     } 
 
-    
     function update(Request $req) {
         
 
