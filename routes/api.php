@@ -199,13 +199,43 @@ Route::get('/seller/statement/{id}',[sStatementController::class,'monthlyStateme
 
 //_________________________________Employee___________________________________________
 Route::get('/employee/empprofile' , [EmployeeController::class, 'EmpProfile']);
+
 Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+
 Route::post('/employee/edit', [EmployeeController::class, 'update']);
+
 Route::get('/employee/buyerlist', [EmployeeController::class, 'BuyerList']);
+
 Route::get('/employee/editbuyer/{id}', [EmployeeController::class, 'buyeredit']);
+
 Route::post('/employee/editbuyer', [EmployeeController::class, 'buyerupdate']);
+
 Route::get('/employee/sellerlist', [EmployeeController::class, 'SellerList']);
+
 Route::get('/employee/editseller/{id}', [EmployeeController::class, 'selleredit']);
+
 Route::post('/employee/editseller', [EmployeeController::class, 'sellerupdate']);
+
+Route::post('/employee/delete/${id}', [EmployeeController::class, 'deleteEmp']);
+
+Route::get('/employee/AddEmployee', [EmployeeController::class, 'AddEmp']);
+
+Route::post('/employee/AddEmployee', [EmployeeController::class, 'storeEmployee']);
+
+Route::post('/employee/deletebuyer/${id}', [EmployeeController::class, 'deleteBuyer']);
+
+Route::post('/employee/deleteseller/${id}', [EmployeeController::class, 'deleteSeller']);
+
+Route::get('/employee/AddBuyer', [EmployeeController::class, 'AddBuyer']);
+
+Route::post('/employee/AddBuyer', [EmployeeController::class, 'storeBuyer']);
+
+Route::get('/employee/AddSeller', [EmployeeController::class, 'AddSeller']);
+
+Route::post('/employee/AddSeller', [EmployeeController::class, 'storeSeller']);
+
+
+
+
 
 
