@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\buyer\OrderItem;
 use Session;
-use Carbon\Carbon;
 
 class sStatementController extends Controller
 {
@@ -25,7 +24,6 @@ class sStatementController extends Controller
         $junDate = date('Y-m-d', strtotime("2022-06-30"));
         $julDate = date('Y-m-d', strtotime("2022-07-31"));
         $augDate = date('Y-m-d', strtotime("2022-08-31"));
-        //$dt = Carbon::create(2022, 8, 31, 0);
 
         
 

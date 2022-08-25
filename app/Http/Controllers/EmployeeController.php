@@ -52,8 +52,8 @@ class EmployeeController extends Controller
 
              [
                 "e_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
-                "e_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
-                "e_phn"=>"required|regex:/^\+[8]{2}[0-9]{11}+$/i",//11 Digits And Need +880
+                "e_mail"=>"required|unique:seller,s_mail|unique:buyer,b_mail|unique:employee,e_mail|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
+                "e_phn"=>"required|unique:seller,s_phn|unique:buyer,b_phn|unique:employee,e_phn|regex:/^[0-9]{11}+$/i",//11 Digits
                 "e_add"=>"required",
                 "e_pass"=>"required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",//MUST 8 CHARECTER, Symbol, Capital & Small
              ],
@@ -63,7 +63,7 @@ class EmployeeController extends Controller
                 "e_mail.required"=> "Please provide your email!!!",
                 "e_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
                 "e_phn.required"=> "Please provide your phone number!!!",
-                "e_phn.regex"=> "Please provide correct phone number like +880---------!!!",
+                "e_phn.regex"=> "Please provide correct phone number",
                 "e_add.required"=> "Please provide your address!!!",
                 "e_pass.required"=> "Please provide your password!!!",
                 "e_pass.regex"=> "Please provide password which have 8 charecter, capital and small letter & symbol like @ABcd12#!!!"
@@ -71,7 +71,10 @@ class EmployeeController extends Controller
              ]
         );
         if($validator->fails()){
-            return response()->json($validator->errors(),422);
+            return response()->json([
+                'status'=>422,
+                'errors'=> $validator->errors(),
+            ]);
         }
         $a = new employeeUser();
         $a->e_name= $request->e_name;
@@ -80,7 +83,7 @@ class EmployeeController extends Controller
         $a->e_pass= $request->e_pass;
         $a->e_add= $request->e_add;
         $a->save();
-        return response()->json(["msg"=>"Success","data"=>$a]);
+        return response()->json(["msg"=>"Success","status"=>200]);
     
     }
 
@@ -132,7 +135,7 @@ class EmployeeController extends Controller
              [
                 "b_name"=>"required|regex:^[a-zA-Z\s\.\-]+$^",//SMALL AND CAPITAL & . & - ACCEPTED
                 "b_mail"=>"required|regex:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}+$/i",//like: abc@gmail.com
-                "b_phn"=>"required|regex:/^\+[8]{2}[0-9]{11}+$/i",//11 Digits And Need +880
+                "b_phn"=>"required|regex:/^[0-9]{11}+$/i",//11 Digits 
                 "b_add"=>"required",
                 "b_pass"=>"required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",//MUST 8 CHARECTER, Symbol, Capital & Small
              ],
@@ -142,7 +145,7 @@ class EmployeeController extends Controller
                 "b_mail.required"=> "Please provide your email!!!",
                 "b_mail.regex"=> "Please provide correct email like abc@gmail.com!!!",
                 "b_phn.required"=> "Please provide your phone number!!!",
-                "b_phn.regex"=> "Please provide correct phone number like +880---------!!!",
+                "b_phn.regex"=> "Please provide correct phone number",
                 "b_add.required"=> "Please provide your address!!!",
                 "b_pass.required"=> "Please provide your password!!!",
                 "b_pass.regex"=> "Please provide password which have 8 charecter, capital and small letter & symbol like @ABcd12#!!!"
@@ -163,9 +166,8 @@ class EmployeeController extends Controller
     
     }
 
-    function deleteEmp(Request $request){
-        $e_id=$request->id;
-        $data = employeeUser::where('e_id',$e_id)->first();
+    function deleteEmp($id){
+        $data = employeeUser::where('e_id',$id)->first();
         $data->delete();
         return response()->json($data);
 

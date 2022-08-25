@@ -20,7 +20,7 @@ class userController extends Controller
         $validator = Validator::make($req->all(),[
             'name'=>"required|regex:/^[a-zA-Z\s\.\-]+$/",
             'email'=>"required|email|unique:seller,s_mail|unique:buyer,b_mail|unique:employee,e_mail|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,3}$/",
-            'psw'=>"required", //|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            'psw'=>"required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
             'psw_repeat'=>"required|same:psw",
 
             'phone'=>"required|unique:seller,s_phn|unique:buyer,b_phn|unique:employee,e_phn|regex:/^[0-9]{11}+$/i",
@@ -34,6 +34,7 @@ class userController extends Controller
             'phone.required'=>'Provide your phone number',
             'address.required'=>'Provide your address',
             'psw.required'=>"Password must contain upper case, lower case, number and special characters, min length 8",
+            'psw.regex'=>"Password must contain upper case, lower case, number and special characters, min length 8",
             'psw_repeat.required'=>'Must enter the password again',
             'psw_repeat.same'=>'Password must match with repeat password',
             'phone.required'=>'Provide your phone number',
